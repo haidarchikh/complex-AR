@@ -1,4 +1,4 @@
-package se.ltu.d7013e.rabbitMQ;
+package se.ltu.d7031e;
 
 public class Consts {
 	
@@ -40,4 +40,6 @@ public class Consts {
 	public static final String LOCALHOST                   = "localhost";
 	public static final String EXCHANGE_NAME_EVENTS        = "events";
 	public static final String EXCHANGE_NAME_ACCELEROMETER = "accelerometer";
+	public static final String EXCHANGE_TYPE_DIRECT        = "direct";
+	public static final String CLASSIFIER_PATH = "/home/haidar/Desktop/Features/featuresModel.model";
 }

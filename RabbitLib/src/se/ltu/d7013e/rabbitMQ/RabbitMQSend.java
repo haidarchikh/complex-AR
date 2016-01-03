@@ -1,6 +1,5 @@
 package se.ltu.d7013e.rabbitMQ;
 
-
 import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeoutException;
@@ -34,14 +33,20 @@ public class RabbitMQSend extends Thread{
 			SendMessage(mJSON);
 		}
 		Disconnect();
-		}catch (TimeoutException | IOException | InterruptedException e){e.printStackTrace();}
+		}catch (InterruptedException e) {
+			System.out.println("-----------------INTERRUP-------------------");}
+		catch (IOException e) {
+			e.printStackTrace();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
 	}
 	private void Connet() throws IOException, TimeoutException{
 		mFactory = new ConnectionFactory();
 	    mFactory.setHost(mHostName);
 	    mConnection = mFactory.newConnection();
 	    mChannel = mConnection.createChannel();
-	    mChannel.exchangeDeclare(mExchangeName , "direct");
+	    mChannel.exchangeDeclare(mExchangeName, Consts.EXCHANGE_TYPE_DIRECT);
 	}
 	private void SendMessage(JSONObject mJSON) throws IOException{
 		mChannel.basicPublish(mExchangeName , mRoutingKey , null, mJSON.toString().getBytes());

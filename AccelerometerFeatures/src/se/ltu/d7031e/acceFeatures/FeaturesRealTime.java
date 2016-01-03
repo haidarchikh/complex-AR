@@ -22,13 +22,20 @@ public class FeaturesRealTime extends Thread {
 	// Files names in the inDir <LowerBack.arff>
 	private String mName;
 	
-	public static final int windowSize  = 32;
-	public static final int windowShift = 16;
+	public static int windowSize  = 64;
+	public static int windowShift = 16;
 	//GLOBAL VARS END	
 
 	private boolean running = false;
-	private BlockingQueue<JSONObject> mInQ;
-	private BlockingQueue<JSONObject> mOutQ;
+	private BlockingQueue<JSONObject> mInQ  = new ArrayBlockingQueue<>(100);
+	private BlockingQueue<JSONObject> mOutQ = new ArrayBlockingQueue<>(100);
+	
+	
+	public FeaturesRealTime(int windowSize , int windowShift){
+		// ugly fix :D
+		FeaturesRealTime.windowSize = windowSize;
+		FeaturesRealTime.windowShift = windowShift;
+	}
 	@Override
 	public void run(){
 		try{
@@ -41,15 +48,13 @@ public class FeaturesRealTime extends Thread {
 
  				mOutQ.put(new JSONObject().put(mName, mFeatureData));
 			}
-		}catch(InterruptedException e){e.printStackTrace();}
+		}catch (InterruptedException e) {
+			System.out.println("-----------------INTERRUP-------------------");}
 	}
 	
 	public void setRunning(boolean running){
 		this.running = running;
-	}
-	public FeaturesRealTime(){
-		mInQ  = new ArrayBlockingQueue<>(100);
-		mOutQ = new ArrayBlockingQueue<>(100);
+		if(!running){this.interrupt();}
 	}
 	private String GetFeatures(String mRawData){
 		String mResult="";
@@ -288,16 +293,10 @@ public class FeaturesRealTime extends Thread {
 			return res;
 		}
 	}
-	public BlockingQueue<JSONObject> getmInQ() {
-		return mInQ;
-	}
 	public void setmInQ(BlockingQueue<JSONObject> mInQ) {
 		this.mInQ = mInQ;
 	}
 	public BlockingQueue<JSONObject> getmOutQ() {
 		return mOutQ;
-	}
-	public void setmOutQ(BlockingQueue<JSONObject> mOutQ) {
-		this.mOutQ = mOutQ;
 	}
 }

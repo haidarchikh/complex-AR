@@ -30,8 +30,8 @@ public class RabbitMQReceive extends Thread{
 			try {
 				mJSON = mInternalQ.take();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+				System.out.println("-----------------INTERRUP-------------------");
+				}
 			mOutQ.add(mJSON);
 		}
 		Disconnect();
@@ -47,7 +47,7 @@ public class RabbitMQReceive extends Thread{
 			mConnection  = mFactory.newConnection();
 		    mChannel     = mConnection.createChannel();
 		    mRabbitQueue = mChannel.queueDeclare().getQueue();
-		    mChannel.exchangeDeclare(mExchangeName , "direct", false);
+		    mChannel.exchangeDeclare(mExchangeName , Consts.EXCHANGE_TYPE_DIRECT, false);
 		    mChannel.queueBind(mRabbitQueue , mExchangeName , mRoutingKey);
 		} catch (IOException | TimeoutException e) {
 			System.out.println("Error while connecting to RabbitMQ" +e.getCause());
@@ -81,13 +81,13 @@ public class RabbitMQReceive extends Thread{
 			e.printStackTrace();
 		}
 	}
-	public RabbitMQReceive(String mHostName , String mExchange){
-		this(mHostName , mExchange, "");
-	}
 	public RabbitMQReceive(String mHostName, String mExchangeName, String mRoutingKey){
 		this.mHostName     = mHostName;
 		this.mExchangeName = mExchangeName;
 		this.mRoutingKey   = mRoutingKey;
+	}
+	public RabbitMQReceive(String mHostName , String mExchange){
+		this(mHostName , mExchange, "");
 	}
 	public BlockingQueue<JSONObject> getmOutQ() {
 		return mOutQ;

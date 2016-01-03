@@ -1,7 +1,20 @@
-package se.ltu.d7031e;
+package wordcount;
 
+import se.ltu.d7031e.DB;
+import se.ltu.d7031e.DBCursor;
+import se.ltu.d7031e.File;
+import se.ltu.d7031e.GridFS;
+import se.ltu.d7031e.GridFSDBFile;
+import se.ltu.d7031e.GridFSInputFile;
+import se.ltu.d7031e.IOException;
+import se.ltu.d7031e.MongoClient;
+import se.ltu.d7031e.MongoDB;
+
+public class sfdfg {
+
+}
 public class MongoDB {
-	/*
+	
 	private DB db;
 	private String dbName;
 	private String mIP;
@@ -59,6 +72,4 @@ public class MongoDB {
 			e.printStackTrace();
 		}
     }
-     */
-    
 }

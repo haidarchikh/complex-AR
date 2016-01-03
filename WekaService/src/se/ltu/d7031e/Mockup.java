@@ -1,4 +1,4 @@
-package se.ltu.d7013e.rabbitMQ;
+package se.ltu.d7031e;
 
 
 import java.util.concurrent.ArrayBlockingQueue;

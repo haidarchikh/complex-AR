@@ -3,6 +3,7 @@ package se.ltu.d7031e;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -43,15 +44,23 @@ public class WekaService extends Thread{
 				Instances data = arff.getData();
 				data.setClassIndex(data.numAttributes()-1);
 				int numInstances = data.numInstances();
+				System.out.println(numInstances);
 				for(int i = 0 ; i < numInstances ; i++){
 					totalInstances++;
 					double value=mClassifier.classifyInstance(data.instance(i));
 		            String prediction = data.classAttribute().value((int)value); 
-		            PrintPredeiction(prediction);
 		            
 		            mOutQ.put(new JSONObject().put(mResultKey, prediction));
+		            
+		            PrintPredeiction(prediction);
 				}
-			} catch (Exception e) {e.printStackTrace();}	
+			} catch (InterruptedException e) {
+				System.out.println("-----------------INTERRUP-------------------");} 
+			catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
 		}
 	}
 	private void GetClassifier(){
@@ -107,8 +116,9 @@ public class WekaService extends Thread{
 		}
 		return split;
 	}
-	public void setRunning (boolean running){
+	public void setRunning(boolean running){
 		this.running = running;
+		if(!running){this.interrupt();}
 	}
 	public BlockingQueue<JSONObject> getmOutQ() {
 		return mOutQ;
