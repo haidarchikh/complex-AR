@@ -9,15 +9,15 @@ import se.ltu.d7013e.rabbitMQ.RabbitMQSend;
 import se.ltu.d7031e.acceFeatures.FeaturesRealTime;
 
 public class testAndroid {
-	public static final int windowSize  = 512;
-	public static final int windowShift = 256;
+	public static final int windowSize  = 16;
+	public static final int windowShift = 8;
 	
 	public static String mRabbit_IP = Consts.LOCALHOST ;
 	public static BlockingQueue<JSONObject> mQ;
 	
 	public static void main(String[] args) {
 		
-		RawToArff        mRawToArff = new RawToArff("waist", 2048);
+		RawToArff        mRawToArff = new RawToArff(32);
 		FeaturesRealTime mFeatures  = new FeaturesRealTime(windowSize, windowShift);
 		WekaService      mWeka      = new WekaService    (Consts.CLASSIFIER_PATH, Consts.ACTIVITY);
 		RabbitMQSend     mSender    = new RabbitMQSend   (mRabbit_IP, Consts.EXCHANGE_NAME_EVENTS);
@@ -35,14 +35,11 @@ public class testAndroid {
 		mSender   .setmInQ(mWeka     .getmOutQ());
 		
 		
-		mRawToArff.start();
-		mFeatures .start();
-		mWeka     .start();
+		//mRawToArff.start();
+		//mFeatures .start();
+		//mWeka     .start();
 		//mSender   .start();
-		mQ = mWeka.getmOutQ();
-		
-		
-		
+		mQ = mReceiver.getmOutQ();
 		
 		mReceiver .start();
 		

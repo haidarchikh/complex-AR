@@ -42,4 +42,6 @@ public class Consts {
 	public static final String EXCHANGE_NAME_ACCELEROMETER = "accelerometer";
 	public static final String EXCHANGE_TYPE_DIRECT        = "direct";
 	public static final String CLASSIFIER_PATH = "/home/haidar/Desktop/Features/featuresModel.model";
+	
+	
 }

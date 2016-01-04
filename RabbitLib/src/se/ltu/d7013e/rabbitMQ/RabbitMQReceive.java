@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import com.rabbitmq.client.*;
 
 public class RabbitMQReceive extends Thread{
-	
+	private static final String EXCHANGE_TYPE_DIRECT = "direct";
 	private String mHostName;
 	private String mExchangeName;
 	private String mRoutingKey;
@@ -47,7 +47,7 @@ public class RabbitMQReceive extends Thread{
 			mConnection  = mFactory.newConnection();
 		    mChannel     = mConnection.createChannel();
 		    mRabbitQueue = mChannel.queueDeclare().getQueue();
-		    mChannel.exchangeDeclare(mExchangeName , Consts.EXCHANGE_TYPE_DIRECT, false);
+		    mChannel.exchangeDeclare(mExchangeName, EXCHANGE_TYPE_DIRECT, false);
 		    mChannel.queueBind(mRabbitQueue , mExchangeName , mRoutingKey);
 		} catch (IOException | TimeoutException e) {
 			System.out.println("Error while connecting to RabbitMQ" +e.getCause());

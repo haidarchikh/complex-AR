@@ -11,7 +11,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 
 public class RabbitMQSend extends Thread{
-	
+	private static final String EXCHANGE_TYPE_DIRECT = "direct";
 	private String mHostName;
 	private String mExchangeName;
 	private String mRoutingKey;
@@ -46,7 +46,7 @@ public class RabbitMQSend extends Thread{
 	    mFactory.setHost(mHostName);
 	    mConnection = mFactory.newConnection();
 	    mChannel = mConnection.createChannel();
-	    mChannel.exchangeDeclare(mExchangeName, Consts.EXCHANGE_TYPE_DIRECT);
+	    mChannel.exchangeDeclare(mExchangeName, EXCHANGE_TYPE_DIRECT);
 	}
 	private void SendMessage(JSONObject mJSON) throws IOException{
 		mChannel.basicPublish(mExchangeName , mRoutingKey , null, mJSON.toString().getBytes());
