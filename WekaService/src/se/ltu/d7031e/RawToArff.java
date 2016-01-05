@@ -18,11 +18,11 @@ public class RawToArff extends Thread{
 	private static final String NEWLINE    = "\n";
 	private static final String COMMA      = ",";
 	private static final String mTIMESTAMP = "timestamp";
-    private static final String mPOSITION  = "position";
-    private static final String mLABEL     = "label";
-    private static final String X          = "x";
-    private static final String Y          = "y";
-    private static final String Z          = "z";
+	private static final String mPOSITION  = "position";
+	private static final String mLABEL     = "label";
+	private static final String X          = "x";
+	private static final String Y          = "y";
+	private static final String Z          = "z";
 	
 	private BlockingQueue<JSONObject> mInQ;
 	private BlockingQueue<JSONObject> mOutQ = new ArrayBlockingQueue<>(100);

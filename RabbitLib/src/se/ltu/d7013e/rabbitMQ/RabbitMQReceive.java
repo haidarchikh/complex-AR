@@ -53,7 +53,7 @@ public class RabbitMQReceive extends Thread{
 			System.out.println("Error while connecting to RabbitMQ" +e.getCause());
 			e.printStackTrace();
 		}
-	    System.out.println(" [*] Waiting for events.");
+	    //System.out.println(" [*] Waiting for events.");
 	}
 	private void ReciveMessage() {
 	    Consumer consumer = new DefaultConsumer(mChannel) {
