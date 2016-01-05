@@ -30,6 +30,7 @@ public class OnGoingCA {
 			mWieght += mContext.getmWeight()/2;
 		}
 	}
+	// It will handle CA without any end or core atomic attributes
 	public boolean Fulfilled(){
 		return(	CoreAtomicActivityFullfilled()&&
 				CoreContextAttributeFulfilled()&&

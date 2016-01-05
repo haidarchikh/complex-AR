@@ -16,10 +16,18 @@ public class ComplexActivity {
 	private Hashtable<String,ContextAttribute> mCoreContext      = new Hashtable<>();
 	private Hashtable<String,ContextAttribute> mEndContext       = new Hashtable<>();
 	private Hashtable<String,ContextAttribute> mContexts         = new Hashtable<>();
-	
+	/**
+	 * Creates Complex Activity object with the given name
+	 * @param mName the Atomic Activity name.
+	 * */
 	public ComplexActivity (String mName){
 		this.mName = mName;
 	}
+	/**
+	 * Adds an Atomic Activity to this Complex Activity 
+	 * Activities list.
+	 * @param mActivity Atomic Activity to be added
+	 * */
 	public void addActivity(AtomicActivity mActivity){
 		mActivities.put(mActivity.getmName(), mActivity);
 	}
@@ -56,29 +64,29 @@ public class ComplexActivity {
 	public boolean isContextAttribute(ContextAttribute mContext){
 		return mContexts.containsKey(mContext.getmName());
 	}
-	public boolean isCoreAtomicActivity(AtomicActivity mActivity){
-			return mCoreActivities.containsKey(mActivity.getmName());
-	}
-	public boolean isCoreContextAttribute(ContextAttribute mContext){ 
-			return mCoreContext.containsKey(mContext.getmName());
-	}
 	public boolean isStartAtomicActivity(AtomicActivity mActivity){
 			return mStartActivities.containsKey(mActivity.getmName());
 	}
 	public boolean isStartContextAttribute(ContextAttribute mContext){ 
 			return mStartContext.containsKey(mContext.getmName());
 	}
-	public boolean isEndAtomicActivity(AtomicActivity mActivity){
-			return mEndActivities.containsKey(mActivity.getmName());
+	public Hashtable<String,AtomicActivity> getmCoreActivities() {
+		return mCoreActivities;
 	}
-	public boolean isEndContextAttribute(ContextAttribute mContext){ 
-			return mEndContext.containsKey(mContext.getmName());
+	public Hashtable<String,AtomicActivity> getmEndActivities() {
+		return mEndActivities;
 	}
-	public double getmThreshold() {
-		return mThreshold;
+	public Hashtable<String,ContextAttribute> getmCoreContext() {
+		return mCoreContext;
+	}
+	public Hashtable<String,ContextAttribute> getmEndContext() {
+		return mEndContext;
 	}
 	public void setmThreshold(double mThreshold) {
 		this.mThreshold = mThreshold;
+	}
+	public double getmThreshold() {
+		return mThreshold;
 	}
 	public String getmName() {
 		return mName;
@@ -91,53 +99,5 @@ public class ComplexActivity {
 	}
 	public void setmLifespan(long mLifespan) {
 		this.mLifespan = mLifespan;
-	}
-	public Hashtable<String,AtomicActivity> getmStartActivities() {
-		return mStartActivities;
-	}
-	public void setmStartActivities(Hashtable<String,AtomicActivity> mStartActivities) {
-		this.mStartActivities = mStartActivities;
-	}
-	public Hashtable<String,AtomicActivity> getmCoreActivities() {
-		return mCoreActivities;
-	}
-	public void setmCoreActivities(Hashtable<String,AtomicActivity> mCoreActivities) {
-		this.mCoreActivities = mCoreActivities;
-	}
-	public Hashtable<String,AtomicActivity> getmEndActivities() {
-		return mEndActivities;
-	}
-	public void setmEndActivities(Hashtable<String,AtomicActivity> mEndActivities) {
-		this.mEndActivities = mEndActivities;
-	}
-	public Hashtable<String,AtomicActivity> getmActivities() {
-		return mActivities;
-	}
-	public void setmActivities(Hashtable<String,AtomicActivity> mActivities) {
-		this.mActivities = mActivities;
-	}
-	public Hashtable<String,ContextAttribute> getmStartContext() {
-		return mStartContext;
-	}
-	public void setmStartContext(Hashtable<String,ContextAttribute> mStartContext) {
-		this.mStartContext = mStartContext;
-	}
-	public Hashtable<String,ContextAttribute> getmCoreContext() {
-		return mCoreContext;
-	}
-	public void setmCoreContext(Hashtable<String,ContextAttribute> mCoreContext) {
-		this.mCoreContext = mCoreContext;
-	}
-	public Hashtable<String,ContextAttribute> getmEndContext() {
-		return mEndContext;
-	}
-	public void setmEndContext(Hashtable<String,ContextAttribute> mEndContext) {
-		this.mEndContext = mEndContext;
-	}
-	public Hashtable<String,ContextAttribute> getmContexts() {
-		return mContexts;
-	}
-	public void setmContexts(Hashtable<String,ContextAttribute> mContext) {
-		this.mContexts = mContext;
 	}
 }
