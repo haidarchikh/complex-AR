@@ -40,3 +40,14 @@ target/
 # TeXlipse plugin
 .texlipse
 
+# Folders
+Brian/
+d7001d_2015/
+D7001Lab2/
+D7001Lab3/
+D7001Test/
+Lab2/
+MongoDB/
+SmartHome/
+SSLClientServer/
+wordcount/
