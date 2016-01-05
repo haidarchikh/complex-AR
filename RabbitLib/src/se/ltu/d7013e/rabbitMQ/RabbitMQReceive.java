@@ -29,10 +29,10 @@ public class RabbitMQReceive extends Thread{
 			JSONObject mJSON = new JSONObject();
 			try {
 				mJSON = mInternalQ.take();
+				mOutQ.add(mJSON);
 			} catch (InterruptedException e) {
 				System.out.println("-----------------INTERRUP-------------------");
-				}
-			mOutQ.add(mJSON);
+			}
 		}
 		Disconnect();
 	}
