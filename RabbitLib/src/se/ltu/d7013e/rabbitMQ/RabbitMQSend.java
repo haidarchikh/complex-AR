@@ -27,12 +27,12 @@ public class RabbitMQSend extends Thread{
 	@Override
 	public void run(){
 		try{
-		Connet();
+		connet();
 		while(running){
 			JSONObject mJSON = mInQ.take();
-			SendMessage(mJSON);
+			sendMessage(mJSON);
 		}
-		Disconnect();
+		disconnect();
 		}catch (InterruptedException e) {
 			System.out.println("-----------------INTERRUP-------------------");}
 		catch (IOException e) {
@@ -41,17 +41,17 @@ public class RabbitMQSend extends Thread{
 			e.printStackTrace();
 		}
 	}
-	private void Connet() throws IOException, TimeoutException{
+	private void connet() throws IOException, TimeoutException{
 		mFactory = new ConnectionFactory();
 	    mFactory.setHost(mHostName);
 	    mConnection = mFactory.newConnection();
 	    mChannel = mConnection.createChannel();
 	    mChannel.exchangeDeclare(mExchangeName, EXCHANGE_TYPE_DIRECT);
 	}
-	private void SendMessage(JSONObject mJSON) throws IOException{
+	private void sendMessage(JSONObject mJSON) throws IOException{
 		mChannel.basicPublish(mExchangeName , mRoutingKey , null, mJSON.toString().getBytes());
 	}
-	private void Disconnect() throws IOException, TimeoutException{
+	private void disconnect() throws IOException, TimeoutException{
 	    mChannel.close();
 	    mConnection.close();
 	}

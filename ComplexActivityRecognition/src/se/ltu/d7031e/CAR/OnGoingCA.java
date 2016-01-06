@@ -18,14 +18,14 @@ public class OnGoingCA {
 	}
 	public void NewAtomicActivity(AtomicActivity mActivity){
 		if(mCA.isAtomicActivity(mActivity)&&!mActivityList.containsKey(mActivity.getmName())){
-			mActivity.setmWeight(mCA.GetActivityWieght(mActivity));
+			mActivity.setmWeight(mCA.getActivityWeight(mActivity.getmName()));
 			mActivityList.put(mActivity.getmName(),mActivity);
 			mWieght += mActivity.getmWeight()/2;
 		}
 	}
 	public void NewContextAttribute(ContextAttribute mContext){
 		if(mCA.isContextAttribute(mContext)&&!mContextList.containsKey(mContext.getmName())){
-			mContext.setmWeight(mCA.GetContextWieght(mContext));
+			mContext.setmWeight(mCA.getContextWeight(mContext.getmName()));
 			mContextList.put(mContext.getmName(),mContext);
 			mWieght += mContext.getmWeight()/2;
 		}

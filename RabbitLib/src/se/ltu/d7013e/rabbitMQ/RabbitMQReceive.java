@@ -23,8 +23,8 @@ public class RabbitMQReceive extends Thread{
 	private BlockingQueue<JSONObject> mInternalQ = new ArrayBlockingQueue<>(100);
 	@Override
 	public void run(){
-		Connect();
-		ReciveMessage();
+		connect();
+		reciveMessage();
 		while(running){
 			JSONObject mJSON = new JSONObject();
 			try {
@@ -34,13 +34,13 @@ public class RabbitMQReceive extends Thread{
 				System.out.println("-----------------INTERRUP-------------------");
 			}
 		}
-		Disconnect();
+		disconnect();
 	}
 	public void setRunning(boolean running){
 		this.running = running;
 		if(!running){this.interrupt();}
 	}
-	private void Connect(){
+	private void connect(){
 		mFactory = new ConnectionFactory();
 	    mFactory.setHost(mHostName);
 	    try {
@@ -55,7 +55,7 @@ public class RabbitMQReceive extends Thread{
 		}
 	    //System.out.println(" [*] Waiting for events.");
 	}
-	private void ReciveMessage() {
+	private void reciveMessage() {
 	    Consumer consumer = new DefaultConsumer(mChannel) {
 	      @Override
 	      public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
@@ -72,7 +72,7 @@ public class RabbitMQReceive extends Thread{
 			e.printStackTrace();
 		}
 	}
-	private void Disconnect(){
+	private void disconnect(){
 	    try {
 			mChannel.close();
 			mConnection.close();

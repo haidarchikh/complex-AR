@@ -65,7 +65,7 @@ public class CAFactory {
 		
 		if(isStartAtomicActivity){mCA.addStartActivity(mActivity);}
 		if(isEndAtomicActivity  ){mCA.addEndActivity  (mActivity);}
-		if(isCoreAtomicActivity) {mCA.addCoreActivity (mActivity);}
+		if(isCoreAtomicActivity ){mCA.addCoreActivity (mActivity);}
 		if(isStartAtomicActivity&&isEndAtomicActivity){System.out.println("Can't be start and end at the same time");}
 	}
 	private void addContextAttribute(String mName, double mWeight,
@@ -75,7 +75,7 @@ public class CAFactory {
 		
 		if(isStartContextAttribute){mCA.addStartContext(mContext);}
 		if(isEndContextAttribute  ){mCA.addEndContext  (mContext);}
-		if(isCoreContextAttribute) {mCA.addCoreContext (mContext);}
+		if(isCoreContextAttribute ){mCA.addCoreContext (mContext);}
 		if(isStartContextAttribute&&isEndContextAttribute){System.out.println("Can't be start and end at the same time");}
 	}
 	private ComplexActivity GetmCA(){

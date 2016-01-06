@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="se.ltu.d7013e.rabbitMQ.RabbitMQReceive" project="RabbitLib" 
-    file="/RabbitLib/src/se/ltu/d7013e/rabbitMQ/RabbitMQReceive.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="359" y="208"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="se.ltu.d7013e.rabbitMQ.RabbitMQSend" project="RabbitLib" 
+  <class id="1" language="java" name="se.ltu.d7013e.rabbitMQ.RabbitMQSend" project="RabbitLib" 
     file="/RabbitLib/src/se/ltu/d7013e/rabbitMQ/RabbitMQSend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="148" y="192"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

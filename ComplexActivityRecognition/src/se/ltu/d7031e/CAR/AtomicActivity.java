@@ -20,15 +20,29 @@ public class AtomicActivity {
 		this.mName		= mName;
 		this.mWeight	= mWeight;
 	}
+	/**
+	 * @return the Atomic Activity name
+	 * */
 	public String getmName() {
 		return mName;
 	}
+	/**
+	 * Sets the Atomic Activity name
+	 * */
 	public void setmName(String mName) {
 		this.mName = mName;
 	}
+	/**
+	 * Returns the Atomic Activity weight.
+	 * @return a double value between 0 and 1
+	 * */
 	public double getmWeight() {
 		return mWeight;
 	}
+	/**
+	 * Sets the Atomic Activity weight.
+	 * @param mWeight a double value between 0 and 1
+	 * */
 	public void setmWeight(double mWeight) {
 		this.mWeight = mWeight;
 	}

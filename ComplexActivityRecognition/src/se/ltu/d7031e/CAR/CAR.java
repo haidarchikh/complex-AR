@@ -20,30 +20,30 @@ public class CAR extends Thread{
 		while(running){
 			try{
 				mEvent = mInQ.take();
-				CheckCurrentSituation();
-				DeleteDeadCA();
-				CheckForNewCA(mEvent);
-				PassNewEvent(mEvent);
-				CheckIfAnyCAFulfilled();
+				checkCurrentSituation();
+				deleteDeadCA();
+				checkForNewCA(mEvent);
+				passNewEvent(mEvent);
+				checkIfAnyCAFulfilled();
 			}catch (InterruptedException e) {
 				System.out.println("-----------------INTERRUP-------------------");}	
 		}
 	}
-	private void PassNewEvent(JSONObject mEvent){
+	private void passNewEvent(JSONObject mEvent){
 		if(mEvent.has(Consts.ACTIVITY)){
-			NewAtomicActivity(new AtomicActivity((mEvent.getString(Consts.ACTIVITY))));
+			newAtomicActivity(new AtomicActivity((mEvent.getString(Consts.ACTIVITY))));
 		}else if(mEvent.has(Consts.CONTEXT)){
-			NewContextAttribute(new ContextAttribute(mEvent.getString(Consts.CONTEXT)));
+			newContextAttribute(new ContextAttribute(mEvent.getString(Consts.CONTEXT)));
 		}
 	}
-	private void CheckForNewCA(JSONObject mEvent){
+	private void checkForNewCA(JSONObject mEvent){
 		if(mEvent.has(Consts.ACTIVITY)){
-			CheckForNewCAA(new AtomicActivity((mEvent.getString(Consts.ACTIVITY))));
+			checkForNewCAA(new AtomicActivity((mEvent.getString(Consts.ACTIVITY))));
 		}else if(mEvent.has(Consts.CONTEXT)){
-			CheckForNewCAC(new ContextAttribute(mEvent.getString(Consts.CONTEXT)));
+			checkForNewCAC(new ContextAttribute(mEvent.getString(Consts.CONTEXT)));
 		}
 	}
-	private void DeleteDeadCA(){
+	private void deleteDeadCA(){
 		Iterator<Entry<String, OnGoingCA>> mIterator = mOnGoingCAList.entrySet().iterator();
 		while(mIterator.hasNext()){
 			 OnGoingCA mOnGoingCA = mIterator.next().getValue();
@@ -53,23 +53,23 @@ public class CAR extends Thread{
 			 }
 		}
 	}
-	private void NewAtomicActivity(AtomicActivity mActivity){
+	private void newAtomicActivity(AtomicActivity mActivity){
 		Iterator<Entry<String, OnGoingCA>> mIterator = mOnGoingCAList.entrySet().iterator();
 		while(mIterator.hasNext()){ 
 			mIterator.next().getValue().NewAtomicActivity(mActivity);
 			}
 	}
-	private void NewContextAttribute(ContextAttribute mContext){
+	private void newContextAttribute(ContextAttribute mContext){
 		Iterator<Entry<String, OnGoingCA>> mIterator = mOnGoingCAList.entrySet().iterator();
 		while(mIterator.hasNext()){	
 			mIterator.next().getValue().NewContextAttribute(mContext);
 			}
 	}
-	private void CheckCurrentSituation(){
+	private void checkCurrentSituation(){
 		mSituation = CAFactory.atHome();
-		if(situationChanged){DeleteNonSituationCA();}
+		if(situationChanged){deleteNonSituationCA();}
 	}
-	private void CheckForNewCAA(AtomicActivity mActivity){
+	private void checkForNewCAA(AtomicActivity mActivity){
 		Iterator<Entry<String, ComplexActivity>> mSituationCAListIterator = mSituation.getmCA().entrySet().iterator();
 		while(mSituationCAListIterator.hasNext()){
 			ComplexActivity mSituationCA = mSituationCAListIterator.next().getValue();
@@ -78,7 +78,7 @@ public class CAR extends Thread{
 			}
 		}
 	}
-	private void CheckForNewCAC(ContextAttribute mContext){
+	private void checkForNewCAC(ContextAttribute mContext){
 		Iterator<Entry<String, ComplexActivity>> mSituationCAListIterator = mSituation.getmCA().entrySet().iterator();
 		while(mSituationCAListIterator.hasNext()){
 			ComplexActivity mSituationCA = mSituationCAListIterator.next().getValue();
@@ -91,7 +91,7 @@ public class CAR extends Thread{
 		mOnGoingCAList.put(mCA.getmName(),new OnGoingCA(mCA));
 		System.out.println("Detected a biggining of a Complex Activity :" + mCA.getmName());
 	}
-	private void CheckIfAnyCAFulfilled(){
+	private void checkIfAnyCAFulfilled(){
 		Iterator<Entry<String, OnGoingCA>> mIterator = mOnGoingCAList.entrySet().iterator();
 		while(mIterator.hasNext()){
 			OnGoingCA mOnGoingCA = mIterator.next().getValue();
@@ -103,7 +103,7 @@ public class CAR extends Thread{
 			}
 		}
 	}
-	private void DeleteNonSituationCA(){
+	private void deleteNonSituationCA(){
 		Iterator<Entry<String, OnGoingCA>> mIterator = mOnGoingCAList.entrySet().iterator();
 		while(mIterator.hasNext()){
 			if(!mSituation.getmCA().containsKey(mIterator.next().getValue().getmName())){
