@@ -1,5 +1,13 @@
 package se.ltu.d7031e.CAR;
 
+/**
+ * This class represent a context attribute. Each context attribute has a name and a
+ * weight. The weight represent importance of the context attribute when included in 
+ * a complex activity.
+ * <p> To instantiate :
+ * <p><b><code>ContextAttribute mContext = new ContextAttribute(String mName, double mWeight);</code></b>
+ * 
+ * */
 public class ContextAttribute {
 	
 	private String mName;

@@ -1,5 +1,11 @@
 package se.ltu.d7031e.CAR;
-
+/**
+ * This class represent an atomic activity. Each atomic activity has a name and a
+ * weight. The weight represent importance of the atomic activity when included in 
+ * a complex activity.
+ * <p> To instantiate :
+ * <p><b><code>AtomicActivity mActivity = new AtomicActivity(String mName, double mWeight);</code></b>
+ * */
 public class AtomicActivity {
 	
 	private String mName;

@@ -1,20 +1,38 @@
 package se.ltu.d7031e.CAR;
 
 import java.util.Hashtable;
-
+import java.util.Iterator;
+import java.util.Map.Entry;
+/**
+ * This class represents a complex activity. A complex activity is a collection of 
+ * atomic activities and context attributes, has a life span and a threshold.
+ * <p> To instantiate :
+ * <p><b><code>ComplexActivity mCA = new ComplexActivity(String mName);</code></b>
+ * <p> The activities and attributes are categorized in three categories. Start, End and Core.
+ * Each of these categories has its own Hashtabel to be stored in and all the atomic activities and
+ * context attributes should be add to mActivities/mContexts.
+ * <p><b><code>AtomicActivity mActivity = new AtomicActivity(mName, mWeight); <br>
+ *             mCA.addCoreActivity(mActivity);<br>
+ *             mCA.addActivity(mActivity);</code></b>
+ *  <p> Complex activity threshold is a double value between 0 and 1
+ *  <p><b><code>mCA.setmThreshold(mThreshold);</code></b>
+ *  <p> Complex activity life span is an int value represent the maximum time in seconds
+ *  which this activity could be still going.
+ *  <p><b><code>mCA.setmLifespan(mLifespan);</code></b>
+ * */
 
 public class ComplexActivity {
-	
+
 	private String mName;
-	private double mThreshold;
+	private double mThreshold = 0.0d;
 	private int mLifespan;
 	private Hashtable<String,AtomicActivity>   mStartActivities  = new Hashtable<>();
 	private Hashtable<String,AtomicActivity>   mCoreActivities   = new Hashtable<>();
 	private Hashtable<String,AtomicActivity>   mEndActivities    = new Hashtable<>();
 	private Hashtable<String,AtomicActivity>   mActivities       = new Hashtable<>();
-	private Hashtable<String,ContextAttribute> mStartContext     = new Hashtable<>();
-	private Hashtable<String,ContextAttribute> mCoreContext      = new Hashtable<>();
-	private Hashtable<String,ContextAttribute> mEndContext       = new Hashtable<>();
+	private Hashtable<String,ContextAttribute> mStartContexts    = new Hashtable<>();
+	private Hashtable<String,ContextAttribute> mCoreContexts     = new Hashtable<>();
+	private Hashtable<String,ContextAttribute> mEndContexts      = new Hashtable<>();
 	private Hashtable<String,ContextAttribute> mContexts         = new Hashtable<>();
 	/**
 	 * Creates a Complex Activity object with the given name
@@ -63,21 +81,21 @@ public class ComplexActivity {
 	 * @param mContext Context Attribute to be added
 	 * */
 	public void addStartContext(ContextAttribute mContext){
-		mStartContext.put(mContext.getmName(), mContext);
+		mStartContexts.put(mContext.getmName(), mContext);
 	}
 	/**
 	 * Adds a Context Attribute to end contexts' list.
 	 * @param mContext Context Attribute to be added
 	 * */
 	public void addEndContext(ContextAttribute mContext){
-		mEndContext.put(mContext.getmName(), mContext);
+		mEndContexts.put(mContext.getmName(), mContext);
 	}
 	/**
 	 * Adds a Context Attribute to core contexts' list.
 	 * @param mContext Context Attribute to be added
 	 * */
 	public void addCoreContext(ContextAttribute mContext){
-		mCoreContext.put(mContext.getmName(), mContext);
+		mCoreContexts.put(mContext.getmName(), mContext);
 	}
 	/**
 	 * Returns the Atomic Activity weight or 0 if this Complex
@@ -131,7 +149,7 @@ public class ComplexActivity {
 	 * @return true if exist and false if it doesn't doesn't
 	 * */
 	public boolean isStartContextAttribute(ContextAttribute mContext){ 
-			return mStartContext.containsKey(mContext.getmName());
+			return mStartContexts.containsKey(mContext.getmName());
 	}
 	/**
 	 * Returns the core Atomic Activity's list
@@ -152,14 +170,14 @@ public class ComplexActivity {
 	 * @return a Hashtable containing the core Context Attribute list
 	 * */
 	public Hashtable<String,ContextAttribute> getmCoreContext() {
-		return mCoreContext;
+		return mCoreContexts;
 	}
 	/**
 	 * Returns the end Context Attribute's list
 	 * @return a Hashtable containing the end Context Attribute list
 	 * */
 	public Hashtable<String,ContextAttribute> getmEndContext() {
-		return mEndContext;
+		return mEndContexts;
 	}
 	/**
 	 * Sets the complex activity Threshold.

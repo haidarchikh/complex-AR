@@ -1,5 +1,8 @@
 package se.ltu.d7031e.CAR;
-
+/**
+ * This is a helper class, make it easier to create and
+ * get use complex activities.
+ * */
 public class CAFactory {
 	private static ComplexActivity brushingTeeth 	= null; 
 	private static ComplexActivity preparingCoffee 	= null;
@@ -19,7 +22,7 @@ public class CAFactory {
 			mFactory.addContextAttribute(Consts.C_AT_BATHROOM       , 0.6, false, false , false);
 			mFactory.addContextAttribute(Consts.C_BATHROOM_LIGHT_ON , 0.6, false, false , true);
 			
-			brushingTeeth = mFactory.GetmCA();
+			brushingTeeth = mFactory.getmCA();
 			return brushingTeeth;
 		}
 		return brushingTeeth;
@@ -37,7 +40,7 @@ public class CAFactory {
 			mFactory.addContextAttribute(Consts.C_AT_KITCHEN       , 0.6, false, false , true);
 			mFactory.addContextAttribute(Consts.C_KITCHEN_LIGHT_ON , 0.6, false, false , true);
 			
-			preparingCoffee = mFactory.GetmCA();
+			preparingCoffee = mFactory.getmCA();
 			return preparingCoffee;
 		}
 		return preparingCoffee;
@@ -52,11 +55,25 @@ public class CAFactory {
 		}
 		return atHome;
 	}
+	/**
+	 * Creates a new CAFactory object with the given name, life span and threshold
+	 * @param mName The complex activity name
+	 * @param mLifespan the complex activity life span in seconds
+	 * @param mThreshold a double value between 0 and 1 
+	 * */
 	private CAFactory(String mName, int mLifespan , double mThreshold){
 		mCA = new ComplexActivity(mName);
 		mCA.setmLifespan(mLifespan);
 		mCA.setmThreshold(mThreshold);
 	}
+	/**
+	 * Adds an atomic activity to the complex activity
+	 * @param mName Atomic activity name
+	 * @param mWeight Atomic activity weight
+	 * @param isStartAtomicActivity true if this atomic activity is a start activity
+	 * @param isEndAtomicActivity true if this atomic activity is an end activity
+	 * @param isCoreAtomicActivity true if this atomic activity is a core atomic activity 
+	 * */
 	private void addAtomicActivity(String mName, double mWeight,
 			boolean isStartAtomicActivity, boolean isEndAtomicActivity, boolean isCoreAtomicActivity){
 		
@@ -68,6 +85,14 @@ public class CAFactory {
 		if(isCoreAtomicActivity ){mCA.addCoreActivity (mActivity);}
 		if(isStartAtomicActivity&&isEndAtomicActivity){System.out.println("Can't be start and end at the same time");}
 	}
+	/**
+	 * Adds an context attribute to the complex activity
+	 * @param mName Context attribute name
+	 * @param mWeight Context attribute weight
+	 * @param isStartContextAttribute true if this context attribute is a start context
+	 * @param isEndContextAttribute true if this context attribute is an end context
+	 * @param isCoreContextAttribute true if this context attribute is a core context attribute 
+	 * */
 	private void addContextAttribute(String mName, double mWeight,
 			boolean isStartContextAttribute, boolean isEndContextAttribute, boolean isCoreContextAttribute){
 		ContextAttribute mContext = new ContextAttribute(mName, mWeight);
@@ -78,7 +103,7 @@ public class CAFactory {
 		if(isCoreContextAttribute ){mCA.addCoreContext (mContext);}
 		if(isStartContextAttribute&&isEndContextAttribute){System.out.println("Can't be start and end at the same time");}
 	}
-	private ComplexActivity GetmCA(){
+	private ComplexActivity getmCA(){
 		return mCA;
 	}
 }

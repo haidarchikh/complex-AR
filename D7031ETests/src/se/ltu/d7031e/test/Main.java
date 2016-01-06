@@ -21,22 +21,22 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		
+		RabbitMQReceive  mRecvAcce  = new RabbitMQReceive(mRabbit_IP, Consts.EXCHANGE_NAME_ACCELEROMETER);
 		RawToArff        mRawToArff = new RawToArff(32);
 		FeaturesRealTime mFeatures  = new FeaturesRealTime(windowSize, windowShift);
 		WekaService      mWeka      = new WekaService    (Consts.CLASSIFIER_PATH, Consts.ACTIVITY);
 		RabbitMQSend     mSender    = new RabbitMQSend   (mRabbit_IP, Consts.EXCHANGE_NAME_EVENTS);
-		CAR              mAlgorithm = new CAR();
-		RabbitMQReceive  mRecvAcce  = new RabbitMQReceive(mRabbit_IP, Consts.EXCHANGE_NAME_ACCELEROMETER);
 		RabbitMQReceive  mRecvEvent = new RabbitMQReceive(mRabbit_IP, Consts.EXCHANGE_NAME_EVENTS);
+		CAR              mAlgorithm = new CAR();
 		
+		mRecvAcce .setRunning(true);
 		mRawToArff.setRunning(true);
 		mFeatures .setRunning(true);
 		mWeka     .setRunning(true);
 		mSender   .setRunning(true);
-		mAlgorithm.setRunning(true);
-		mRecvAcce .setRunning(true);
 		mRecvEvent.setRunning(true);
+		mAlgorithm.setRunning(true);
+		
 		
 		mRawToArff.setmInQ(mRecvAcce .getmOutQ());
 		mFeatures .setmInQ(mRawToArff.getmOutQ());
@@ -45,22 +45,23 @@ public class Main {
 		
 		mAlgorithm.setmInQ(mRecvEvent.getmOutQ());
 		
-		mRecvEvent.start();
 		mAlgorithm.start();
-		mRawToArff.start();
-		mFeatures .start();
-		mWeka     .start();
+		mRecvEvent.start();
 		mSender   .start();
-		
-		mQ = mRecvAcce.getmOutQ();
-		
+		mWeka     .start();
+		//mFeatures .start();
+		mRawToArff.start();
 		mRecvAcce .start();
 		
+		mQ = mRawToArff.getmOutQ();
+		
+		
+		
 		boolean x = false;
-		while(x){
+		while(true){
 			try {
 				JSONObject mJSON = mQ.take();
-				System.out.println(mJSON.toString());				
+				System.out.println(mJSON.get("waist").toString());				
 				/*
 				mSamplingRate++;
                 mReceivedRecords++;

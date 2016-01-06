@@ -7,8 +7,23 @@ import java.util.concurrent.TimeoutException;
 
 import org.json.JSONObject;
 
-import com.rabbitmq.client.*;
+import se.ltu.d7031e.Consts;
 
+import com.rabbitmq.client.*;
+/**
+ * This class is a rabbitMQ receive client. It connects to rabbitMQ broker and 
+ * receives individual messages.<br> It's customized to hide the complexity and 
+ * be very simple to use (no security or authentication) for rapid prototyping.<br>
+ * There is no real need to make it run as a separate thread since the provided call back is not called from <br>
+ * the main thread and has it's own working thread, but for consistency reasons it has its own thread<br>
+ * To instantiate :
+ * <p><b><code>RabbitMQReceive  mReceiver = new RabbitMQReceive(mRabbitIP, mExchangeName);</code></b>
+ * <p>The object will connect to the broker, create a temporary queue, bind the exchange to<br>
+ * this queue and start receiving. All messages between different parts of the system are JSON objects,<br>
+ * so the object will receive the messages and put them in a queue ready to be used by a consumer <br>
+ * To get the queue
+ * <p><b><code>BlockingQueue {@literal <JSONObject>} mQ = mReceiver.getmOutQ(); </code></b>
+ * */
 public class RabbitMQReceive extends Thread{
 	private static final String EXCHANGE_TYPE_DIRECT = "direct";
 	private String mHostName;
@@ -40,6 +55,10 @@ public class RabbitMQReceive extends Thread{
 		this.running = running;
 		if(!running){this.interrupt();}
 	}
+	/**
+	 * The method connects to the broker, creates a temporary <br>
+	 * queue, creates a exchange and bind the exchange to the temprory queue.
+	 * */
 	private void connect(){
 		mFactory = new ConnectionFactory();
 	    mFactory.setHost(mHostName);
@@ -54,7 +73,12 @@ public class RabbitMQReceive extends Thread{
 			e.printStackTrace();
 		}
 	    //System.out.println(" [*] Waiting for events.");
-	}
+	} 
+	/**
+	 *This method creates a consumer and overrides a callback provided by rappitMQ library
+	 *<br> the received messages go throw unnecessary stage which is from this callback to the internal
+	 *queue.
+	 */
 	private void reciveMessage() {
 	    Consumer consumer = new DefaultConsumer(mChannel) {
 	      @Override
@@ -72,6 +96,9 @@ public class RabbitMQReceive extends Thread{
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * This method will disconnect form the broker and close the channel.
+	 * */
 	private void disconnect(){
 	    try {
 			mChannel.close();
@@ -81,11 +108,17 @@ public class RabbitMQReceive extends Thread{
 			e.printStackTrace();
 		}
 	}
+	// Not used, maybe will be in future projects
 	public RabbitMQReceive(String mHostName, String mExchangeName, String mRoutingKey){
 		this.mHostName     = mHostName;
 		this.mExchangeName = mExchangeName;
 		this.mRoutingKey   = mRoutingKey;
 	}
+	/**
+	 * Creates a RabbitMQReceive Object.
+	 * @param mHostName RappitMQ broker IP address
+	 * @param mExchange Name of the exchange to receive messages from.
+	 * */
 	public RabbitMQReceive(String mHostName , String mExchange){
 		this(mHostName , mExchange, "");
 	}

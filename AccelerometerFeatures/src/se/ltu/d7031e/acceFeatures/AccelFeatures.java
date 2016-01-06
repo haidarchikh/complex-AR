@@ -16,7 +16,7 @@ public class AccelFeatures {
 	// Files names in the inDir <Accelerometer.arff>
 	public static final String names[] = new String[]{"test","Accelerometer"};
 	
-	public static final int windowSize = 32;
+	public static final int windowSize  = 32;
 	public static final int windowShift = 8;
 	//GLOBAL VARS END	
 	

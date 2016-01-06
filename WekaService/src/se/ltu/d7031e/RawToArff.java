@@ -5,6 +5,34 @@ import java.util.concurrent.BlockingQueue;
 
 import org.json.JSONObject;
 
+/**
+ * This is a helper class used to transform accelerometer raw data to 
+ * Arff format. Gets an input as a Input queue, transforms to Arff and puts
+ * the output to an output queue. The class take an Integer argument to specify the number
+ * of instance in each output file.
+ * <p><b><code>RawToArff mRawToArff = new RawToArff(numberOfInstances);</code></b>
+ * <p><b>Input example :</b><br>
+ * <p> {"timestamp":"1167163271","position":"waist","label":"?","z":"10.238","y":"-0.157","x":"0.118"}<br>
+ * {"timestamp":"1167163279","position":"waist","label":"?","z":"10.199","y":"-0.157","x":"0.098"}<br>
+ * {"timestamp":"1167163288","position":"waist","label":"?","z":"10.199","y":"-0.157","x":"0.098"}<br>
+ * </p>
+ * <p><b>Output example :</b><br>
+ * <p>
+ * {@literal @}RELATION waist<br>
+ * {@literal @}ATTRIBUTE Timestamp NUMERIC<br>
+ * {@literal @}ATTRIBUTE accX NUMERIC<br>
+ * {@literal @}ATTRIBUTE accY NUMERIC<br>
+ * {@literal @}ATTRIBUTE accZ NUMERIC<br>
+ * {@literal @}ATTRIBUTE accTotal NUMERIC<br>
+ * {@literal @}ATTRIBUTE label {lying,running,sitting,standing,walking}<br>
+ * <br>
+ * {@literal @}DATA<br>
+ * <br>
+ * 1167388110,0.137,-0.196,10.199,10.201803075927314,?<br>
+ * 1167388118,0.137,-0.177,10.219,10.22145092440403,?<br>
+ * 1167388127,0.157,-0.196,10.199,10.20209125620821,?</p><br>
+ * */
+
 public class RawToArff extends Thread{
 	
 	private static final String RELATION   = "@RELATION ";

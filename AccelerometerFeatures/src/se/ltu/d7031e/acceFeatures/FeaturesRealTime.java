@@ -61,15 +61,14 @@ public class FeaturesRealTime extends Thread {
 		try{
 			Vector<String> bannedNames = new Vector<String>();
 			bannedNames.add("Timestamp");
-			
-				StringReader reader   = new StringReader(mRawData);
-				StringWriter outFile  = new StringWriter();
-				BufferedReader inFile = new BufferedReader(reader);
-			
+				StringReader reader     = new StringReader(mRawData);
+				StringWriter outString  = new StringWriter();
+				BufferedReader inString = new BufferedReader(reader);
+				
 				//Reading until data lines
 				Vector<String> attrs = new Vector<String>();
 				Vector<Integer> corresp = new Vector<Integer>();
-				String str = inFile.readLine();
+				String str = inString.readLine();
 
 				@SuppressWarnings("unused")
 				int startLineNum=0;
@@ -90,46 +89,46 @@ public class FeaturesRealTime extends Thread {
 						}
 						attrNum++;
 					}					
-					str = inFile.readLine();
+					str = inString.readLine();
 					startLineNum++;
 				};
 				//System.out.println(startLineNum);
 				
-				outFile.write("@RELATION "+mName+"Features\n\n");				
-				outFile.write("@ATTRIBUTE Timeframe NUMERIC\n");
+				outString.write("@RELATION "+mName+"Features\n\n");				
+				outString.write("@ATTRIBUTE Timeframe NUMERIC\n");
 				for (int i=0;i<attrs.size();i++){
-					outFile.write("@ATTRIBUTE mean"+attrs.elementAt(i)+" NUMERIC\n");
+					outString.write("@ATTRIBUTE mean"+attrs.elementAt(i)+" NUMERIC\n");
 				}
 				for (int i=0;i<attrs.size();i++){
-					outFile.write("@ATTRIBUTE stdev"+attrs.elementAt(i)+" NUMERIC\n");
+					outString.write("@ATTRIBUTE stdev"+attrs.elementAt(i)+" NUMERIC\n");
 				}
 				for (int i=0;i<attrs.size();i++){
-					outFile.write("@ATTRIBUTE skew"+attrs.elementAt(i)+" NUMERIC\n");
+					outString.write("@ATTRIBUTE skew"+attrs.elementAt(i)+" NUMERIC\n");
 				}
 				for (int i=0;i<attrs.size();i++){
-					outFile.write("@ATTRIBUTE curt"+attrs.elementAt(i)+" NUMERIC\n");
+					outString.write("@ATTRIBUTE curt"+attrs.elementAt(i)+" NUMERIC\n");
 				}
 				for (int i=0;i<attrs.size();i++){
-					outFile.write("@ATTRIBUTE energy"+attrs.elementAt(i)+" NUMERIC\n");
+					outString.write("@ATTRIBUTE energy"+attrs.elementAt(i)+" NUMERIC\n");
 				}
 				for (int i=0;i<attrs.size()-1;i++){
 					for (int j=i+1;j<attrs.size();j++){
-						outFile.write("@ATTRIBUTE cor"+attrs.elementAt(i)+attrs.elementAt(j)+" NUMERIC\n");	
+						outString.write("@ATTRIBUTE cor"+attrs.elementAt(i)+attrs.elementAt(j)+" NUMERIC\n");	
 					}
 				}				
 				//TODO Add features
-				outFile.write(labelString+"\n");
-				outFile.write("\n@DATA\n");
-				outFile.flush();
+				outString.write(labelString+"\n");
+				outString.write("\n@DATA\n");
+				outString.flush();
 				
 				String allLines[] = new String[windowSize];
-				allLines = readWindow(allLines, inFile, true, windowShift);
+				allLines = readWindow(allLines, inString, true, windowShift);
 				while (allLines!=null){
 					//Calc timeframe
 					double startTime = Double.parseDouble(allLines[0].split(",")[0]);
 					double endTime = Double.parseDouble(allLines[allLines.length-1].split(",")[0]);
 					double timeFrame = endTime-startTime;
-					outFile.write(""+timeFrame);
+					outString.write(""+timeFrame);
 					
 					//Calc averages
 					double attrAvg[] = new double[attrs.size()];
@@ -140,7 +139,7 @@ public class FeaturesRealTime extends Thread {
 							attrAvg[i] += Double.parseDouble(allLines[j].split(",")[numSplit]);
 						}
 						attrAvg[i] = attrAvg[i]/allLines.length;
-						outFile.write(","+attrAvg[i]);
+						outString.write(","+attrAvg[i]);
 					}
 					
 					//Calc stdevs
@@ -154,7 +153,7 @@ public class FeaturesRealTime extends Thread {
 								(Double.parseDouble(allLines[j].split(",")[numSplit]) - attrAvg[i]);
 						}
 						stdev[i] = Math.sqrt(stdev[i]/allLines.length);
-						outFile.write(","+stdev[i]);						
+						outString.write(","+stdev[i]);						
 					}
 					
 					//3rd central momentum (need for skewness)
@@ -183,7 +182,7 @@ public class FeaturesRealTime extends Thread {
 					double skew[] = new double[attrs.size()];
 					for(int i=0;i<attrs.size();i++){
 						skew[i] = thirdCentralMoment[i]/(stdev[i]*stdev[i]*stdev[i]);
-						outFile.write(","+skew[i]);						
+						outString.write(","+skew[i]);						
 					}					
 					
 					//Curtosis
@@ -191,7 +190,7 @@ public class FeaturesRealTime extends Thread {
 					for(int i=0;i<attrs.size();i++){
 						curtosis[i] = 
 						  (fourthCentralMoment[i]/(stdev[i]*stdev[i]*stdev[i]*stdev[i])) - 3;						
-						outFile.write(","+curtosis[i]);						
+						outString.write(","+curtosis[i]);						
 					}
 					
 					//Energy
@@ -210,7 +209,7 @@ public class FeaturesRealTime extends Thread {
 							res = res+(transformResults[i][j].abs()*transformResults[i][j].abs());
 						}
 						energy[i] = res/transformResults[i].length;
-						outFile.write(","+energy[i]);						
+						outString.write(","+energy[i]);						
 					}
 					
 					//Correlations
@@ -227,18 +226,18 @@ public class FeaturesRealTime extends Thread {
 							mulExp = mulExp/allLines.length;
 							mulExp = mulExp/stdev[i];
 							mulExp = mulExp/stdev[j];
-							outFile.write(","+mulExp);
+							outString.write(","+mulExp);
 						}
 					}				
 
 					
-					outFile.write(","+allLines[0].split(",")[allLines[0].split(",").length-1]+"\n");
-					outFile.flush();					
-					allLines = readWindow(allLines, inFile, false, windowShift);
+					outString.write(","+allLines[0].split(",")[allLines[0].split(",").length-1]+"\n");
+					outString.flush();					
+					allLines = readWindow(allLines, inString, false, windowShift);
 				}
-				outFile.flush();
-				mResult = outFile.toString();
-				outFile.close();
+				outString.flush();
+				mResult = outString.toString();
+				outString.close();
 		}catch(Throwable e){
 			e.printStackTrace();
 		}

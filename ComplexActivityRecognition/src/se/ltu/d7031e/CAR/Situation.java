@@ -24,7 +24,7 @@ public class Situation {
 	/**
 	 * @return Hashtable contains this situation Complex Activity list
 	 * */
-	public Hashtable<String,ComplexActivity> getmCA() {
+	public Hashtable<String,ComplexActivity> getmCAList() {
 		return mCA;
 	}
 }

@@ -65,32 +65,32 @@
     </display>  
   </class>  
   <association id="8">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="9" name="mOnGoingCAList">        
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="9" name="atHome">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="10" minimum="0" maximum="2147483647">        
+      <multiplicity id="10" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="11">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="12" name="mEndContext">        
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="12" name="brushingTeeth">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="13" minimum="0" maximum="2147483647">        
+      <multiplicity id="13" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="14">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="15" name="mActivityList">        
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="15" name="mEndActivities">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="16" minimum="0" maximum="2147483647">        
@@ -101,71 +101,71 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="17">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="18" name="mStartActivities">        
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="18" name="mOnGoingCAList">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="19" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="20">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="21" name="mCA">        
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="21" name="mCoreActivities">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="22" minimum="0" maximum="1">        
+      <multiplicity id="22" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="23">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="24" name="mCoreContext">        
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="24" name="mActivityList">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="25" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="26">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="27" name="mSituation">        
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="27" name="mStartContexts">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="28" minimum="0" maximum="1">        
+      <multiplicity id="28" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="29">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="30" name="brushingTeeth">        
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="30" name="mActivities">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="31" minimum="0" maximum="1">        
+      <multiplicity id="31" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="32">    
-    <end type="SOURCE" refId="4" navigable="false">      
+    <end type="SOURCE" refId="6" navigable="false">      
       <attribute id="33" name="mCA">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="34" minimum="0" maximum="2147483647">        
+      <multiplicity id="34" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
@@ -173,44 +173,44 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="35">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="36" name="mContextList">        
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="36" name="mCA">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="37" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="38">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="39" name="atHome">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="40" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="41">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="42" name="mActivities">        
+      <attribute id="39" name="mStartActivities">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="43" minimum="0" maximum="2147483647">        
+      <multiplicity id="40" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="41">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="42" name="mContextList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="43" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="44">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="45" name="mContexts">        
+      <attribute id="45" name="mCoreContexts">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="46" minimum="0" maximum="2147483647">        
@@ -234,31 +234,31 @@
   </association>  
   <association id="50">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="51" name="mCoreActivities">        
+      <attribute id="51" name="mEndContexts">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="52" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="53">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="54" name="mEndActivities">        
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="54" name="mSituation">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="55" minimum="0" maximum="2147483647">        
+      <multiplicity id="55" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="56">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="57" name="mStartContext">        
+      <attribute id="57" name="mContexts">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="58" minimum="0" maximum="2147483647">        
