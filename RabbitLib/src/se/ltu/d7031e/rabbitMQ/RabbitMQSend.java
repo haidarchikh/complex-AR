@@ -1,13 +1,10 @@
-package se.ltu.d7013e.rabbitMQ;
+package se.ltu.d7031e.rabbitMQ;
 
 import java.io.IOException;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeoutException;
 
 import org.json.JSONObject;
-
-import se.ltu.d7031e.Consts;
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;

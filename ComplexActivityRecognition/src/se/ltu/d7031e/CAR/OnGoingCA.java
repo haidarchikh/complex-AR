@@ -10,7 +10,7 @@ import java.util.Hashtable;
  * <p><b><code>mOnGoingCA.newAtomicActivity(mActivity);<br></code></b>
  * <p>The algorithm can check if the activity is alive and fulfilled
  * <p><b><code>	boolean fulfilled  = mOnGoingCA.fulfilled();<br>
-	boolean isAlive    = mOnGoingCA.isAlive();</code></b>
+	boolean isAlive = mOnGoingCA.isAlive();</code></b>
  * */
 
 public class OnGoingCA {

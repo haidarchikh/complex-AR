@@ -6,10 +6,11 @@ repositories {
 }
 
 dependencies {
-	compile "nz.ac.waikato.cms.weka:weka-stable:3.6.13"
-	compile "org.mongodb:mongo-java-driver:3.1.1"
-	compile "com.rabbitmq:amqp-client:3.5.6"
 	compile "org.json:json:20140107"
+	compile files('/home/haidar/workspace/AccelerometerFeatures/build/libs/AccelerometerFeatures.jar')
+	compile files('/home/haidar/workspace/RabbitLib/build/libs/RabbitLib.jar')
+	compile files('/home/haidar/workspace/WekaService/build/libs/WekaService.jar')
+	compile files('/home/haidar/workspace/ComplexActivityRecognition/build/libs/ComplexActivityRecognition.jar')
 }
 sourceSets{
 	main.java.srcDir "src"

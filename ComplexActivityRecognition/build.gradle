@@ -6,9 +6,8 @@ repositories {
 }
 
 dependencies {
-	compile "com.rabbitmq:amqp-client:3.5.6"
 	compile "org.json:json:20140107"
-
+	compile files('/home/haidar/workspace/RabbitLib/build/libs/RabbitLib.jar')
 }
 
 sourceSets{

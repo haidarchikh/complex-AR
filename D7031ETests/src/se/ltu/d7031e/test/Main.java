@@ -6,11 +6,11 @@ import org.json.JSONObject;
 
 import se.ltu.d7013e.rabbitMQ.RabbitMQReceive;
 import se.ltu.d7013e.rabbitMQ.RabbitMQSend;
-import se.ltu.d7031e.Consts;
 import se.ltu.d7031e.RawToArff;
 import se.ltu.d7031e.WekaService;
 import se.ltu.d7031e.CAR.CAR;
 import se.ltu.d7031e.acceFeatures.FeaturesRealTime;
+
 
 public class Main {
 	public static final int windowSize  = 16;
