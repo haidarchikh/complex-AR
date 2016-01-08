@@ -1,7 +1,6 @@
 allprojects {
   task hello << { task -> println "I'm $task.project.name" }
 }
-
 subprojects {
   apply plugin: "java"
   apply plugin: "eclipse"
@@ -11,4 +10,9 @@ subprojects {
  dependencies {
    compile "org.json:json:20140107"
  }
+}
+task copyJar(type: Copy) {
+    from        'ComplexActivityRecognition/build/libs/ComplexActivityRecognition.jar' ,
+                'WekaService/build/libs/WekaService.jar'
+    into        'docker'
 }

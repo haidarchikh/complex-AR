@@ -4,7 +4,3 @@ dependencies {
 	compile project(':WekaService')
 	compile project(':ComplexActivityRecognition')
 }
-jar{
-	from configurations.compile.collect {zipTree it}
-	manifest.attributes "Main-Class" : "se.ltu.d7031e.tests.Main"
-}
