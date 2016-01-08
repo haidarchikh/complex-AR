@@ -1,0 +1,14 @@
+allprojects {
+  task hello << { task -> println "I'm $task.project.name" }
+}
+
+subprojects {
+  apply plugin: "java"
+  apply plugin: "eclipse"
+  repositories {
+     mavenCentral()
+ }
+ dependencies {
+   compile "org.json:json:20140107"
+ }
+}

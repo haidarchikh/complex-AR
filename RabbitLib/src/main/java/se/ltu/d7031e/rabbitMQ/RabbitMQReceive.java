@@ -37,7 +37,12 @@ public class RabbitMQReceive extends Thread{
 	private BlockingQueue<JSONObject> mInternalQ = new ArrayBlockingQueue<>(100);
 	@Override
 	public void run(){
-		connect();
+		try {
+			connect();
+		} catch (IOException | TimeoutException e1) {
+			System.out.println("Couldn't connect to RabbitMQ broker");
+			e1.printStackTrace();
+		}
 		reciveMessage();
 		while(running){
 			JSONObject mJSON = new JSONObject();
@@ -56,22 +61,21 @@ public class RabbitMQReceive extends Thread{
 	}
 	/**
 	 * The method connects to the broker, creates a temporary <br>
-	 * queue, creates a exchange and bind the exchange to the temprory queue.
+	 * queue, creates a exchange and bind the exchange to the temporary queue.
+	 * @throws TimeoutException Couldn't connect to the broker
+	 * @throws IOException 
 	 * */
-	private void connect(){
+	private void connect() throws IOException, TimeoutException{
 		mFactory = new ConnectionFactory();
 	    mFactory.setHost(mHostName);
-	    try {
-			mConnection  = mFactory.newConnection();
-		    mChannel     = mConnection.createChannel();
-		    mRabbitQueue = mChannel.queueDeclare().getQueue();
-		    mChannel.exchangeDeclare(mExchangeName, EXCHANGE_TYPE_DIRECT, false);
-		    mChannel.queueBind(mRabbitQueue , mExchangeName , mRoutingKey);
-		} catch (IOException | TimeoutException e) {
-			System.out.println("Error while connecting to RabbitMQ" +e.getCause());
-			e.printStackTrace();
-		}
-	    //System.out.println(" [*] Waiting for events.");
+		mConnection  = mFactory.newConnection();
+		mChannel     = mConnection.createChannel();
+		mRabbitQueue = mChannel.queueDeclare().getQueue();
+		mChannel.exchangeDeclare(mExchangeName, EXCHANGE_TYPE_DIRECT, false);
+		mChannel.queueBind(mRabbitQueue , mExchangeName , mRoutingKey);
+		System.out.println("Connectd to :"
+		+mHostName +" and reciving messages from the "
+		+mExchangeName +" exchange");
 	} 
 	/**
 	 *This method creates a consumer and overrides a callback provided by rappitMQ library
