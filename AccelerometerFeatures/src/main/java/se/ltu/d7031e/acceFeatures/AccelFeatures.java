@@ -10,14 +10,14 @@ import java.util.Vector;
 public class AccelFeatures {
 
 	//GLOBAL VARS CHANGE HERE
-	public static final String outDir = "/home/haidar/Desktop/Features/";
-	public static final String inDir  = "/home/haidar/Desktop/Features/";
+	public static final String outDir = "/home/haidar/Desktop/newTraining/";
+	public static final String inDir  = "/home/haidar/Desktop/newTraining/";
 	
 	// Files names in the inDir <Accelerometer.arff>
-	public static final String names[] = new String[]{"test","Accelerometer"};
+	public static final String names[] = new String[]{"waist"};
 	
 	public static final int windowSize  = 32;
-	public static final int windowShift = 8;
+	public static final int windowShift = 16;
 	//GLOBAL VARS END	
 	
 	

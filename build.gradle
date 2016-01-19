@@ -12,7 +12,16 @@ subprojects {
  }
 }
 task copyJar(type: Copy) {
-    from        'ComplexActivityRecognition/build/libs/ComplexActivityRecognition.jar' ,
-                'WekaService/build/libs/WekaService.jar'
-    into        'docker'
+    from        'ComplexActivityRecognition/build/libs/ComplexActivityRecognition.jar'
+    into        'jar/'
+    from        'WekaService/build/libs/WekaService.jar'
+    into        'jar/'
+}
+task copycar(type: Copy) {
+    from        'ComplexActivityRecognition/build/libs/ComplexActivityRecognition.jar'
+    into        '/home/haidar/workspaceDocker/d7031e/ComplexActivityRecognision/src'
+}
+task dockerweka(type: Copy) {
+    from        'WekaService/build/libs/WekaService.jar'
+    into        '/home/haidar/workspaceDocker/d7031e/WekaService/src'
 }

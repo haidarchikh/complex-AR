@@ -1,6 +1,8 @@
 package se.ltu.d7031e.test;
 
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -24,8 +26,9 @@ public class Mockup extends Thread {
 	private JSONObject bathroomLightOn        = new JSONObject();
 	private JSONObject atKitchen              = new JSONObject();
 	private JSONObject kitchenLightON         = new JSONObject();
+	private ArrayList<JSONObject> mArray      = new ArrayList<>();
 	
-	private BlockingQueue<JSONObject> mOutQ = new ArrayBlockingQueue<>(100);
+	private BlockingQueue<JSONObject> mOutQ   = new ArrayBlockingQueue<>(100);
 	
 	public Mockup(){
 		lying                 .put(Consts.ACTIVITY, Consts.A_LYING);
@@ -43,6 +46,22 @@ public class Mockup extends Thread {
 		bathroomLightOn       .put(Consts.CONTEXT , Consts.C_BATHROOM_LIGHT_ON);
 		atKitchen             .put(Consts.CONTEXT , Consts.C_AT_KITCHEN);
 		kitchenLightON        .put(Consts.CONTEXT , Consts.C_KITCHEN_LIGHT_ON);
+		
+		mArray.add(lying);
+		mArray.add(running);
+		mArray.add(sitting);
+		mArray.add(standing);
+		mArray.add(walking);
+		mArray.add(toothBrushHandMove);
+		mArray.add(openBathRoomCupboard);
+		mArray.add(takeToothbrush);
+		mArray.add(takeToothpaste);
+		mArray.add(coffeeMug);
+		mArray.add(coffeeMachine);
+		mArray.add(atBathroom);
+		mArray.add(bathroomLightOn);
+		mArray.add(atKitchen);
+		mArray.add(kitchenLightON);
 	}
 	
 	private boolean runningb = false;
@@ -50,7 +69,9 @@ public class Mockup extends Thread {
 	public void run() {
 		while(runningb){
 			SendBrushingTeeth();
+			sendNoise();
 			SendPreparingCoffee();
+			sendNoise();
 			runningb = false;
 		}
 	}
@@ -62,6 +83,7 @@ public class Mockup extends Thread {
 		mOutQ.add(atKitchen);
 		mOutQ.add(kitchenLightON);
 	}
+	
 	private void SendBrushingTeeth(){
 		mOutQ.add(standing);
 		
@@ -72,9 +94,17 @@ public class Mockup extends Thread {
 		mOutQ.add(atBathroom);
 		mOutQ.add(toothBrushHandMove);
 	}
+	
+	private void sendNoise(){
+		Random rand = new Random();
+		int i = rand.nextInt(14);
+		mOutQ.add(mArray.get(i));
+	}
+	
 	public void setRunning(boolean running){
 		this.runningb = running;
 	}
+	
 	public BlockingQueue<JSONObject> getmOutQ() {
 		return mOutQ;
 	}

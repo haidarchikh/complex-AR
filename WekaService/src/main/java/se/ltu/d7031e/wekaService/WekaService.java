@@ -52,7 +52,7 @@ public class WekaService extends Thread{
 		            
 		            mOutQ.put(new JSONObject().put(mResultKey, prediction));
 		            
-		            //PrintPredeiction(prediction);
+		            PrintPredeiction(prediction);
 				}
 			} catch (InterruptedException e) {
 				System.out.println("-----------------INTERRUP-------------------");} 

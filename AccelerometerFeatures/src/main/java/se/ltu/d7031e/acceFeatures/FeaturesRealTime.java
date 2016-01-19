@@ -15,16 +15,12 @@ import se.ltu.d7031e.acceFeatures.FFT;
 
 
 public class FeaturesRealTime extends Thread {
-	//GLOBAL VARS CHANGE HERE
-	public static final String outDir = "/home/haidar/Desktop/Features/";
-	public static final String inDir  = "/home/haidar/Desktop/Features/";
 	
 	// Files names in the inDir <LowerBack.arff>
 	private String mName;
 	
 	public static int windowSize  = 64;
 	public static int windowShift = 16;
-	//GLOBAL VARS END	
 
 	private boolean running = false;
 	private BlockingQueue<JSONObject> mInQ  = new ArrayBlockingQueue<>(100);
@@ -32,7 +28,7 @@ public class FeaturesRealTime extends Thread {
 	
 	
 	public FeaturesRealTime(int windowSize , int windowShift){
-		// ugly fix :D
+		// ugly fix :D (static methods)
 		FeaturesRealTime.windowSize = windowSize;
 		FeaturesRealTime.windowShift = windowShift;
 	}

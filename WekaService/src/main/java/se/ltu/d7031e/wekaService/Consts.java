@@ -41,6 +41,7 @@ public class Consts {
 	public static final String EXCHANGE_NAME_EVENTS        = "events";
 	public static final String EXCHANGE_NAME_ACCELEROMETER = "accelerometer";
 	public static final String EXCHANGE_TYPE_DIRECT        = "direct";
-	public static final String CLASSIFIER_PATH = "/home/haidar/Desktop/Features/featuresModel.model";
-	public static final String CLASSIFIER_PATH_DOCKER = "/src/featuresModel.model";
+	public static final String CLASSIFIER_PATH = "/home/haidar/Desktop/newTraining/models/new_128_64.model";
+	//public static final String CLASSIFIER_PATH = "/home/haidar/Desktop/Features/featuresModel.model";
+	public static final String CLASSIFIER_PATH_DOCKER = "/src/mModel.model";
 }
