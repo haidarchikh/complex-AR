@@ -43,6 +43,7 @@ public class FeaturesRealTime extends Thread {
 				String mFeatureData = GetFeatures(mJSON.getString(mName));
 
  				mOutQ.put(new JSONObject().put(mName, mFeatureData));
+ 				System.out.println(mFeatureData);
 			}
 		}catch (InterruptedException e) {
 			System.out.println("-----------------INTERRUP-------------------");}

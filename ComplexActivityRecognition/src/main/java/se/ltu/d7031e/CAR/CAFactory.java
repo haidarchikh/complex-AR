@@ -20,7 +20,7 @@ public class CAFactory {
 			mFactory.addAtomicActivity(Consts.A_TOOTH_BRUSHING_HAND_MOVE,  0.6, false , true  , true  );
 			
 			mFactory.addContextAttribute(Consts.C_AT_BATHROOM       , 0.6, false, false , false);
-			mFactory.addContextAttribute(Consts.C_BATHROOM_LIGHT_ON , 0.6, false, false , true);
+			mFactory.addContextAttribute(Consts.C_BATHROOM_LIGHT_ON , 0.4, false, false , true);
 			
 			brushingTeeth = mFactory.getmCA();
 			return brushingTeeth;

@@ -17,11 +17,11 @@ task copyJar(type: Copy) {
     from        'WekaService/build/libs/WekaService.jar'
     into        'jar/'
 }
-task copycar(type: Copy) {
+task copyCar(type: Copy) {
     from        'ComplexActivityRecognition/build/libs/ComplexActivityRecognition.jar'
     into        '/home/haidar/workspaceDocker/d7031e/ComplexActivityRecognision/src'
 }
-task dockerweka(type: Copy) {
+task copyWeka(type: Copy) {
     from        'WekaService/build/libs/WekaService.jar'
     into        '/home/haidar/workspaceDocker/d7031e/WekaService/src'
 }

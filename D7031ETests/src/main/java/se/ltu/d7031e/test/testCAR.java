@@ -1,6 +1,6 @@
 package se.ltu.d7031e.test;
 
-import se.ltu.d7031e.rabbitMQ.RabbitMQSend;
+import se.ltu.d7031e.CAR.CAR;
 
 public class testCAR {
 	
@@ -9,14 +9,13 @@ public class testCAR {
 	public static void main(String[] args) {	
 		
 		Mockup mMockup     = new Mockup();
-		RabbitMQSend mSend = new RabbitMQSend(mRabbit_IP, Consts.EXCHANGE_NAME_EVENTS);
-		
+		CAR     mAlgorithm = new CAR();
 		mMockup.setRunning(true);
-		mSend  .setRunning(true);
+		mAlgorithm.setRunning(true);
 		
-		mSend.setmInQ(mMockup.getmOutQ());
+		mAlgorithm.setmInQ(mMockup.getmOutQ());
 		
-		mSend   .start();
+		mAlgorithm.start();
 		mMockup .start();
 	}
 	

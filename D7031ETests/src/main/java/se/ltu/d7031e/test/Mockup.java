@@ -68,19 +68,27 @@ public class Mockup extends Thread {
 	@Override
 	public void run() {
 		while(runningb){
-			SendBrushingTeeth();
+			//SendBrushingTeeth();
 			sendNoise();
-			SendPreparingCoffee();
-			sendNoise();
-			runningb = false;
+			//SendPreparingCoffee();
+			//runningb = false;
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	private void SendPreparingCoffee(){
 		mOutQ.add(standing);
+		sendNoise();
 		//mOutQ.add(walking);
 		mOutQ.add(coffeeMug);
+		sendNoise();
 		mOutQ.add(coffeeMachine);
 		mOutQ.add(atKitchen);
+		sendNoise();
 		mOutQ.add(kitchenLightON);
 	}
 	
@@ -89,8 +97,10 @@ public class Mockup extends Thread {
 		
 		mOutQ.add(takeToothbrush);
 		mOutQ.add(bathroomLightOn);
+		sendNoise();
 		mOutQ.add(takeToothpaste);
 		mOutQ.add(openBathRoomCupboard);
+		sendNoise();
 		mOutQ.add(atBathroom);
 		mOutQ.add(toothBrushHandMove);
 	}
