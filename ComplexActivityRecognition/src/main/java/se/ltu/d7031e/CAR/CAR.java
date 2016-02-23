@@ -31,7 +31,7 @@ public class CAR extends Thread{
 	private boolean running = false;
 	@Override
 	public void run() {
-		System.out.println("Complex Activity Recognition alcorithm is running and waiting for new events");
+		System.out.println("Complex Activity Recognition algorithm is running and waiting for new events");
 		while(running){
 			try{
 				mEvent = mInQ.take();
