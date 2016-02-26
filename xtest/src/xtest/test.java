@@ -25,14 +25,8 @@ public class test {
 		//System.out.println(res);
 		Random rand = new Random();
 		while (true){
-			System.out.println(getPoisson(10));
+			getPoisson(10);
 			
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 				}
 		}
 	}
