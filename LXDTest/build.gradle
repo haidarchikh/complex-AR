@@ -1,0 +1,12 @@
+apply plugin: "java"
+apply plugin: "eclipse"
+
+repositories {
+     mavenCentral()
+ }
+ sourceSets{
+	main.java.srcDir "src"
+}
+jar{
+	manifest.attributes "Main-Class" : "se.ltu.thesis.lxdTest.Main"
+}
