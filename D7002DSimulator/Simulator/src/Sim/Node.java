@@ -33,6 +33,21 @@ public class Node extends SimEnt {
 	{
 		return _id;
 	}
+	public void recv(SimEnt src, Event ev)
+	{
+		if (ev instanceof Message)
+		{
+			System.out.println("Node "+_id.networkId()+ "." + _id.nodeId() +
+					" receives message with seq: "+((Message) ev).seq() +
+					" at time "+SimEngine.getTime());
+			}
+		}
+}
+	
+
+
+	
+	/*
 		
 	// This method is called upon that an event destined for this node triggers.
 	
@@ -64,12 +79,12 @@ public class Node extends SimEnt {
 	private int i = 1;
 	private double _mJitterAve;
 	private int _mMessageCount;
-	/*
-	 * The method execute the following formula 
-	 *    deltaT1 = T2 - T1
-	 *    deltaT2 = T3 - T2
-	 *    jitter  = | delataT1 - deltaT2 |
-	 * */
+	//
+	// The method execute the following formula 
+	//    deltaT1 = T2 - T1
+	//    deltaT2 = T3 - T2
+	//    jitter  = | delataT1 - deltaT2 |
+	// 
 	protected double calculateJitter(){
 		switch(i){
 		case 1 : _mT1 = SimEngine.getTime(); i++;
@@ -118,5 +133,6 @@ public class Node extends SimEnt {
 			_toNetwork = update.newNode().getAddr().networkId();
 			_toHost = update.newNode().getAddr().nodeId();
 		}
-	}
-}
+		}
+		}
+		*/

@@ -1,0 +1,24 @@
+apply plugin: "eclipse"
+apply plugin: "java"
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile "edu.brown.cs.burlap:burlap:2.1.0"
+	
+}
+
+sourceSets{
+	main.java.srcDir "src"
+}
+
+jar{
+	from configurations.compile.collect {zipTree it}
+	manifest.attributes "Main-Class" : "se.ltu.thesis.haidar.agent.Main"
+}
+task copyDeps(type: Copy) {
+  from configurations.runtime
+  into 'build/libs'
+}
