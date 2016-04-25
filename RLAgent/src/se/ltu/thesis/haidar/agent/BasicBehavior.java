@@ -37,6 +37,7 @@ import burlap.oomdp.auxiliary.stateconditiontest.TFGoalCondition;
 import burlap.oomdp.core.Domain;
 import burlap.oomdp.core.TerminalFunction;
 import burlap.oomdp.core.objects.ObjectInstance;
+import burlap.oomdp.core.states.MutableState;
 import burlap.oomdp.core.states.State;
 import burlap.oomdp.singleagent.RewardFunction;
 import burlap.oomdp.singleagent.SADomain;
@@ -62,10 +63,11 @@ public class BasicBehavior {
 
 
 	public BasicBehavior(){
+		// Instantiate a domain instance
 		gwdg = new GridWorldDomain(11, 11);
 		gwdg.setMapToFourRooms();
 		domain = gwdg.generateDomain();
-
+		
 
 		rf = new UniformCostRF();
 		tf = new SinglePFTF(domain.getPropFunction(GridWorldDomain.PFATLOCATION));
@@ -303,7 +305,7 @@ public class BasicBehavior {
 		//example.sarsaLearningExample(outputPath);
 
 		//example.experimentAndPlotter();
-
+		
 		example.visualize(outputPath);
 
 	}

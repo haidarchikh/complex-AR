@@ -65,8 +65,7 @@ public class TrafficGenerator extends Node {
 			mStatistcs.put(delay, occurrence);	
 		}else{
 			mStatistcs.put(delay, 1);
-		}
-			 
+		} 
 	}
 	protected void printStatistics(){
 		System.out.println("Sent messages :"+_sentmsg+", mean value : "+_expectedDelay);

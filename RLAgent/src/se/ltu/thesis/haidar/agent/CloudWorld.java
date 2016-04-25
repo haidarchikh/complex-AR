@@ -7,13 +7,16 @@ import burlap.oomdp.core.Attribute;
 import burlap.oomdp.core.Attribute.AttributeType;
 import burlap.oomdp.core.Domain;
 import burlap.oomdp.core.ObjectClass;
+import burlap.oomdp.core.TerminalFunction;
 import burlap.oomdp.core.TransitionProbability;
 import burlap.oomdp.core.objects.MutableObjectInstance;
 import burlap.oomdp.core.objects.ObjectInstance;
 import burlap.oomdp.core.states.MutableState;
 import burlap.oomdp.core.states.State;
+import burlap.oomdp.singleagent.Action;
 import burlap.oomdp.singleagent.FullActionModel;
 import burlap.oomdp.singleagent.GroundedAction;
+import burlap.oomdp.singleagent.ObjectParameterizedAction;
 import burlap.oomdp.singleagent.RewardFunction;
 import burlap.oomdp.singleagent.SADomain;
 import burlap.oomdp.singleagent.common.SimpleAction;
@@ -37,7 +40,9 @@ public class CloudWorld implements DomainGenerator{
 	
 	public static final String CURRENT_NETWORK 	= "current network";
 	public static final String CURRENT_CLOUD 	= "current cloud";
-
+	
+	public static final String NETWORK 	= "network";
+	public static final String CLOUD 	= "cloud";
 	// Cloud 1 - WiFI
 	public static final String D_N1_C1	= DELAY + N1 + C1;
 	public static final String T_N1_C1	= THROUGHPUT + N1 + C1;	
@@ -61,12 +66,15 @@ public class CloudWorld implements DomainGenerator{
 
 
 	// Actions
-	public static final String HANDOFF_TO_N1 = HANDOFF + TO + N1;
-	public static final String HANDOFF_TO_N2 = HANDOFF + TO + N2;
+
 	
-	public static final String MIGRATE_TO_C1 = MIGRATE + TO + C1;
-	public static final String MIGRATE_TO_C2 = MIGRATE + TO + C2;
-	public static final String MIGRATE_TO_C3 = MIGRATE + TO + C3;
+	public static final String MIGRATE_TO_N1_C1 = MIGRATE + TO + N1 + C1;
+	public static final String MIGRATE_TO_N1_C2 = MIGRATE + TO + N1 + C2;
+	public static final String MIGRATE_TO_N1_C3 = MIGRATE + TO + N1 + C3;
+	
+	public static final String MIGRATE_TO_N2_C1 = MIGRATE + TO + N2 + C1;
+	public static final String MIGRATE_TO_N2_C2 = MIGRATE + TO + N2 + C2;
+	public static final String MIGRATE_TO_N2_C3 = MIGRATE + TO + N2 + C3;
 	
 	// My agent 
 	public static final String CLASSAGENT = "agent";
@@ -80,6 +88,17 @@ public class CloudWorld implements DomainGenerator{
 		SADomain domain = new SADomain();
 		
 		ObjectClass mAgentClass = new ObjectClass(domain, CLASSAGENT);
+		
+		/* This is the right way to do it 
+		ObjectClass mNetwork = new ObjectClass(domain, NETWORK);
+		
+		Attribute mC1 = new Attribute(domain, C1, AttributeType.INT);
+		Attribute mC2 = new Attribute(domain, C2, AttributeType.INT);
+		Attribute mC3 = new Attribute(domain, C3, AttributeType.INT);
+		mNetwork.addAttribute(mC1);
+		mNetwork.addAttribute(mC2);
+		mNetwork.addAttribute(mC3);
+		*/
 		
 		
 		// WiFI 
@@ -134,13 +153,14 @@ public class CloudWorld implements DomainGenerator{
 		mAgentClass.addAttribute(mC);
 		mAgentClass.addAttribute(mN);
 		
-
-		new Handoff(HANDOFF_TO_N1, domain, 1);
-		new Handoff(HANDOFF_TO_N2, domain, 2);
 		
-		new Migrate(MIGRATE_TO_C1, domain, 1);
-		new Migrate(MIGRATE_TO_C2, domain, 2);
-		new Migrate(MIGRATE_TO_C3, domain, 3);
+		new Migrate(MIGRATE_TO_N1_C1, domain, N1 ,C1);
+		new Migrate(MIGRATE_TO_N1_C2, domain, N1 ,C2);
+		new Migrate(MIGRATE_TO_N1_C3, domain, N1 ,C3);
+		
+		new Migrate(MIGRATE_TO_N2_C1, domain, N2 ,C1);
+		new Migrate(MIGRATE_TO_N2_C2, domain, N2 ,C2);
+		new Migrate(MIGRATE_TO_N2_C3, domain, N2 ,C3);
 		
 		return domain;
 	}
@@ -175,49 +195,57 @@ public class CloudWorld implements DomainGenerator{
 		return s;
 	}
 	
-	protected class Handoff extends SimpleAction implements FullActionModel{
-		
-		//1: WiFI; 2: 4G;
-		public Handoff(String actionName, Domain domain, int network){
+	protected class Migrate extends SimpleAction {
+		private String mTargetCloud;
+		private String mTargetNetwork;
+		// the constructor takes a string name "cloud", the action will migrate the
+		// application to this cloud
+		public Migrate(String actionName, Domain domain, String mTargetNetwork, String mTargetCloud){
 			super(actionName, domain);
-		}
-		
-		@Override
-		public List<TransitionProbability> getTransitions(State s,
-				GroundedAction groundedAction) {
-			// TODO Auto-generated method stub
-			return null;
+			this.mTargetNetwork = mTargetNetwork;
+			this.mTargetCloud 	= mTargetCloud;
 		}
 
 		@Override
 		protected State performActionHelper(State s,
 				GroundedAction groundedAction) {
-			// TODO Auto-generated method stub
-			return null;
+			ObjectInstance agent	= s.getFirstObjectOfClass(CLASSAGENT);
+			
+			String currentNetwork 	= agent.getStringValForAttribute(CURRENT_NETWORK);
+			String currentCloud 	= agent.getStringValForAttribute(CURRENT_CLOUD);
+			
+			// It's not necessary to do this, but for future improvement it will help
+			// The idea is, not to do a migrate action if I'm using the right cloud 
+			
+			if(mTargetNetwork != currentNetwork){
+				agent.setValue(CURRENT_NETWORK	, mTargetNetwork);
+			}
+			if(mTargetCloud != currentCloud){
+				agent.setValue(CURRENT_CLOUD	, mTargetCloud);
+			}
+			return s;
 		}
 	}
-	
-	protected class Migrate extends SimpleAction implements FullActionModel{
-		
-		//1: Cloud 1; 2: Cloud 2; 3: Cloud 3;
-		public Migrate(String actionName, Domain domain, int cloud){
-			super(actionName, domain);
-		}
-		
-		@Override
-		public List<TransitionProbability> getTransitions(State s,
-				GroundedAction groundedAction) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+	public static class Terminal implements TerminalFunction{
 
-		@Override
-		protected State performActionHelper(State s,
-				GroundedAction groundedAction) {
-			// TODO Auto-generated method stub
-			return null;
+		int mEpochTimeNmber;
+		int counter;
+		
+		public Terminal(int mEpochTimeNmber){
+			this.mEpochTimeNmber = mEpochTimeNmber;
 		}
+		
+		@Override
+		public boolean isTerminal(State s) {
+			counter++;
+			if(counter > mEpochTimeNmber){
+				counter = 0;
+				return true;
+			}
+			return false;
+		}	
 	}
+
 	public static class Reward implements RewardFunction{
 		// D : Delay
 		private int min_D;
@@ -227,6 +255,7 @@ public class CloudWorld implements DomainGenerator{
 		private int min_T;
 		private int max_T;
 		
+		private static double WEIGHT = 0.9;
 		/**
 		 * @param min_D The minimum delay required by an application
 		 * @param max_D The maximum delay required by an application
@@ -240,9 +269,11 @@ public class CloudWorld implements DomainGenerator{
 			this.max_T = max_T;
 		}
 		@Override
+		// s and a are the state and action in from the previous time epochs, spirme is the currnet state
+		// so we can have the reward for the tuples  (state action state^prime) 
 		public double reward(State s, GroundedAction a, State sprime) {
 			
-			ObjectInstance agent = s.getFirstObjectOfClass(CLASSAGENT);
+			ObjectInstance agent = sprime.getFirstObjectOfClass(CLASSAGENT);
 			
 			String mCurrentNetwork	= agent.getStringValForAttribute(CURRENT_NETWORK);
 			String mCurrentCloud	= agent.getStringValForAttribute(CURRENT_CLOUD);
@@ -256,8 +287,9 @@ public class CloudWorld implements DomainGenerator{
 			double delayReward 		= calcDelayReward(delay);
 			double throughputReward = calcThroughputReward(throughput);
 			
-			double reward = delayReward + throughputReward;
 			//TODO fix the weighting
+			double reward = (WEIGHT) * delayReward + (1.0 -WEIGHT ) * throughputReward;
+			
 			return reward;
 		}
 		// calculate the delay reward 
