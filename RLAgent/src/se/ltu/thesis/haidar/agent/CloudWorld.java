@@ -1,22 +1,16 @@
 package se.ltu.thesis.haidar.agent;
 
-import java.util.List;
-
 import burlap.oomdp.auxiliary.DomainGenerator;
 import burlap.oomdp.core.Attribute;
 import burlap.oomdp.core.Attribute.AttributeType;
 import burlap.oomdp.core.Domain;
 import burlap.oomdp.core.ObjectClass;
 import burlap.oomdp.core.TerminalFunction;
-import burlap.oomdp.core.TransitionProbability;
 import burlap.oomdp.core.objects.MutableObjectInstance;
 import burlap.oomdp.core.objects.ObjectInstance;
 import burlap.oomdp.core.states.MutableState;
 import burlap.oomdp.core.states.State;
-import burlap.oomdp.singleagent.Action;
-import burlap.oomdp.singleagent.FullActionModel;
 import burlap.oomdp.singleagent.GroundedAction;
-import burlap.oomdp.singleagent.ObjectParameterizedAction;
 import burlap.oomdp.singleagent.RewardFunction;
 import burlap.oomdp.singleagent.SADomain;
 import burlap.oomdp.singleagent.common.SimpleAction;
@@ -24,18 +18,17 @@ import burlap.oomdp.singleagent.common.SimpleAction;
 // Interface DomainGenerator is a BURLAP convention when we want to implement our own domain
 public class CloudWorld implements DomainGenerator{
 	
-	public static final String C1 = " cloud 1 ";
-	public static final String C2 = " cloud 2 ";
-	public static final String C3 = " cloud 3 ";
+	public static final String C1 = " cloud 1";
+	public static final String C2 = " cloud 2";
+	public static final String C3 = " cloud 3";
 	
-	public static final String N1 = " WiFI ";
-	public static final String N2 = " 4G ";
+	public static final String N1 = "WiFI";
+	public static final String N2 = "4G";
 	
 	public static final String DELAY = " delay ";
 	public static final String THROUGHPUT = " throughput ";
 	
-	public static final String MIGRATE = " migrate ";
-	public static final String HANDOFF = " handoff ";
+	public static final String MIGRATE = "migrate";
 	public static final String TO = " to ";
 	
 	public static final String CURRENT_NETWORK 	= "current network";
@@ -76,6 +69,7 @@ public class CloudWorld implements DomainGenerator{
 	public static final String MIGRATE_TO_N2_C2 = MIGRATE + TO + N2 + C2;
 	public static final String MIGRATE_TO_N2_C3 = MIGRATE + TO + N2 + C3;
 	
+	public static final boolean DEBUG = false;
 	// My agent 
 	public static final String CLASSAGENT = "agent";
 	
@@ -88,18 +82,6 @@ public class CloudWorld implements DomainGenerator{
 		SADomain domain = new SADomain();
 		
 		ObjectClass mAgentClass = new ObjectClass(domain, CLASSAGENT);
-		
-		/* This is the right way to do it 
-		ObjectClass mNetwork = new ObjectClass(domain, NETWORK);
-		
-		Attribute mC1 = new Attribute(domain, C1, AttributeType.INT);
-		Attribute mC2 = new Attribute(domain, C2, AttributeType.INT);
-		Attribute mC3 = new Attribute(domain, C3, AttributeType.INT);
-		mNetwork.addAttribute(mC1);
-		mNetwork.addAttribute(mC2);
-		mNetwork.addAttribute(mC3);
-		*/
-		
 		
 		// WiFI 
 		Attribute mD_N1_C1 = new Attribute(domain, D_N1_C1, AttributeType.INT);
@@ -156,11 +138,11 @@ public class CloudWorld implements DomainGenerator{
 		
 		new Migrate(MIGRATE_TO_N1_C1, domain, N1 ,C1);
 		new Migrate(MIGRATE_TO_N1_C2, domain, N1 ,C2);
-		new Migrate(MIGRATE_TO_N1_C3, domain, N1 ,C3);
+		//new Migrate(MIGRATE_TO_N1_C3, domain, N1 ,C3);
 		
-		new Migrate(MIGRATE_TO_N2_C1, domain, N2 ,C1);
-		new Migrate(MIGRATE_TO_N2_C2, domain, N2 ,C2);
-		new Migrate(MIGRATE_TO_N2_C3, domain, N2 ,C3);
+		//new Migrate(MIGRATE_TO_N2_C1, domain, N2 ,C1);
+		//new Migrate(MIGRATE_TO_N2_C2, domain, N2 ,C2);
+		//new Migrate(MIGRATE_TO_N2_C3, domain, N2 ,C3);
 		
 		return domain;
 	}
@@ -196,8 +178,9 @@ public class CloudWorld implements DomainGenerator{
 	}
 	
 	protected class Migrate extends SimpleAction {
-		private String mTargetCloud;
 		private String mTargetNetwork;
+		private String mTargetCloud;
+		
 		// the constructor takes a string name "cloud", the action will migrate the
 		// application to this cloud
 		public Migrate(String actionName, Domain domain, String mTargetNetwork, String mTargetCloud){
@@ -216,6 +199,10 @@ public class CloudWorld implements DomainGenerator{
 			
 			// It's not necessary to do this, but for future improvement it will help
 			// The idea is, not to do a migrate action if I'm using the right cloud 
+			if(DEBUG){
+				System.out.println("The current cloud: " + currentCloud);
+				System.out.println("The target cloud: "+ mTargetCloud);
+			}
 			
 			if(mTargetNetwork != currentNetwork){
 				agent.setValue(CURRENT_NETWORK	, mTargetNetwork);
@@ -226,6 +213,7 @@ public class CloudWorld implements DomainGenerator{
 			return s;
 		}
 	}
+	
 	public static class Terminal implements TerminalFunction{
 
 		int mEpochTimeNmber;
@@ -255,7 +243,7 @@ public class CloudWorld implements DomainGenerator{
 		private int min_T;
 		private int max_T;
 		
-		private static double WEIGHT = 0.9;
+		private static final double WEIGHT = 0.9;
 		/**
 		 * @param min_D The minimum delay required by an application
 		 * @param max_D The maximum delay required by an application
@@ -287,9 +275,12 @@ public class CloudWorld implements DomainGenerator{
 			double delayReward 		= calcDelayReward(delay);
 			double throughputReward = calcThroughputReward(throughput);
 			
-			//TODO fix the weighting
-			double reward = (WEIGHT) * delayReward + (1.0 -WEIGHT ) * throughputReward;
-			
+			double reward = (WEIGHT) * delayReward + (1.0 - WEIGHT ) * throughputReward;
+			if(reward > 1){reward = 1;}
+			if(DEBUG){
+				System.out.println("REWARD___the current cloud: "+ mCurrentCloud);
+				System.out.println("REWARD___the delay :"+ mDelay + " delay reward :"+ delayReward);
+			}
 			return reward;
 		}
 		// calculate the delay reward 

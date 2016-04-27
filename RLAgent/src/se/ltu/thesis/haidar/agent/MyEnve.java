@@ -6,7 +6,6 @@ import java.util.List;
 import burlap.oomdp.auxiliary.StateGenerator;
 import burlap.oomdp.auxiliary.common.ConstantStateGenerator;
 import burlap.oomdp.core.Domain;
-import burlap.oomdp.core.ObjectClass;
 import burlap.oomdp.core.TerminalFunction;
 import burlap.oomdp.core.objects.ObjectInstance;
 import burlap.oomdp.core.states.State;
@@ -25,21 +24,7 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 	
 	// N1 : WiFI , N2 : 4G
 	// C1 : Local, C2 : Cloud1 , C3 : Cloud2 
-	private GaussianGenerator D_N1_C1 = new GaussianGenerator(100);
-	private GaussianGenerator D_N1_C2 = new GaussianGenerator(150);
-	private GaussianGenerator D_N1_C3 = new GaussianGenerator(200);
-	
-	private GaussianGenerator D_N2_C1 = new GaussianGenerator(110);
-	private GaussianGenerator D_N2_C2 = new GaussianGenerator(200);
-	private GaussianGenerator D_N2_C3 = new GaussianGenerator(250);
-	
-	private GaussianGenerator T_N1_C1 = new GaussianGenerator(50);
-	private GaussianGenerator T_N1_C2 = new GaussianGenerator(40);
-	private GaussianGenerator T_N1_C3 = new GaussianGenerator(30);
-	
-	private GaussianGenerator T_N2_C1 = new GaussianGenerator(40);
-	private GaussianGenerator T_N2_C2 = new GaussianGenerator(25);
-	private GaussianGenerator T_N2_C3 = new GaussianGenerator(15);
+	private StateUpdater mUpdater;
 	
 	private boolean allowActionFromTerminalStates = false;
 	
@@ -55,6 +40,8 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 	protected StateGenerator stateGenerator;
 
 	protected State curState;
+	
+	//private State nextState;
 
 	protected double lastReward = 0.;
 	
@@ -66,31 +53,38 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 		this.tf = tf;
 		this.stateGenerator = new ConstantStateGenerator(initialState);
 		this.curState = initialState;
+		
+		// for the state
+		mUpdater = new StateUpdater(false);
 	}
-	
+
 	@Override
 	public State getCurrentObservation() {
 		return this.curState.copy();
 	}
-	private State getNetxState(){
-		State temp = this.curState.copy();
+	private State getNetxStateValues(State nextState){
+		State temp = nextState.copy();
 		
 		ObjectInstance agent = temp.getFirstObjectOfClass(CloudWorld.CLASSAGENT);
-		agent.setValue(CloudWorld.D_N1_C1, D_N1_C1.getSample());
-		agent.setValue(CloudWorld.D_N1_C2, D_N1_C2.getSample());
-		agent.setValue(CloudWorld.D_N1_C3, D_N1_C3.getSample());
+		// Ugly fix in case never converges
+		int sample = mUpdater.getD_N1_C1().getSample();
+		if(sample == -1){mUpdater = new StateUpdater(false);}
 		
-		agent.setValue(CloudWorld.D_N2_C1, D_N2_C1.getSample());
-		agent.setValue(CloudWorld.D_N2_C2, D_N2_C2.getSample());
-		agent.setValue(CloudWorld.D_N2_C3, D_N2_C3.getSample());
+		agent.setValue(CloudWorld.D_N1_C1, sample);
+		agent.setValue(CloudWorld.D_N1_C2, mUpdater.getD_N1_C2().getSample());
+		agent.setValue(CloudWorld.D_N1_C3, mUpdater.getD_N1_C3().getSample());
 		
-		agent.setValue(CloudWorld.T_N1_C1, T_N1_C1.getSample());
-		agent.setValue(CloudWorld.T_N1_C2, T_N1_C2.getSample());
-		agent.setValue(CloudWorld.T_N1_C3, T_N1_C3.getSample());
+		agent.setValue(CloudWorld.D_N2_C1, mUpdater.getD_N2_C1().getSample());
+		agent.setValue(CloudWorld.D_N2_C2, mUpdater.getD_N2_C2().getSample());
+		agent.setValue(CloudWorld.D_N2_C3, mUpdater.getD_N2_C3().getSample());
 		
-		agent.setValue(CloudWorld.T_N2_C1, T_N2_C1.getSample());
-		agent.setValue(CloudWorld.T_N2_C2, T_N2_C2.getSample());
-		agent.setValue(CloudWorld.T_N2_C3, T_N2_C3.getSample());
+		agent.setValue(CloudWorld.T_N1_C1, mUpdater.getT_N1_C1().getSample());
+		agent.setValue(CloudWorld.T_N1_C2, mUpdater.getT_N1_C2().getSample());
+		agent.setValue(CloudWorld.T_N1_C3, mUpdater.getT_N1_C3().getSample());
+		
+		agent.setValue(CloudWorld.T_N2_C1, mUpdater.getT_N2_C1().getSample());
+		agent.setValue(CloudWorld.T_N2_C2, mUpdater.getT_N2_C2().getSample());
+		agent.setValue(CloudWorld.T_N2_C3, mUpdater.getT_N2_C3().getSample());
 		
 		return temp;
 	}
@@ -113,7 +107,7 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 			////////////////////////////////////////////////////////////
 			// here I can plug in my external data. to the "nextState"//
 			////////////////////////////////////////////////////////////
-			nextState = getNetxState();
+			nextState = getNetxStateValues(nextState);
 			this.lastReward = this.rf.reward(this.curState, simGA, nextState);
 		}
 		else{
@@ -139,6 +133,10 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 		for(EnvironmentObserver observer : this.observers){
 			observer.observeEnvironmentReset(this);
 		}
+		///////////////////////////////
+		// here I can rest the input//
+		//////////////////////////////
+		mUpdater = new StateUpdater(false);
 		
 	}
 	
