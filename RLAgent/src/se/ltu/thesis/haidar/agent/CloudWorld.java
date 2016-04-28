@@ -1,15 +1,19 @@
 package se.ltu.thesis.haidar.agent;
 
+import java.util.List;
+
 import burlap.oomdp.auxiliary.DomainGenerator;
 import burlap.oomdp.core.Attribute;
 import burlap.oomdp.core.Attribute.AttributeType;
 import burlap.oomdp.core.Domain;
 import burlap.oomdp.core.ObjectClass;
 import burlap.oomdp.core.TerminalFunction;
+import burlap.oomdp.core.TransitionProbability;
 import burlap.oomdp.core.objects.MutableObjectInstance;
 import burlap.oomdp.core.objects.ObjectInstance;
 import burlap.oomdp.core.states.MutableState;
 import burlap.oomdp.core.states.State;
+import burlap.oomdp.singleagent.FullActionModel;
 import burlap.oomdp.singleagent.GroundedAction;
 import burlap.oomdp.singleagent.RewardFunction;
 import burlap.oomdp.singleagent.SADomain;
@@ -177,7 +181,7 @@ public class CloudWorld implements DomainGenerator{
 		return s;
 	}
 	
-	protected class Migrate extends SimpleAction {
+	protected class Migrate extends SimpleAction implements FullActionModel{
 		private String mTargetNetwork;
 		private String mTargetCloud;
 		
@@ -204,35 +208,37 @@ public class CloudWorld implements DomainGenerator{
 				System.out.println("The target cloud: "+ mTargetCloud);
 			}
 			
-			if(mTargetNetwork != currentNetwork){
+			if(!mTargetNetwork.equals(currentNetwork)){
 				agent.setValue(CURRENT_NETWORK	, mTargetNetwork);
 			}
-			if(mTargetCloud != currentCloud){
+			if(!mTargetCloud.equals(currentCloud)){
 				agent.setValue(CURRENT_CLOUD	, mTargetCloud);
 			}
 			return s;
 		}
+
+		@Override
+		public List<TransitionProbability> getTransitions(State s,
+				GroundedAction groundedAction) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
 	
 	public static class Terminal implements TerminalFunction{
-
-		int mEpochTimeNmber;
-		int counter;
-		
-		public Terminal(int mEpochTimeNmber){
-			this.mEpochTimeNmber = mEpochTimeNmber;
-		}
 		
 		@Override
 		public boolean isTerminal(State s) {
-			counter++;
-			if(counter > mEpochTimeNmber){
-				counter = 0;
+			
+			ObjectInstance agent = s.getFirstObjectOfClass(CloudWorld.CLASSAGENT);
+			int value = agent.getIntValForAttribute(CloudWorld.D_N1_C1);
+			if(value == -1){
 				return true;
 			}
 			return false;
-		}	
+		}
 	}
+		
 
 	public static class Reward implements RewardFunction{
 		// D : Delay
@@ -266,8 +272,8 @@ public class CloudWorld implements DomainGenerator{
 			String mCurrentNetwork	= agent.getStringValForAttribute(CURRENT_NETWORK);
 			String mCurrentCloud	= agent.getStringValForAttribute(CURRENT_CLOUD);
 			
-			String mDelay 		= DELAY + mCurrentNetwork + mCurrentCloud;
-			String mThroughput 	= THROUGHPUT + mCurrentNetwork + mCurrentCloud;
+			String mDelay 		= DELAY 		+ mCurrentNetwork + mCurrentCloud;
+			String mThroughput 	= THROUGHPUT 	+ mCurrentNetwork + mCurrentCloud;
 			
 			int delay 		= agent.getIntValForAttribute(mDelay);
 			int throughput 	= agent.getIntValForAttribute(mThroughput);
@@ -276,7 +282,8 @@ public class CloudWorld implements DomainGenerator{
 			double throughputReward = calcThroughputReward(throughput);
 			
 			double reward = (WEIGHT) * delayReward + (1.0 - WEIGHT ) * throughputReward;
-			if(reward > 1){reward = 1;}
+			reward = Double.valueOf(String.format("%.2f", reward));
+			//if(reward > 1){reward = 1;}
 			if(DEBUG){
 				System.out.println("REWARD___the current cloud: "+ mCurrentCloud);
 				System.out.println("REWARD___the delay :"+ mDelay + " delay reward :"+ delayReward);

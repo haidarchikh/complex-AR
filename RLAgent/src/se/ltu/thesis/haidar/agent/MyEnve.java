@@ -62,32 +62,7 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 	public State getCurrentObservation() {
 		return this.curState.copy();
 	}
-	private State getNetxStateValues(State nextState){
-		State temp = nextState.copy();
-		
-		ObjectInstance agent = temp.getFirstObjectOfClass(CloudWorld.CLASSAGENT);
-		// Ugly fix in case never converges
-		int sample = mUpdater.getD_N1_C1().getSample();
-		if(sample == -1){mUpdater = new StateUpdater(false);}
-		
-		agent.setValue(CloudWorld.D_N1_C1, sample);
-		agent.setValue(CloudWorld.D_N1_C2, mUpdater.getD_N1_C2().getSample());
-		agent.setValue(CloudWorld.D_N1_C3, mUpdater.getD_N1_C3().getSample());
-		
-		agent.setValue(CloudWorld.D_N2_C1, mUpdater.getD_N2_C1().getSample());
-		agent.setValue(CloudWorld.D_N2_C2, mUpdater.getD_N2_C2().getSample());
-		agent.setValue(CloudWorld.D_N2_C3, mUpdater.getD_N2_C3().getSample());
-		
-		agent.setValue(CloudWorld.T_N1_C1, mUpdater.getT_N1_C1().getSample());
-		agent.setValue(CloudWorld.T_N1_C2, mUpdater.getT_N1_C2().getSample());
-		agent.setValue(CloudWorld.T_N1_C3, mUpdater.getT_N1_C3().getSample());
-		
-		agent.setValue(CloudWorld.T_N2_C1, mUpdater.getT_N2_C1().getSample());
-		agent.setValue(CloudWorld.T_N2_C2, mUpdater.getT_N2_C2().getSample());
-		agent.setValue(CloudWorld.T_N2_C3, mUpdater.getT_N2_C3().getSample());
-		
-		return temp;
-	}
+	
 
 	@Override
 	public EnvironmentOutcome executeAction(GroundedAction ga) {
@@ -137,9 +112,34 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 		// here I can rest the input//
 		//////////////////////////////
 		mUpdater = new StateUpdater(false);
-		
 	}
 	
+	private State getNetxStateValues(State nextState){
+		State temp = nextState.copy();
+		ObjectInstance agent = temp.getFirstObjectOfClass(CloudWorld.CLASSAGENT);
+		
+		// Ugly fix in case the algorithm want more states than what is planned in StateUpdater
+		//int sample = mUpdater.getD_N1_C1().getSample();
+		//if(sample == -1){return getTerminalState();}
+		
+		agent.setValue(CloudWorld.D_N1_C1, mUpdater.getD_N1_C1().getSample());
+		agent.setValue(CloudWorld.D_N1_C2, mUpdater.getD_N1_C2().getSample());
+		agent.setValue(CloudWorld.D_N1_C3, mUpdater.getD_N1_C3().getSample());
+		
+		agent.setValue(CloudWorld.D_N2_C1, mUpdater.getD_N2_C1().getSample());
+		agent.setValue(CloudWorld.D_N2_C2, mUpdater.getD_N2_C2().getSample());
+		agent.setValue(CloudWorld.D_N2_C3, mUpdater.getD_N2_C3().getSample());
+		
+		agent.setValue(CloudWorld.T_N1_C1, mUpdater.getT_N1_C1().getSample());
+		agent.setValue(CloudWorld.T_N1_C2, mUpdater.getT_N1_C2().getSample());
+		agent.setValue(CloudWorld.T_N1_C3, mUpdater.getT_N1_C3().getSample());
+		
+		agent.setValue(CloudWorld.T_N2_C1, mUpdater.getT_N2_C1().getSample());
+		agent.setValue(CloudWorld.T_N2_C2, mUpdater.getT_N2_C2().getSample());
+		agent.setValue(CloudWorld.T_N2_C3, mUpdater.getT_N2_C3().getSample());
+		
+		return temp;
+	}
 	@Override
 	public void setCurStateTo(State s) {
 		if(this.stateGenerator == null){

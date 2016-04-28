@@ -1,0 +1,1991 @@
+!!burlap.behavior.singleagent.EpisodeAnalysis
+actionSequence: [!action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud
+    1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 2', !action 'migrate
+    to WiFI cloud 1', !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI
+    cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 1',
+  !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate
+    to WiFI cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI
+    cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 2',
+  !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate
+    to WiFI cloud 1', !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI
+    cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 1',
+  !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate
+    to WiFI cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI
+    cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 2',
+  !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate
+    to WiFI cloud 1', !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI
+    cloud 1', !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI cloud 1',
+  !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate
+    to WiFI cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI
+    cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 2',
+  !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 2', !action 'migrate
+    to WiFI cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI
+    cloud 1', !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI cloud 2',
+  !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate
+    to WiFI cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI
+    cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 1',
+  !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 2', !action 'migrate
+    to WiFI cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI
+    cloud 1', !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI cloud 1',
+  !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate
+    to WiFI cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI
+    cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 1',
+  !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 2', !action 'migrate
+    to WiFI cloud 1', !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI
+    cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 1',
+  !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate
+    to WiFI cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI
+    cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 2',
+  !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate
+    to WiFI cloud 1', !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI
+    cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 1',
+  !action 'migrate to WiFI cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate
+    to WiFI cloud 2', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI
+    cloud 1', !action 'migrate to WiFI cloud 1', !action 'migrate to WiFI cloud 2',
+  !action 'migrate to WiFI cloud 1']
+rewardSequence: [0.9, 0.9, 0.9, 0.0, 0.9, 0.0, 0.9, 0.9, 0.9, 0.0, 0.9, 0.9, 0.9,
+  0.0, 0.9, 0.0, 0.9, 0.9, 0.9, 0.0, 0.9, 0.9, 0.9, 0.0, 0.9, 0.0, 0.9, 0.9, 0.9,
+  0.0, 0.9, 0.9, 0.9, 0.0, 0.9, 0.0, 0.9, 0.9, 0.9, 0.0, 0.9, 0.9, 0.9, 0.0, 0.9,
+  0.0, 0.9, 0.9, 0.9, 0.0, 0.0, 0.9, 0.9, 0.0, 0.9, 0.0, 0.9, 0.9, 0.9, 0.0, 0.9,
+  0.9, 0.9, 0.0, 0.9, 0.0, 0.9, 0.9, 0.9, 0.0, 0.9, 0.9, 0.9, 0.0, 0.9, 0.0, 0.9,
+  0.9, 0.9, 0.0, 0.9, 0.9, 0.9, 0.0, 0.9, 0.0, 0.9, 0.9, 0.9, 0.0, 0.9, 0.9, 0.9,
+  0.0, 0.9, 0.0, 0.9, 0.9, 0.9, 0.0, 0.9]
+stateSequence:
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '0'}
+    - {attribute: ' throughput WiFI cloud 1', value: '0'}
+    - {attribute: ' delay WiFI cloud 2', value: '0'}
+    - {attribute: ' throughput WiFI cloud 2', value: '0'}
+    - {attribute: ' delay WiFI cloud 3', value: '0'}
+    - {attribute: ' throughput WiFI cloud 3', value: '0'}
+    - {attribute: ' delay 4G cloud 1', value: '0'}
+    - {attribute: ' throughput 4G cloud 1', value: '0'}
+    - {attribute: ' delay 4G cloud 2', value: '0'}
+    - {attribute: ' throughput 4G cloud 2', value: '0'}
+    - {attribute: ' delay 4G cloud 3', value: '0'}
+    - {attribute: ' throughput 4G cloud 3', value: '0'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '120'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '520'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '110'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '510'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '80'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '480'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '120'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '520'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '110'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '510'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '80'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '480'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '120'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '520'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '110'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '510'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '80'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '480'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '120'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '520'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '110'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '510'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '80'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '480'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '120'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '520'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '110'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '510'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '80'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '480'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '120'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '520'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '110'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '510'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '80'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '480'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '120'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '520'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '110'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '510'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '80'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '480'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '120'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '520'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '110'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '510'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '80'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '480'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '120'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '520'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '110'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '510'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '80'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '480'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '100'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '120'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '520'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '110'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '510'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '80'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '480'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '90'}
+    - {attribute: ' throughput WiFI cloud 1', value: '1'}
+    - {attribute: ' delay WiFI cloud 2', value: '490'}
+    - {attribute: ' throughput WiFI cloud 2', value: '1'}
+    - {attribute: ' delay WiFI cloud 3', value: '10000'}
+    - {attribute: ' throughput WiFI cloud 3', value: '1'}
+    - {attribute: ' delay 4G cloud 1', value: '10000'}
+    - {attribute: ' throughput 4G cloud 1', value: '1'}
+    - {attribute: ' delay 4G cloud 2', value: '10000'}
+    - {attribute: ' throughput 4G cloud 2', value: '1'}
+    - {attribute: ' delay 4G cloud 3', value: '10000'}
+    - {attribute: ' throughput 4G cloud 3', value: '1'}
+    - {attribute: current cloud, value: ' cloud 2'}
+    - {attribute: current network, value: WiFI}
+- !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
+  objects:
+  - name: agent0
+    object_class: agent
+    values:
+    - {attribute: ' delay WiFI cloud 1', value: '-1'}
+    - {attribute: ' throughput WiFI cloud 1', value: '-1'}
+    - {attribute: ' delay WiFI cloud 2', value: '500'}
+    - {attribute: ' throughput WiFI cloud 2', value: '-1'}
+    - {attribute: ' delay WiFI cloud 3', value: '-1'}
+    - {attribute: ' throughput WiFI cloud 3', value: '-1'}
+    - {attribute: ' delay 4G cloud 1', value: '-1'}
+    - {attribute: ' throughput 4G cloud 1', value: '-1'}
+    - {attribute: ' delay 4G cloud 2', value: '-1'}
+    - {attribute: ' throughput 4G cloud 2', value: '-1'}
+    - {attribute: ' delay 4G cloud 3', value: '-1'}
+    - {attribute: ' throughput 4G cloud 3', value: '-1'}
+    - {attribute: current cloud, value: ' cloud 1'}
+    - {attribute: current network, value: WiFI}

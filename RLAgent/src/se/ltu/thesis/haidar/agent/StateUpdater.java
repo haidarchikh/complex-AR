@@ -2,8 +2,10 @@ package se.ltu.thesis.haidar.agent;
 
 public class StateUpdater {
 	
-	public static final double COUNT 				= 100;
-	public static final double COUNT_ALL 			= 1000;
+	
+	public static final double COUNT_ALL 			= 100;
+	public static final double COUNT 				= 10;
+	
 	public static final double CONSTANT_DELAY 		= 10000;
 	public static final double CONSTANT_THROUGHPUT 	= 1;
 	public static final int ROUND_DELAY_TO 			= 10;
@@ -49,23 +51,23 @@ public class StateUpdater {
 	private void setupUpdater(){
 		// Count , Mean , Variance , RoundTO
 		// D_N1_C1
-		D_N1_C1.addDataPlan(COUNT, 130, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 130, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 130, 10, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
 		// D_N1_C2
 		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
 		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
 		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
 		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
 		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C2.addDataPlan(COUNT, 130, 10, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
 		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
 		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
 		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);

@@ -1,5 +1,7 @@
 package se.ltu.thesis.haidar.agent;
 
+import burlap.behavior.policy.EpsilonGreedy;
+import burlap.behavior.policy.Policy;
 import burlap.behavior.singleagent.EpisodeAnalysis;
 import burlap.behavior.singleagent.auxiliary.performance.LearningAlgorithmExperimenter;
 import burlap.behavior.singleagent.auxiliary.performance.PerformanceMetric;
@@ -8,6 +10,9 @@ import burlap.behavior.singleagent.learning.LearningAgent;
 import burlap.behavior.singleagent.learning.LearningAgentFactory;
 import burlap.behavior.singleagent.learning.tdmethods.QLearning;
 import burlap.behavior.singleagent.learning.tdmethods.SarsaLam;
+import burlap.behavior.singleagent.planning.Planner;
+import burlap.behavior.singleagent.planning.stochastic.valueiteration.ValueIteration;
+import burlap.behavior.valuefunction.QFunction;
 import burlap.oomdp.auxiliary.common.NullTermination;
 import burlap.oomdp.core.Domain;
 import burlap.oomdp.core.TerminalFunction;
@@ -30,7 +35,6 @@ public class Main {
 	public static final double LEARNING_RATE 	= 1.;
 	
 	public static final double EPSILON = 0.5;
-	public static final int mTermination = 1000;
 	
 	private CloudWorld 			 mCloudWorld;
 	private Domain 				 domain;
@@ -40,12 +44,13 @@ public class Main {
 	private HashableStateFactory hashingFactory;
 	private Environment 		 env;
 	//private StateConditionTest goalCondition;
+	
 	public Main(){
 		mCloudWorld = new CloudWorld();
 		domain = mCloudWorld.generateDomain();
 		rf = new CloudWorld.Reward(MIN_D , MAX_D , MIN_T , MAX_T);
 		//tf = new NullTermination();
-		tf = new CloudWorld.Terminal(mTermination);
+		tf = new CloudWorld.Terminal();
 		initialState = CloudWorld.getInitialState(domain);
 		
 		hashingFactory = new SimpleHashableStateFactory();
@@ -53,14 +58,31 @@ public class Main {
 		env = new MyEnve(domain, rf, tf, initialState);
 	}
 	
+	public void valueIterationExample(String outputPath){
+		
+		Planner planner = new ValueIteration(domain, rf, tf, 0.99, hashingFactory, 0.001, 100);
+		Policy p = planner.planFromState(initialState);
+		p.evaluateBehavior(initialState, rf, tf).writeToFile(outputPath + "vi");
+		
+	}
+	
 	public void QLearningExample(String outputPath){
 		
 		LearningAgent agent = new QLearning(domain, DISSCOUNT_FACTOR , hashingFactory, INITIAL_Q_VALUE , LEARNING_RATE);
-
+		
+		((QLearning)agent).setLearningPolicy(new EpsilonGreedy((QFunction) agent, 0.05));
+		
+		((QLearning)agent).setMaximumEpisodesForPlanning(5);
+		
+		((QLearning) agent).setMaxQChangeForPlanningTerminaiton(10);
+		
+		((QLearning) agent).initializeForPlanning(rf, tf, 10);
+		
+		//((QLearning)agent).planFromState(CloudWorld.getInitialState(domain));
 		//run learning for 50 episodes
 		for(int i = 0; i < 50; i++){
 			EpisodeAnalysis ea = agent.runLearningEpisode(env);
-
+			
 			ea.writeToFile(outputPath + "ql_" + i);
 			System.out.println(i + ": " + ea.maxTimeStep());
 
@@ -113,7 +135,7 @@ public class Main {
 
 			@Override
 			public LearningAgent generateAgent() {
-				return new SarsaLam(domain, DISSCOUNT_FACTOR , hashingFactory, 0.3, LEARNING_RATE , 1.);
+				return new SarsaLam(domain, DISSCOUNT_FACTOR , hashingFactory, 0.3, 0.5 , 0.9);
 			}
 		};
 
@@ -135,12 +157,14 @@ public class Main {
 	public static void main(String[] args) {
 	
 		Main example = new Main();
-		String outputPathQl = "output/ql/";
-		String outputPathSARAS = "output/saras/";
-		//example.QLearningExample(outputPathQl);
+		String outputPathQl 	= "output/ql/";
+		String outputPathSARAS 	= "output/saras/";
+		String outputPathVI 	= "output/vi/";
+		
+		example.QLearningExample(outputPathQl);
 		//example.SARASLearningExample(outputPathSARAS);
-		example.experimentAndPlotter();
+		//example.experimentAndPlotter();
 			
-		//example.visualize(outputPath);
+		//example.valueIterationExample(outputPathVI);
 	}	
 }
