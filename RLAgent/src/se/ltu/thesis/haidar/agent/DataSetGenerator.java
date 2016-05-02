@@ -23,7 +23,7 @@ public class DataSetGenerator {
 	private double mCount;
 	private double mMean;
 	private double mVariance;
-	private int    mRoundTo;
+	private int    mRoundToMultipleOf;
 	
 	// set to true of you want to print statistics
 	private boolean printStatistics;
@@ -39,12 +39,9 @@ public class DataSetGenerator {
 		this.printStatistics = printStatistics;
 	}
 	
-	public void addDataPlan(double count, double mean, double variance,int roundTo){
-		double[] temp = {count, mean, variance, roundTo};
+	public void addDataPlan(double count, double mean, double variance,int roundToMultipleOf){
+		double[] temp = {count, mean, variance, roundToMultipleOf};
 		mQ.add(temp);
-	}
-	public void addConstatDataPlane(double count, double mean){
-		
 	}
 	
 	public int getSample(){
@@ -72,12 +69,13 @@ public class DataSetGenerator {
 
 	
 	private void setupNextTuple(){
-		mCurrentTuple = mQ.poll();
-		mCount 		= mCurrentTuple[0];
-		mMean 		= mCurrentTuple[1];
-		mVariance 	= mCurrentTuple[2];
-		mRoundTo    = (int) mCurrentTuple[3];
-		mGenerator = new SampleGenerator(mMean, mVariance,mRoundTo);
+		mCurrentTuple 		= mQ.poll();
+		mCount 				= mCurrentTuple[0];
+		mMean 				= mCurrentTuple[1];
+		mVariance 			= mCurrentTuple[2];
+		mRoundToMultipleOf	= (int) mCurrentTuple[3];
+		
+		mGenerator = new SampleGenerator(mMean, mVariance,mRoundToMultipleOf);
 		
 		// nasty
 		mCurrentDataSetCount = (int) mCount;
@@ -126,16 +124,16 @@ public class DataSetGenerator {
 			 int occurrence = mEntry.getValue();
 			 double percentage = (double) occurrence /(double) sampleCount;
 			 percentage *=100;
-			 System.out.println("sample : "+String.format("%02d", sample)
+			 System.out.println("sample value: "+String.format("%02d", sample)
 					 +", Occurrence : "+ String.format("%02d", occurrence)
 					 +", Percentage : "+String.format("%.3f", percentage)+"%");
 		 }
 	}
 	public static void main(String[] args){
 		DataSetGenerator mG = new DataSetGenerator(true);
-		mG.addDataPlan(100, 50,  10, 5);
-		mG.addDataPlan(100, 100, 10, 5);
-		mG.addDataPlan(100, 150, 10, 5);
+		mG.addDataPlan(100, 200, 10, 10);
+		mG.addDataPlan(100, 500, 10, 10);
+		//mG.addDataPlan(100, 150, 10, 5);
 		while(true){
 			int res = mG.getSample();
 			//System.out.println(res);

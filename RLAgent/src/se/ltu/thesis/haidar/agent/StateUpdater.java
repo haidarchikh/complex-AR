@@ -1,16 +1,32 @@
 package se.ltu.thesis.haidar.agent;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Hashtable;
+
+import org.json.JSONObject;
+
 public class StateUpdater {
 	
 	
-	public static final double COUNT_ALL 			= 100;
-	public static final double COUNT 				= 10;
+	public static final double COUNT_ALL 			= 1000;
+	public static final double COUNT 				= 100;
 	
-	public static final double CONSTANT_DELAY 		= 10000;
-	public static final double CONSTANT_THROUGHPUT 	= 1;
-	public static final int ROUND_DELAY_TO 			= 10;
-	public static final int ROUND_THROUGHPUT_TO 	= 1;
-
+	public static final double	CONSTANT_DELAY 			= 10000;
+	public static final double 	CONSTANT_THROUGHPUT 	= 1;
+	public static final int 	ROUND_DELAY_TO 			= 10;
+	public static final int 	DELAY_VARIANCE 			= 10;
+	public static final int 	ROUND_THROUGHPUT_TO 	= 1;
+	public static final String 	SAMPLE_COUNT 			= "sample count";
+	public static final String 	FILE_PATH				= "outputData/samples.json";
+	
+	private static final boolean PRINT = false;
+	
+	private Hashtable<Integer,JSONObject> mTable = new Hashtable<>();
 	
 	private DataSetGenerator D_N1_C1 ;
 	private DataSetGenerator D_N1_C2 ;
@@ -28,22 +44,24 @@ public class StateUpdater {
 	private DataSetGenerator T_N2_C2 ;
 	private DataSetGenerator T_N2_C3 ;
 	
-	public StateUpdater(boolean print){
-		D_N1_C1 = new DataSetGenerator(print);
-		D_N1_C2 = new DataSetGenerator(print);
-		D_N1_C3 = new DataSetGenerator(print);
+	private JSONObject mJSON;
+	
+	public StateUpdater(){
+		D_N1_C1 = new DataSetGenerator(PRINT);
+		D_N1_C2 = new DataSetGenerator(PRINT);
+		D_N1_C3 = new DataSetGenerator(PRINT);
 		
-		D_N2_C1 = new DataSetGenerator(print);
-		D_N2_C2 = new DataSetGenerator(print);
-		D_N2_C3 = new DataSetGenerator(print);
+		D_N2_C1 = new DataSetGenerator(PRINT);
+		D_N2_C2 = new DataSetGenerator(PRINT);
+		D_N2_C3 = new DataSetGenerator(PRINT);
 		
-		T_N1_C1 = new DataSetGenerator(print);
-		T_N1_C2 = new DataSetGenerator(print);
-		T_N1_C3 = new DataSetGenerator(print);
+		T_N1_C1 = new DataSetGenerator(PRINT);
+		T_N1_C2 = new DataSetGenerator(PRINT);
+		T_N1_C3 = new DataSetGenerator(PRINT);
 		
-		T_N2_C1 = new DataSetGenerator(print);
-		T_N2_C2 = new DataSetGenerator(print);
-		T_N2_C3 = new DataSetGenerator(print);
+		T_N2_C1 = new DataSetGenerator(PRINT);
+		T_N2_C2 = new DataSetGenerator(PRINT);
+		T_N2_C3 = new DataSetGenerator(PRINT);
 		
 		setupUpdater();
 		
@@ -51,28 +69,28 @@ public class StateUpdater {
 	private void setupUpdater(){
 		// Count , Mean , Variance , RoundTO
 		// D_N1_C1
-		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
-		D_N1_C1.addDataPlan(COUNT, 100, 10, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
 		// D_N1_C2
-		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
-		D_N1_C2.addDataPlan(COUNT, 500, 10, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
 		
 		// D_N1_C3
 		addConstantDelay(D_N1_C3);
@@ -92,58 +110,93 @@ public class StateUpdater {
 		addConstantThroughput(T_N2_C2);
 		addConstantThroughput(T_N2_C3);
 	}
+	// Write the data plan to a file
+	private void writeToFile(String path){
+		File f = (new File(path)).getParentFile();
+		if(f != null){
+			f.mkdirs();
+		}
+		BufferedWriter out = null;
+		try {
+			out = new BufferedWriter(new FileWriter(path));
+		} catch (IOException e) {e.printStackTrace();}
+		
+		JSONObject mJSON = null ;
+		do{
+			mJSON = getDataSample();
+			try {
+				out.write(mJSON.toString());
+				out.write("\n");
+			} catch (IOException e) {e.printStackTrace();}
+			
+		} while(mJSON.getInt(CloudWorld.D_N1_C1) != -1);
+		
+		try {
+			out.close();
+		} catch (IOException e) {e.printStackTrace();}
+	}
+	
+	public void loadDataFromFile(){
+		JSONObject	 	mJSON 	= null;
+		String 			line	= null;
+		BufferedReader 	br		= null;
+		
+		try {
+			br 		= new BufferedReader(new FileReader(FILE_PATH));
+			line 	= br.readLine();
+			
+			while(line != null){
+				mJSON = new JSONObject(line);
+				mTable.put(mJSON.getInt(SAMPLE_COUNT), mJSON);
+				line = br.readLine();
+			}
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public Hashtable<Integer, JSONObject> getDataTable() {
+		return mTable;
+	}
+	public JSONObject getDataSample(int datasample){
+		return mTable.get(datasample);
+	}
 	private void addConstantDelay(DataSetGenerator mG){
 		mG.addDataPlan(COUNT_ALL, CONSTANT_DELAY, 0, ROUND_DELAY_TO);
 	}
 	private void addConstantThroughput(DataSetGenerator mG){
 		mG.addDataPlan(COUNT_ALL, CONSTANT_THROUGHPUT, 0, ROUND_THROUGHPUT_TO);
 	}
+	
+	// ugly fix
+	private int sampleCount = 0;
+	private JSONObject getDataSample(){
+		mJSON = new JSONObject();
+		mJSON.put(SAMPLE_COUNT, sampleCount);
 
-	public DataSetGenerator getD_N1_C1() {
-		return D_N1_C1;
+		mJSON.put(CloudWorld.D_N1_C1, D_N1_C1.getSample());
+		mJSON.put(CloudWorld.D_N1_C2, D_N1_C2.getSample());
+		mJSON.put(CloudWorld.D_N1_C3, D_N1_C3.getSample());
+		
+		mJSON.put(CloudWorld.D_N2_C1, D_N2_C1.getSample());
+		mJSON.put(CloudWorld.D_N2_C2, D_N2_C2.getSample());
+		mJSON.put(CloudWorld.D_N2_C3, D_N2_C3.getSample());
+		
+		
+		mJSON.put(CloudWorld.T_N1_C1, T_N1_C1.getSample());
+		mJSON.put(CloudWorld.T_N1_C2, T_N1_C2.getSample());
+		mJSON.put(CloudWorld.T_N1_C3, T_N1_C3.getSample());
+		
+		mJSON.put(CloudWorld.T_N2_C1, T_N2_C1.getSample());
+		mJSON.put(CloudWorld.T_N2_C2, T_N2_C2.getSample());
+		mJSON.put(CloudWorld.T_N2_C3, T_N2_C3.getSample());
+		
+		sampleCount++;
+		return mJSON;
 	}
-
-	public DataSetGenerator getD_N1_C2() {
-		return D_N1_C2;
+	public static void main(String[] args){
+		
+		StateUpdater mUpdater = new StateUpdater();
+		mUpdater.writeToFile(FILE_PATH);
 	}
-
-	public DataSetGenerator getD_N1_C3() {
-		return D_N1_C3;
-	}
-
-	public DataSetGenerator getD_N2_C1() {
-		return D_N2_C1;
-	}
-
-	public DataSetGenerator getD_N2_C2() {
-		return D_N2_C2;
-	}
-
-	public DataSetGenerator getD_N2_C3() {
-		return D_N2_C3;
-	}
-
-	public DataSetGenerator getT_N1_C1() {
-		return T_N1_C1;
-	}
-
-	public DataSetGenerator getT_N1_C2() {
-		return T_N1_C2;
-	}
-
-	public DataSetGenerator getT_N1_C3() {
-		return T_N1_C3;
-	}
-
-	public DataSetGenerator getT_N2_C1() {
-		return T_N2_C1;
-	}
-
-	public DataSetGenerator getT_N2_C2() {
-		return T_N2_C2;
-	}
-
-	public DataSetGenerator getT_N2_C3() {
-		return T_N2_C3;
-	}	
 }

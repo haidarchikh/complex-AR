@@ -1,5 +1,9 @@
 package se.ltu.thesis.haidar.agent;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 import burlap.oomdp.auxiliary.DomainGenerator;
@@ -18,25 +22,31 @@ import burlap.oomdp.singleagent.GroundedAction;
 import burlap.oomdp.singleagent.RewardFunction;
 import burlap.oomdp.singleagent.SADomain;
 import burlap.oomdp.singleagent.common.SimpleAction;
+import burlap.oomdp.visualizer.ObjectPainter;
+import burlap.oomdp.visualizer.StateRenderLayer;
+import burlap.oomdp.visualizer.StaticPainter;
+import burlap.oomdp.visualizer.Visualizer;
 
 // Interface DomainGenerator is a BURLAP convention when we want to implement our own domain
 public class CloudWorld implements DomainGenerator{
 	
-	public static final String C1 = " cloud 1";
-	public static final String C2 = " cloud 2";
-	public static final String C3 = " cloud 3";
+	public static final String C1 = "_cloud_1";
+	public static final String C2 = "_cloud_2";
+	public static final String C3 = "_cloud_3";
 	
 	public static final String N1 = "WiFI";
 	public static final String N2 = "4G";
 	
-	public static final String DELAY = " delay ";
-	public static final String THROUGHPUT = " throughput ";
+	public static final String SPACE = "_";
+	
+	public static final String DELAY = "delay_";
+	public static final String THROUGHPUT = "throughput_";
 	
 	public static final String MIGRATE = "migrate";
-	public static final String TO = " to ";
+	public static final String TO = "_to_";
 	
-	public static final String CURRENT_NETWORK 	= "current network";
-	public static final String CURRENT_CLOUD 	= "current cloud";
+	public static final String CURRENT_NETWORK 	= "current_network";
+	public static final String CURRENT_CLOUD 	= "current_cloud";
 	
 	public static final String NETWORK 	= "network";
 	public static final String CLOUD 	= "cloud";
@@ -77,7 +87,19 @@ public class CloudWorld implements DomainGenerator{
 	// My agent 
 	public static final String CLASSAGENT = "agent";
 	
-	
+	protected int [][] map = new int[][]{
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0,0,0},
+			{1,0,2,0,3,0,4,0,5,0,6},
+	};
 	@Override
 	public Domain generateDomain() {
 		
@@ -154,24 +176,53 @@ public class CloudWorld implements DomainGenerator{
 	public static State getInitialState(Domain domain){
 		State s = new MutableState();
 		ObjectInstance agent = new MutableObjectInstance(domain.getObjectClass(CLASSAGENT), "agent0");
+
+		agent.setValue(D_N1_C1, 11);
+		agent.setValue(D_N1_C2, 12);
+		agent.setValue(D_N1_C3, 12);
+
+		agent.setValue(D_N2_C1, 21);
+		agent.setValue(D_N2_C2, 22);
+		agent.setValue(D_N2_C3, 23);
 		
-		agent.setValue(D_N2_C1, 0);
-		agent.setValue(T_N2_C1, 0);
 		
-		agent.setValue(D_N2_C2, 0);
-		agent.setValue(T_N2_C1, 0);
+		agent.setValue(T_N1_C1, 9911);
+		agent.setValue(T_N1_C2, 9912);
+		agent.setValue(T_N1_C3, 9912);
+
+		agent.setValue(T_N2_C1, 9921);
+		agent.setValue(T_N2_C2, 9922);
+		agent.setValue(T_N2_C3, 9923);
+
+		agent.setValue(CURRENT_CLOUD  , C1);
+		agent.setValue(CURRENT_NETWORK, N1);
+
+		s.addObject(agent);
 		
-		agent.setValue(D_N2_C3, 0);
-		agent.setValue(T_N2_C1, 0);
+		return s;
+	}
+	
+	public static State getPolicyTestState(Domain domain){
+		State s = new MutableState();
+		ObjectInstance agent = new MutableObjectInstance(domain.getObjectClass(CLASSAGENT), "agent0");
 		
-		agent.setValue(D_N1_C1, 0);
-		agent.setValue(T_N1_C1, 0);
+		agent.setValue(D_N1_C1, 220);
+		agent.setValue(D_N1_C2, 520);
+		agent.setValue(D_N1_C3, 10000);
+
+		agent.setValue(D_N2_C1, 10000);
+		agent.setValue(D_N2_C2, 10000);
+		agent.setValue(D_N2_C3, 10000);
 		
-		agent.setValue(D_N1_C2, 0);
-		agent.setValue(T_N1_C1, 0);
 		
-		agent.setValue(D_N1_C3, 0);
-		agent.setValue(T_N1_C1, 0);
+		agent.setValue(T_N1_C1, 1);
+		agent.setValue(T_N1_C2, 1);
+		agent.setValue(T_N1_C3, 1);
+
+		agent.setValue(T_N2_C1, 1);
+		agent.setValue(T_N2_C2, 1);
+		agent.setValue(T_N2_C3, 1);
+
 		
 		agent.setValue(CURRENT_CLOUD  , C1);
 		agent.setValue(CURRENT_NETWORK, N1);
@@ -323,5 +374,195 @@ public class CloudWorld implements DomainGenerator{
 			}
 			return 0;
 		}
+	}
+	public class WallPainter implements StaticPainter{
+
+		@Override
+		public void paint(Graphics2D g2, State s, float cWidth, float cHeight) {
+			
+			//walls will be filled in black
+			g2.setColor(Color.BLACK);
+			
+			//set up floats for the width and height of our domain
+			float fWidth 	= CloudWorld.this.map.length;
+			float fHeight 	= CloudWorld.this.map[0].length;
+			
+			//determine the width of a single cell on our canvas 
+			//such that the whole map can be painted
+			float width = cWidth / fWidth;
+			float height = cHeight / fHeight;
+			
+			
+			//pass through each cell of our map and if it's a wall, paint a black 
+			//rectangle on our cavas of dimension widthxheight
+			for(int i = 0; i < CloudWorld.this.map.length; i++){
+				for(int j = 0; j < CloudWorld.this.map[0].length; j++){
+					
+					//is there a wall here?
+					if(CloudWorld.this.map[i][j] >= 1){
+						
+						
+						//left corrdinate of cell on our canvas
+						float rx = i*width;
+						
+						//top coordinate of cell on our canvas
+						//coordinate system adjustment because the java canvas
+						//origin is in the top left instead of the bottom right
+						float ry = cHeight - height - j*height;
+						
+						int loc = CloudWorld.this.map[i][j];
+						switch (loc){
+						case 6 :  g2.drawString(N1+ SPACE +C1, ry, rx);
+				        break;
+						case 5 :  g2.drawString(N1+ SPACE +C2, ry, rx);
+				        break;
+						case 4 :  g2.drawString(N1+ SPACE +C3, ry, rx);
+				        break;
+				        
+						case 3 :  g2.drawString(N2+ SPACE +C1, ry, rx);
+				        break;
+						case 2 :  g2.drawString(N2+ SPACE +C2, ry, rx);
+				        break;
+						case 1 :  g2.drawString(N2+ SPACE +C3, ry, rx);
+				        break;
+						}
+						// I fliped the x and y to make it work!!
+						//paint the rectangle
+						//g2.drawString(N1+C1, ry, rx);
+						//g2.fill(new Rectangle2D.Float(ry, rx, width, height));
+					}
+				}
+			}	
+		}
+	}
+	public class AgentPainter implements ObjectPainter{
+
+		@Override
+		public void paintObject(Graphics2D g2, State s, ObjectInstance ob,
+				float cWidth, float cHeight) {
+			
+			//agent will be filled in gray
+			g2.setColor(Color.GRAY);
+			
+			//set up floats for the width and height of our domain
+			float fWidth  = CloudWorld.this.map.length;
+			float fHeight = CloudWorld.this.map[0].length;
+			
+			//determine the width of a single cell on our canvas 
+			//such that the whole map can be painted
+			float width  = cWidth / fWidth;
+			float height = cHeight / fHeight;
+			
+			String mCurrentNetwork	= ob.getStringValForAttribute(CURRENT_NETWORK);
+			String mCurrentCloud	= ob.getStringValForAttribute(CURRENT_CLOUD);
+			
+			//left coordinate of cell on our canvas
+			int ax = agentLocation(mCurrentNetwork, mCurrentCloud);
+			float rx = ax*width;
+			
+			//top coordinate of cell on our canvas
+			//coordinate system adjustment because the java canvas 
+			//origin is in the top left instead of the bottom right
+			float ry = cHeight - height - 2*height;
+		
+			//paint the rectangle
+			g2.fill(new Ellipse2D.Float(rx, ry, width, height));
+			
+			String D_N1_C1 = String.valueOf(ob.getIntValForAttribute(CloudWorld.D_N1_C1));
+			String D_N1_C2 = String.valueOf(ob.getIntValForAttribute(CloudWorld.D_N1_C2));
+			String D_N1_C3 = String.valueOf(ob.getIntValForAttribute(CloudWorld.D_N1_C3));
+			
+			String D_N2_C1 = String.valueOf(ob.getIntValForAttribute(CloudWorld.D_N2_C1));
+			String D_N2_C2 = String.valueOf(ob.getIntValForAttribute(CloudWorld.D_N2_C2));
+			String D_N2_C3 = String.valueOf(ob.getIntValForAttribute(CloudWorld.D_N2_C3));
+			
+			String T_N1_C1 = String.valueOf(ob.getIntValForAttribute(CloudWorld.T_N1_C1));
+			String T_N1_C2 = String.valueOf(ob.getIntValForAttribute(CloudWorld.T_N1_C2));
+			String T_N1_C3 = String.valueOf(ob.getIntValForAttribute(CloudWorld.T_N1_C3));
+			
+			String T_N2_C1 = String.valueOf(ob.getIntValForAttribute(CloudWorld.T_N2_C1));
+			String T_N2_C2 = String.valueOf(ob.getIntValForAttribute(CloudWorld.T_N2_C2));
+			String T_N2_C3 = String.valueOf(ob.getIntValForAttribute(CloudWorld.T_N2_C3));
+			
+			for(int i = 0; i < CloudWorld.this.map.length; i++){
+				for(int j = 0; j < CloudWorld.this.map[0].length; j++){
+					
+					//is there a wall here?
+					if(CloudWorld.this.map[i][j] >= 1){
+						
+						
+						//left corrdinate of cell on our canvas
+						float x = (i-3)*width;
+						float xt = (i-4)*width;
+						//top coordinate of cell on our canvas
+						//coordinate system adjustment because the java canvas
+						//origin is in the top left instead of the bottom right
+						float y = cHeight - height - (j) * height;
+						
+						int loc = CloudWorld.this.map[i][j];
+						switch (loc){
+						case 6 :  
+							g2.drawString(D_N1_C1, y, x);
+							g2.drawString(T_N1_C1, y, xt);
+				        break;
+						case 5 :  
+							g2.drawString(D_N1_C2, y, x);
+							g2.drawString(T_N1_C2, y, xt);
+				        break;
+						case 4 :  
+							g2.drawString(D_N1_C3, y, x);
+							g2.drawString(T_N1_C3, y, xt);
+				        break;
+				        
+						case 3 :  
+							g2.drawString(D_N2_C1, y, x);
+							g2.drawString(T_N2_C1, y, xt);
+				        break;
+						case 2 :  
+							g2.drawString(D_N2_C2, y, x);
+							g2.drawString(T_N2_C2, y, xt);
+				        break;
+						case 1 :  
+							g2.drawString(D_N2_C3, y, x);
+							g2.drawString(T_N2_C3, y, xt);
+				        break;
+						}
+						// I fliped the x and y to make it work!!
+						//paint the rectangle
+						//g2.drawString(N1+C1, ry, rx);
+						//g2.fill(new Rectangle2D.Float(ry, rx, width, height));
+					}
+				}
+			}	
+		}	
+	}
+	public StateRenderLayer getStateRenderLayer(){
+		StateRenderLayer rl = new StateRenderLayer();
+		rl.addStaticPainter(new WallPainter());
+		rl.addObjectClassPainter(CLASSAGENT, new AgentPainter());
+		return rl;
+	}
+
+	public Visualizer getVisualizer(){
+		return new Visualizer(this.getStateRenderLayer());
+	}
+	public static int agentLocation(String currentNetwork , String currentCloud){
+		String location = currentNetwork + currentCloud;
+		int loc = 0;
+		switch (location){
+		case N1+C1 :  loc = 0;
+        break;
+		case N1+C2 :  loc = 2;
+        break;
+		case N1+C3 :  loc = 4;
+        break;
+		case N2+C1 :  loc = 6;
+        break;
+		case N2+C2 :  loc = 8;
+        break;
+		case N2+C3 :  loc = 10;
+        break;
+		}
+		return loc;
 	}
 }

@@ -1,7 +1,10 @@
 package se.ltu.thesis.haidar.agent;
 
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.json.JSONObject;
 
 import burlap.oomdp.auxiliary.StateGenerator;
 import burlap.oomdp.auxiliary.common.ConstantStateGenerator;
@@ -40,13 +43,13 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 	protected StateGenerator stateGenerator;
 
 	protected State curState;
-	
-	//private State nextState;
 
 	protected double lastReward = 0.;
 	
 	protected List<EnvironmentObserver> observers = new LinkedList<EnvironmentObserver>();
-
+	
+	private Hashtable<Integer, JSONObject> mDataTable;
+	
 	public MyEnve(Domain domain, RewardFunction rf, TerminalFunction tf, State initialState) {
 		this.domain = domain;
 		this.rf = rf;
@@ -55,7 +58,9 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 		this.curState = initialState;
 		
 		// for the state
-		mUpdater = new StateUpdater(false);
+		mUpdater = new StateUpdater();
+		mUpdater.loadDataFromFile();
+		mDataTable = mUpdater.getDataTable();
 	}
 
 	@Override
@@ -79,9 +84,9 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 		State nextState;
 		if(this.allowActionFromTerminalStates || !this.isInTerminalState()) {
 			nextState = simGA.executeIn(this.curState);
-			////////////////////////////////////////////////////////////
-			// here I can plug in my external data. to the "nextState"//
-			////////////////////////////////////////////////////////////
+			///////////////////////////////////////////////////////////
+			// here I can plug in my external data to the "nextState"//
+			///////////////////////////////////////////////////////////
 			nextState = getNetxStateValues(nextState);
 			this.lastReward = this.rf.reward(this.curState, simGA, nextState);
 		}
@@ -111,33 +116,35 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 		///////////////////////////////
 		// here I can rest the input//
 		//////////////////////////////
-		mUpdater = new StateUpdater(false);
+		timeEpoch = 0;
 	}
-	
+	private int timeEpoch = 0;
+	private JSONObject mState;
 	private State getNetxStateValues(State nextState){
 		State temp = nextState.copy();
 		ObjectInstance agent = temp.getFirstObjectOfClass(CloudWorld.CLASSAGENT);
+		//System.out.println(mDataTable);
+		mState = mDataTable.get(timeEpoch);
+		timeEpoch++;
+		agent.setValue(CloudWorld.D_N1_C1, mState.get(CloudWorld.D_N1_C1));
+		agent.setValue(CloudWorld.D_N1_C2, mState.get(CloudWorld.D_N1_C2));
+		agent.setValue(CloudWorld.D_N1_C3, mState.get(CloudWorld.D_N1_C3));
 		
-		// Ugly fix in case the algorithm want more states than what is planned in StateUpdater
-		//int sample = mUpdater.getD_N1_C1().getSample();
-		//if(sample == -1){return getTerminalState();}
+		agent.setValue(CloudWorld.D_N2_C1, mState.get(CloudWorld.D_N2_C1));
+		agent.setValue(CloudWorld.D_N2_C2, mState.get(CloudWorld.D_N2_C2));
+		agent.setValue(CloudWorld.D_N2_C3, mState.get(CloudWorld.D_N2_C3));
 		
-		agent.setValue(CloudWorld.D_N1_C1, mUpdater.getD_N1_C1().getSample());
-		agent.setValue(CloudWorld.D_N1_C2, mUpdater.getD_N1_C2().getSample());
-		agent.setValue(CloudWorld.D_N1_C3, mUpdater.getD_N1_C3().getSample());
 		
-		agent.setValue(CloudWorld.D_N2_C1, mUpdater.getD_N2_C1().getSample());
-		agent.setValue(CloudWorld.D_N2_C2, mUpdater.getD_N2_C2().getSample());
-		agent.setValue(CloudWorld.D_N2_C3, mUpdater.getD_N2_C3().getSample());
+		agent.setValue(CloudWorld.T_N1_C1, mState.get(CloudWorld.T_N1_C1));
+		agent.setValue(CloudWorld.T_N1_C2, mState.get(CloudWorld.T_N1_C2));
+		agent.setValue(CloudWorld.T_N1_C3, mState.get(CloudWorld.T_N1_C3));
 		
-		agent.setValue(CloudWorld.T_N1_C1, mUpdater.getT_N1_C1().getSample());
-		agent.setValue(CloudWorld.T_N1_C2, mUpdater.getT_N1_C2().getSample());
-		agent.setValue(CloudWorld.T_N1_C3, mUpdater.getT_N1_C3().getSample());
+		agent.setValue(CloudWorld.T_N2_C1, mState.get(CloudWorld.T_N2_C1));
+		agent.setValue(CloudWorld.T_N2_C2, mState.get(CloudWorld.T_N2_C2));
+		agent.setValue(CloudWorld.T_N2_C3, mState.get(CloudWorld.T_N2_C3));		
 		
-		agent.setValue(CloudWorld.T_N2_C1, mUpdater.getT_N2_C1().getSample());
-		agent.setValue(CloudWorld.T_N2_C2, mUpdater.getT_N2_C2().getSample());
-		agent.setValue(CloudWorld.T_N2_C3, mUpdater.getT_N2_C3().getSample());
-		
+		// To test without terminal state
+		if(mState.getInt(CloudWorld.D_N1_C1)== -1){timeEpoch = 0;}
 		return temp;
 	}
 	@Override

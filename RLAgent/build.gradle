@@ -8,6 +8,7 @@ repositories {
 dependencies {
 	compile "edu.brown.cs.burlap:burlap:2.1.0"
 	compile "colt:colt:1.2.0"
+	compile "org.json:json:20140107"
 	
 }
 
