@@ -16,11 +16,16 @@ public class StateUpdater {
 	public static final double COUNT_ALL 			= 1000;
 	public static final double COUNT 				= 100;
 	
+	// Delay
 	public static final double	CONSTANT_DELAY 			= 10000;
-	public static final double 	CONSTANT_THROUGHPUT 	= 1;
-	public static final int 	ROUND_DELAY_TO 			= 10;
 	public static final int 	DELAY_VARIANCE 			= 10;
-	public static final int 	ROUND_THROUGHPUT_TO 	= 1;
+	public static final int 	ROUND_DELAY_TO 			= 10;
+	
+	// Throughput
+	public static final double 	CONSTANT_THROUGHPUT 	= 1;
+	public static final int 	THROUGHPUT_VARIANCE 	= 10;
+	public static final int 	ROUND_THROUGHPUT_TO 	= 10;
+
 	public static final String 	SAMPLE_COUNT 			= "sample count";
 	public static final String 	FILE_PATH				= "outputData/samples.json";
 	
@@ -63,10 +68,233 @@ public class StateUpdater {
 		T_N2_C2 = new DataSetGenerator(PRINT);
 		T_N2_C3 = new DataSetGenerator(PRINT);
 		
-		setupUpdater();
-		
+		//setupConstatntUpdater();
+		//setupUpdater1();
+		setupUpdater3();
 	}
-	private void setupUpdater(){
+	private void setupUpdaterAgentTest(){
+		// Count , Mean , Variance , RoundTO
+		// D_N1_C1
+		D_N1_C1.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		// D_N1_C2
+		D_N1_C2.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 50 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 50 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 50 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 50 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 50 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		
+		// D_N1_C3
+		addConstantDelay(D_N1_C3);
+		
+		addConstantDelay(D_N2_C1);
+		addConstantDelay(D_N2_C2);
+		addConstantDelay(D_N2_C3);
+		//////////////////////////////////////////////////////////////
+		////////////////////////// Throughput ////////////////////////
+		//////////////////////////////////////////////////////////////
+
+		// D_N1_C1
+		T_N1_C1.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		// T_N1_C2
+		T_N1_C2.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		
+		//addConstantThroughput(T_N1_C1);
+		//addConstantThroughput(T_N1_C2);
+		addConstantThroughput(T_N1_C3);
+		
+		addConstantThroughput(T_N2_C1);
+		addConstantThroughput(T_N2_C2);
+		addConstantThroughput(T_N2_C3);
+	}
+	private void setupUpdater3(){
+		// Count , Mean , Variance , RoundTO
+		// D_N1_C1
+		D_N1_C1.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		// D_N1_C2
+		D_N1_C2.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 40 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		
+		// D_N1_C3
+		addConstantDelay(D_N1_C3);
+		
+		addConstantDelay(D_N2_C1);
+		addConstantDelay(D_N2_C2);
+		addConstantDelay(D_N2_C3);
+		//////////////////////////////////////////////////////////////
+		////////////////////////// Throughput ////////////////////////
+		//////////////////////////////////////////////////////////////
+
+		// D_N1_C1
+		T_N1_C1.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addDataPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		// T_N1_C2
+		T_N1_C2.addDataPlan(COUNT, 15, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 15, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 15, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 15, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 15, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 15, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 60, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 60, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 60, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 60, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addDataPlan(COUNT, 60, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		
+		//addConstantThroughput(T_N1_C1);
+		//addConstantThroughput(T_N1_C2);
+		addConstantThroughput(T_N1_C3);
+		
+		addConstantThroughput(T_N2_C1);
+		addConstantThroughput(T_N2_C2);
+		addConstantThroughput(T_N2_C3);
+	}
+	private void setupUpdater2(){
+		// Count , Mean , Variance , RoundTO
+		// D_N1_C1
+		D_N1_C1.addDataPlan(COUNT, 70 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 70 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 70 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 70 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 70 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		// D_N1_C2
+		D_N1_C2.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 70 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 70 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 70 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 70 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 70 , DELAY_VARIANCE, ROUND_DELAY_TO);
+		
+		// D_N1_C3
+		addConstantDelay(D_N1_C3);
+		
+		addConstantDelay(D_N2_C1);
+		addConstantDelay(D_N2_C2);
+		addConstantDelay(D_N2_C3);
+		//////////////////////////////////////////////////////////////
+		////////////////////////// Throughput ////////////////////////
+		//////////////////////////////////////////////////////////////
+		
+		addConstantThroughput(T_N1_C1);
+		addConstantThroughput(T_N1_C2);
+		addConstantThroughput(T_N1_C3);
+		
+		addConstantThroughput(T_N2_C1);
+		addConstantThroughput(T_N2_C2);
+		addConstantThroughput(T_N2_C3);
+	}
+	
+	private void setupUpdater1(){
+		// Count , Mean , Variance , RoundTO
+		// D_N1_C1
+		D_N1_C1.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 400, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 400, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 100, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 150, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 250, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C1.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		// D_N1_C2
+		D_N1_C2.addDataPlan(COUNT, 150, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 180, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 160, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		D_N1_C2.addDataPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
+		
+		// D_N1_C3
+		addConstantDelay(D_N1_C3);
+		
+		addConstantDelay(D_N2_C1);
+		addConstantDelay(D_N2_C2);
+		addConstantDelay(D_N2_C3);
+		//////////////////////////////////////////////////////////////
+		////////////////////////// Throughput ////////////////////////
+		//////////////////////////////////////////////////////////////
+		
+		addConstantThroughput(T_N1_C1);
+		addConstantThroughput(T_N1_C2);
+		addConstantThroughput(T_N1_C3);
+		
+		addConstantThroughput(T_N2_C1);
+		addConstantThroughput(T_N2_C2);
+		addConstantThroughput(T_N2_C3);
+	}
+	
+	private void setupConstatntUpdater(){
 		// Count , Mean , Variance , RoundTO
 		// D_N1_C1
 		D_N1_C1.addDataPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);

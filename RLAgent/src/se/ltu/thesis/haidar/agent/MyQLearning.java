@@ -242,8 +242,10 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 
 		
 	}
-
-
+	// This maxEpisodeSize is used for planing not learning. It can be set through the constructor, but that is confusing.
+ 	public void setMaxPlaningEpisodeSize(int episodeSize){
+		this.maxEpisodeSize = episodeSize;
+	}
 	/**
 	 * Sets the {@link burlap.oomdp.singleagent.RewardFunction}, {@link burlap.oomdp.core.TerminalFunction},
 	 * and the number of simulated episodes to use for planning when
@@ -477,7 +479,9 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 		if(this.rf == null || this.tf == null){
 			throw new RuntimeException("QLearning (and its subclasses) cannot execute planFromState because the reward function and/or terminal function for planning have not been set. Use the initializeForPlanning method to set them.");
 		}
-
+		/////////////////////////////////////////////
+		////////////// This is my env////////////////
+		/////////////////////////////////////////////
 		MyEnve env = new MyEnve(this.domain, this.rf, this.tf, initialState);
 
 		int eCount = 0;
@@ -485,7 +489,7 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 			env.resetEnvironment();
 			this.runLearningEpisode(env, this.maxEpisodeSize);
 			eCount++;
-			System.out.println(eCount);
+			System.out.println("Episode :"+ eCount +", max Q Change :" + maxQChangeInLastEpisode);
 		}while(eCount < numEpisodesForPlanning && maxQChangeInLastEpisode > maxQChangeForPlanningTermination);
 
 

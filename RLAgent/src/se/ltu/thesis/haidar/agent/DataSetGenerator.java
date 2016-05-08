@@ -124,16 +124,16 @@ public class DataSetGenerator {
 			 int occurrence = mEntry.getValue();
 			 double percentage = (double) occurrence /(double) sampleCount;
 			 percentage *=100;
-			 System.out.println("sample value: "+String.format("%02d", sample)
+			 System.out.println("Sample value: "+String.format("%02d", sample)
 					 +", Occurrence : "+ String.format("%02d", occurrence)
-					 +", Percentage : "+String.format("%.3f", percentage)+"%");
+					 +", Percentage : "+String.format("%.2f", percentage)+"%");
 		 }
 	}
 	public static void main(String[] args){
 		DataSetGenerator mG = new DataSetGenerator(true);
-		mG.addDataPlan(100, 200, 10, 10);
-		mG.addDataPlan(100, 500, 10, 10);
-		//mG.addDataPlan(100, 150, 10, 5);
+		mG.addDataPlan(100, 100, 5, 10 );
+		//mG.addDataPlan(200, 300, 20, 15);
+		//mG.addDataPlan(100, 200, 2 , 1 );
 		while(true){
 			int res = mG.getSample();
 			//System.out.println(res);

@@ -1,6 +1,7 @@
 package se.ltu.thesis.haidar.agent;
 
 import java.util.Iterator;
+import java.util.Random;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
@@ -39,9 +40,16 @@ public class SampleGenerator {
 		mEngine = new DRand();
 		mPoisson = new Poisson(this.mLambda, mEngine);
 	}
+	private Random mRandom = new Random();
 	public int getGaussianSample(){
+		
 		int sample = 0;
-		double gaussian = mNormal.nextDouble();
+		double gaussian = 0;
+		
+		// Increase the randomness 
+		do{gaussian = mNormal.nextDouble();}
+		while (mRandom.nextInt(10) < 7);
+		
 		sample = (int)round(gaussian);
 		appendToStatistics(sample);
 		mSampelCount++;

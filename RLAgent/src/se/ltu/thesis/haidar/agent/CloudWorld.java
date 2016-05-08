@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.List;
 
 import burlap.oomdp.auxiliary.DomainGenerator;
@@ -254,10 +255,6 @@ public class CloudWorld implements DomainGenerator{
 			
 			// It's not necessary to do this, but for future improvement it will help
 			// The idea is, not to do a migrate action if I'm using the right cloud 
-			if(DEBUG){
-				System.out.println("The current cloud: " + currentCloud);
-				System.out.println("The target cloud: "+ mTargetCloud);
-			}
 			
 			if(!mTargetNetwork.equals(currentNetwork)){
 				agent.setValue(CURRENT_NETWORK	, mTargetNetwork);
@@ -267,12 +264,71 @@ public class CloudWorld implements DomainGenerator{
 			}
 			return s;
 		}
-
+		
 		@Override
 		public List<TransitionProbability> getTransitions(State s,
 				GroundedAction groundedAction) {
-			// TODO Auto-generated method stub
-			return null;
+			
+			//get agent and current network/cloud
+			ObjectInstance agent = s.getFirstObjectOfClass(CLASSAGENT);
+			
+			String currentNetwork 	= agent.getStringValForAttribute(CURRENT_NETWORK);
+			String currentCloud 	= agent.getStringValForAttribute(CURRENT_CLOUD);
+
+			List<TransitionProbability> tps = new ArrayList<TransitionProbability>(1);
+			TransitionProbability noChangeTransition = null;
+			// what I have to do here is return two states, one with each action
+			// To do this I have to update my state from the data then change the 
+			// current network and cloud and send is back
+			
+			StateUpdaterForVI mUpdater = StateUpdaterForVI.getInstance();
+			State ns = mUpdater.getNetxStateValues(s);
+			
+			// MIGRATE_TO_N1_C1
+			State temp1 = ns.copy();
+			agent = temp1.getFirstObjectOfClass(CLASSAGENT);
+			agent.setValue(CURRENT_NETWORK	, N1);
+			agent.setValue(CURRENT_CLOUD	, C1);
+			tps.add(new TransitionProbability(temp1, 0.5));
+			
+			// MIGRATE_TO_N1_C1
+			State temp2 = ns.copy();
+			agent = temp2.getFirstObjectOfClass(CLASSAGENT);
+			agent.setValue(CURRENT_NETWORK	, N1);
+			agent.setValue(CURRENT_CLOUD	, C2);
+			tps.add(new TransitionProbability(temp2, 0.5));
+			
+			/*
+			for(int i = 0; i < this.directionProbs.length; i++){
+				int [] newPos = this.moveResult(curX, curY, i);
+				if(newPos[0] != curX || newPos[1] != curY){
+					//new possible outcome
+					State ns = s.copy();
+					ObjectInstance nagent = ns.getFirstObjectOfClass(CLASSAGENT);
+					nagent.setValue(ATTX, newPos[0]);
+					nagent.setValue(ATTY, newPos[1]);
+
+					//create transition probability object and add to our list of outcomes
+					tps.add(new TransitionProbability(ns, this.directionProbs[i]));
+				}
+				else{
+					//this direction didn't lead anywhere new
+					//if there are existing possible directions
+					//that wouldn't lead anywhere, aggregate with them
+					if(noChangeTransition != null){
+						noChangeTransition.p += this.directionProbs[i];
+					}
+					else{
+						//otherwise create this new state and transition
+						noChangeTransition = new TransitionProbability(s.copy(),
+								this.directionProbs[i]);
+						tps.add(noChangeTransition);
+					}
+				}
+			}
+
+		*/
+			return tps;
 		}
 	}
 	
@@ -300,18 +356,21 @@ public class CloudWorld implements DomainGenerator{
 		private int min_T;
 		private int max_T;
 		
-		private static final double WEIGHT = 0.9;
+		private double weight;
+		
+		public static final int BAD_REWARD = -5;
 		/**
 		 * @param min_D The minimum delay required by an application
 		 * @param max_D The maximum delay required by an application
 		 * @param min_T The minimum throughput required by an application
 		 * @param max_T The maximum throughput required by an application
 		 * */
-		public Reward(int min_D, int max_D, int min_T, int max_T){
-			this.min_D = min_D;
-			this.max_D = max_D;
-			this.min_T = min_T;
-			this.max_T = max_T;
+		public Reward(int min_D, int max_D, int min_T, int max_T, double weight){
+			this.min_D 	= min_D;
+			this.max_D 	= max_D;
+			this.min_T 	= min_T;
+			this.max_T 	= max_T;
+			this.weight = weight;
 		}
 		@Override
 		// s and a are the state and action in from the previous time epochs, spirme is the currnet state
@@ -332,12 +391,12 @@ public class CloudWorld implements DomainGenerator{
 			double delayReward 		= calcDelayReward(delay);
 			double throughputReward = calcThroughputReward(throughput);
 			
-			double reward = (WEIGHT) * delayReward + (1.0 - WEIGHT ) * throughputReward;
-			reward = Double.valueOf(String.format("%.2f", reward));
+			double reward = (weight) * delayReward + (1.0 - weight ) * throughputReward;
+			
+			reward = Double.valueOf(String.format("%.4f", reward));
 			//if(reward > 1){reward = 1;}
 			if(DEBUG){
-				System.out.println("REWARD___the current cloud: "+ mCurrentCloud);
-				System.out.println("REWARD___the delay :"+ mDelay + " delay reward :"+ delayReward);
+				System.out.println("REWARD___"+ reward);
 			}
 			return reward;
 		}
@@ -349,20 +408,20 @@ public class CloudWorld implements DomainGenerator{
 			}
 			// if the delay is bigger than the maximum allowed delay
 			if(delay >= max_D){
-				return 0;
+				return BAD_REWARD;
 			}
 			// if the delay is between minimum and maximum
 			if(min_D < delay && delay < max_D){
 				return (double)(max_D - delay)/(max_D - min_D);
 			}
-			return 0;
+			return BAD_REWARD;
 		}
 		
 		// calculate the throughput reward
 		private double calcThroughputReward(int throughput){
 			// if the throughput is smaller than the minimum
 			if(throughput <= min_T){
-				return 0;
+				return BAD_REWARD;
 			}
 			// if the throughput is bigger than the maximum 
 			if(throughput >= max_T){
@@ -372,7 +431,7 @@ public class CloudWorld implements DomainGenerator{
 			if(min_T < throughput && throughput < max_T){
 				return (double)(max_D - throughput)/(max_D - min_D);
 			}
-			return 0;
+			return BAD_REWARD;
 		}
 	}
 	public class WallPainter implements StaticPainter{
@@ -466,7 +525,7 @@ public class CloudWorld implements DomainGenerator{
 			float ry = cHeight - height - 2*height;
 		
 			//paint the rectangle
-			g2.fill(new Ellipse2D.Float(rx, ry, width, height));
+			g2.fill(new Ellipse2D.Float(rx, ry, width , height));
 			
 			String D_N1_C1 = String.valueOf(ob.getIntValForAttribute(CloudWorld.D_N1_C1));
 			String D_N1_C2 = String.valueOf(ob.getIntValForAttribute(CloudWorld.D_N1_C2));
@@ -498,6 +557,11 @@ public class CloudWorld implements DomainGenerator{
 						//coordinate system adjustment because the java canvas
 						//origin is in the top left instead of the bottom right
 						float y = cHeight - height - (j) * height;
+						
+						g2.drawString("Delay : ", y , x);
+						g2.drawString("Throu : ", y , xt);
+						
+						y+= 45;
 						
 						int loc = CloudWorld.this.map[i][j];
 						switch (loc){
@@ -533,8 +597,8 @@ public class CloudWorld implements DomainGenerator{
 						//g2.fill(new Rectangle2D.Float(ry, rx, width, height));
 					}
 				}
-			}	
-		}	
+			}
+		}
 	}
 	public StateRenderLayer getStateRenderLayer(){
 		StateRenderLayer rl = new StateRenderLayer();

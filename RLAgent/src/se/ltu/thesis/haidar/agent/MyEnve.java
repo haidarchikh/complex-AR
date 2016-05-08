@@ -27,7 +27,7 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 	
 	// N1 : WiFI , N2 : 4G
 	// C1 : Local, C2 : Cloud1 , C3 : Cloud2 
-	private StateUpdater mUpdater;
+	
 	
 	private boolean allowActionFromTerminalStates = false;
 	
@@ -48,6 +48,7 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 	
 	protected List<EnvironmentObserver> observers = new LinkedList<EnvironmentObserver>();
 	
+	private StateUpdater mUpdater;
 	private Hashtable<Integer, JSONObject> mDataTable;
 	
 	public MyEnve(Domain domain, RewardFunction rf, TerminalFunction tf, State initialState) {
