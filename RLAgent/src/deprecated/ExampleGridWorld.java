@@ -1,4 +1,4 @@
-package se.ltu.thesis.haidar.agent;
+package deprecated;
 
 import burlap.oomdp.auxiliary.DomainGenerator;
 import burlap.oomdp.core.*;

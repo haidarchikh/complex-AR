@@ -3,6 +3,7 @@ package se.ltu.thesis.haidar.agent;
 import java.awt.*;
 import java.util.List;
 
+import burlap.behavior.learningrate.LearningRate;
 import burlap.behavior.policy.EpsilonGreedy;
 import burlap.behavior.policy.GreedyQPolicy;
 import burlap.behavior.policy.Policy;
@@ -30,9 +31,7 @@ import burlap.oomdp.core.TerminalFunction;
 import burlap.oomdp.core.states.State;
 import burlap.oomdp.singleagent.RewardFunction;
 import burlap.oomdp.singleagent.SADomain;
-import burlap.oomdp.singleagent.common.VisualActionObserver;
 import burlap.oomdp.singleagent.environment.Environment;
-import burlap.oomdp.singleagent.environment.EnvironmentServer;
 import burlap.oomdp.statehashing.HashableStateFactory;
 import burlap.oomdp.statehashing.SimpleHashableStateFactory;
 import burlap.oomdp.visualizer.Visualizer;
@@ -41,21 +40,23 @@ import burlap.oomdp.visualizer.Visualizer;
 public class Main {
 
 	public static final int MIN_D = 20;
-	public static final int MAX_D = 70;
+	public static final int MAX_D = 1000;
 	
-	public static final int MIN_T = 40;
+	public static final int MIN_T = 99;
 	public static final int MAX_T = 100;
 	
-	public static final double REWARD_WEIGHT = 0.85;
+	public static final int NIGATIVE_REWARD = -10;
 	
-	public static final double 	DISSCOUNT_FACTOR 	= 0.1;
+	public static final double REWARD_WEIGHT = 0.9;
+	
+	public static final double 	DISSCOUNT_FACTOR 	= 0.0;
 	public static final double 	INITIAL_Q_VALUE		= 0.0;
 	public static final double 	LEARNING_RATE 		= 0.9;
 	
 	public static final int		STEPS_IN_EPISODE 	= 1000;
-	public static final double 	EPSILON 			= 0.9;
+	public static final double 	EPSILON 			= 1.0;
 	
-	public static final double 	DELTA_TERMINATION 	= 4.0;
+	public static final double 	DELTA_TERMINATION 	= 0.00;
 	public static final int		NUM_PLAN_EPISODE 	= 10000;
 	
 	private CloudWorld 			 mCloudWorld;
@@ -71,7 +72,7 @@ public class Main {
 	public Main(){
 		mCloudWorld = new CloudWorld();
 		domain = mCloudWorld.generateDomain();
-		rf = new CloudWorld.Reward(MIN_D , MAX_D , MIN_T , MAX_T, REWARD_WEIGHT);
+		rf = new CloudWorld.Reward(MIN_D , MAX_D , MIN_T , MAX_T, NIGATIVE_REWARD , REWARD_WEIGHT);
 		tf = new NullTermination();
 		//tf = new CloudWorld.Terminal();
 		initialState = CloudWorld.getInitialState(domain);
@@ -96,7 +97,7 @@ public class Main {
 		
 		LearningAgent agent = new MyQLearning(domain, DISSCOUNT_FACTOR, hashingFactory, INITIAL_Q_VALUE, LEARNING_RATE);
 		
-		((MyQLearning) agent).setLearningPolicy(new EpsilonGreedy((QFunction) agent, EPSILON));
+		((MyQLearning) agent).setLearningPolicy(new MyEpsilonGreedy((QFunction) agent, EPSILON));
 		
 		//run learning for 50 episodes
 		for(int i = 0; i < 50; i++){
@@ -116,8 +117,10 @@ public class Main {
 		}
 	}
 	public void QPlaning(String outputPath){
+		LearningRate mLearnig = new MyLearningRate();
 		LearningAgent agent = new MyQLearning(domain, DISSCOUNT_FACTOR, hashingFactory, INITIAL_Q_VALUE, LEARNING_RATE);
-		((MyQLearning) agent).setLearningPolicy(new EpsilonGreedy((QFunction) agent, EPSILON));
+		((MyQLearning) agent).setLearningRateFunction(mLearnig);
+		((MyQLearning) agent).setLearningPolicy(new MyEpsilonGreedy((QFunction) agent, EPSILON));
 		
 		
 		((MyQLearning) agent).setMaxPlaningEpisodeSize(STEPS_IN_EPISODE);
@@ -127,11 +130,12 @@ public class Main {
 		GreedyQPolicy mPolicy = ((MyQLearning)agent).planFromState(initialState);
 		//AbstractGroundedAction mAction = mPolicy1.getAction(CloudWorld.getPolicyTestState(domain));
 		//System.out.println(mAction.actionName());
-
+		//mPolicy.getDeterministicPolicy(initialState);
 		
 		env.resetEnvironment();
 		EpisodeAnalysis eaP = mPolicy.evaluateBehavior(env, STEPS_IN_EPISODE);
 		//mPolicy1.evaluateBehavior(env, STEPS_IN_EPISODE).writeToFile(outputPath + "ql_p");
+		
 		env.resetEnvironment();
 		eaP.writeToFile(outputPath + "ql_p");
 		//manualValueFunctionVis((ValueFunction) agent, mPolicy1);

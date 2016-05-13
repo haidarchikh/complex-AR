@@ -1,8 +1,8 @@
 package se.ltu.thesis.haidar.agent;
 
-import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
 
@@ -49,7 +49,7 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 	protected List<EnvironmentObserver> observers = new LinkedList<EnvironmentObserver>();
 	
 	private StateUpdater mUpdater;
-	private Hashtable<Integer, JSONObject> mDataTable;
+	private Map<Integer, JSONObject> mData;
 	
 	public MyEnve(Domain domain, RewardFunction rf, TerminalFunction tf, State initialState) {
 		this.domain = domain;
@@ -61,7 +61,7 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 		// for the state
 		mUpdater = new StateUpdater();
 		mUpdater.loadDataFromFile();
-		mDataTable = mUpdater.getDataTable();
+		mData = mUpdater.getData();
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 		State temp = nextState.copy();
 		ObjectInstance agent = temp.getFirstObjectOfClass(CloudWorld.CLASSAGENT);
 		//System.out.println(mDataTable);
-		mState = mDataTable.get(timeEpoch);
+		mState = mData.get(timeEpoch);
 		timeEpoch++;
 		agent.setValue(CloudWorld.D_N1_C1, mState.get(CloudWorld.D_N1_C1));
 		agent.setValue(CloudWorld.D_N1_C2, mState.get(CloudWorld.D_N1_C2));

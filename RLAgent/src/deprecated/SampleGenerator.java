@@ -1,4 +1,4 @@
-package se.ltu.thesis.haidar.agent;
+package deprecated;
 
 import java.util.Iterator;
 import java.util.Random;
@@ -51,6 +51,8 @@ public class SampleGenerator {
 		while (mRandom.nextInt(10) < 7);
 		
 		sample = (int)round(gaussian);
+		// If the sample is < 0 . return 0
+		if(sample<0){sample = 0 ;}
 		appendToStatistics(sample);
 		mSampelCount++;
 		return sample;

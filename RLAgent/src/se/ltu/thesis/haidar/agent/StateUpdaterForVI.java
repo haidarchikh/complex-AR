@@ -4,6 +4,7 @@ import java.util.Hashtable;
 
 import org.json.JSONObject;
 
+import deprecated.StateUpdater;
 import burlap.oomdp.core.objects.ObjectInstance;
 import burlap.oomdp.core.states.State;
 

@@ -1,4 +1,4 @@
-package se.ltu.thesis.haidar.agent;
+package deprecated;
 
 import java.awt.Color;
 import java.util.List;

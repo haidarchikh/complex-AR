@@ -358,19 +358,21 @@ public class CloudWorld implements DomainGenerator{
 		
 		private double weight;
 		
-		public static final int BAD_REWARD = -5;
+		private int nigative_Reward;
 		/**
 		 * @param min_D The minimum delay required by an application
 		 * @param max_D The maximum delay required by an application
 		 * @param min_T The minimum throughput required by an application
 		 * @param max_T The maximum throughput required by an application
 		 * */
-		public Reward(int min_D, int max_D, int min_T, int max_T, double weight){
+		public Reward(int min_D, int max_D, int min_T, int max_T,int nigative_Reward, double weight){
 			this.min_D 	= min_D;
 			this.max_D 	= max_D;
 			this.min_T 	= min_T;
 			this.max_T 	= max_T;
 			this.weight = weight;
+			
+			this.nigative_Reward = nigative_Reward;
 		}
 		@Override
 		// s and a are the state and action in from the previous time epochs, spirme is the currnet state
@@ -408,20 +410,20 @@ public class CloudWorld implements DomainGenerator{
 			}
 			// if the delay is bigger than the maximum allowed delay
 			if(delay >= max_D){
-				return BAD_REWARD;
+				return nigative_Reward;
 			}
 			// if the delay is between minimum and maximum
 			if(min_D < delay && delay < max_D){
 				return (double)(max_D - delay)/(max_D - min_D);
 			}
-			return BAD_REWARD;
+			return nigative_Reward;
 		}
 		
 		// calculate the throughput reward
 		private double calcThroughputReward(int throughput){
 			// if the throughput is smaller than the minimum
 			if(throughput <= min_T){
-				return BAD_REWARD;
+				return nigative_Reward;
 			}
 			// if the throughput is bigger than the maximum 
 			if(throughput >= max_T){
@@ -431,7 +433,7 @@ public class CloudWorld implements DomainGenerator{
 			if(min_T < throughput && throughput < max_T){
 				return (double)(max_D - throughput)/(max_D - min_D);
 			}
-			return BAD_REWARD;
+			return nigative_Reward;
 		}
 	}
 	public class WallPainter implements StaticPainter{

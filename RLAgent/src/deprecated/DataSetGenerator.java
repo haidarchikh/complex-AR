@@ -1,4 +1,4 @@
-package se.ltu.thesis.haidar.agent;
+package deprecated;
 
 import java.util.Iterator;
 import java.util.LinkedList;

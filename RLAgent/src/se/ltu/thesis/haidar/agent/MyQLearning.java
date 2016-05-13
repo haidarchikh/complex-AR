@@ -548,7 +548,7 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 
 			//update Q-value
 			curQ.q = curQ.q + this.learningRate.pollLearningRate(this.totalNumberOfSteps, curState.s, action) * (r + (discount * maxQ) - curQ.q);
-
+			//curQ.q = curQ.q + this.learningRate.pollLearningRate(this.totalNumberOfSteps, curState.s, action) * (r + (discount * maxQ));
 			double deltaQ = Math.abs(oldQ - curQ.q);
 			if(deltaQ > maxQChangeInLastEpisode){
 				maxQChangeInLastEpisode = deltaQ;
