@@ -1,14 +1,10 @@
 package se.ltu.thesis.haidar.agent;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.management.RuntimeErrorException;
-
-import com.sun.xml.internal.ws.wsdl.parser.MexEntityResolver;
 
 import burlap.behavior.policy.Policy;
 import burlap.behavior.policy.SolverDerivedPolicy;
@@ -19,10 +15,6 @@ import burlap.debugtools.RandomFactory;
 import burlap.oomdp.core.AbstractGroundedAction;
 import burlap.oomdp.core.AbstractObjectParameterizedGroundedAction;
 import burlap.oomdp.core.states.State;
-import burlap.oomdp.statehashing.HashableState;
-import burlap.oomdp.statehashing.HashableStateFactory;
-import burlap.oomdp.statehashing.SimpleHashableStateFactory;
-
 
 /**
  * This class defines a an epsilon-greedy policy over Q-values and requires a QComputable valueFunction to be specified.

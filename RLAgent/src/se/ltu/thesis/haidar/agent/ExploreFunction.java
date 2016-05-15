@@ -51,7 +51,7 @@ public class ExploreFunction {
 	
 	private void AddNewState(HashableState mState, AbstractGroundedAction ga) {
 		Map<String, Integer> mActionMap = new HashMap<>();
-		// add the action to the map, and 1 , it's the first time this action
+		// add the action to the map. 1 , it's the first time this action
 		// has occurred
 		mActionMap.put(ga.actionName(), 1);
 		mStateMap.put(mState, mActionMap);

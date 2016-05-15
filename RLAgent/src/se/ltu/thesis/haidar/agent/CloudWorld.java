@@ -3,10 +3,10 @@ package se.ltu.thesis.haidar.agent;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.ltu.thesis.haidar.datagenerator.StateUpdaterForVI;
 import burlap.oomdp.auxiliary.DomainGenerator;
 import burlap.oomdp.core.Attribute;
 import burlap.oomdp.core.Attribute.AttributeType;
@@ -271,12 +271,14 @@ public class CloudWorld implements DomainGenerator{
 			
 			//get agent and current network/cloud
 			ObjectInstance agent = s.getFirstObjectOfClass(CLASSAGENT);
-			
+			/*
 			String currentNetwork 	= agent.getStringValForAttribute(CURRENT_NETWORK);
 			String currentCloud 	= agent.getStringValForAttribute(CURRENT_CLOUD);
-
+			*/
 			List<TransitionProbability> tps = new ArrayList<TransitionProbability>(1);
-			TransitionProbability noChangeTransition = null;
+			//TransitionProbability noChangeTransition = null;
+			
+			
 			// what I have to do here is return two states, one with each action
 			// To do this I have to update my state from the data then change the 
 			// current network and cloud and send is back
@@ -394,9 +396,8 @@ public class CloudWorld implements DomainGenerator{
 			double throughputReward = calcThroughputReward(throughput);
 			
 			double reward = (weight) * delayReward + (1.0 - weight ) * throughputReward;
+
 			
-			reward = Double.valueOf(String.format("%.4f", reward));
-			//if(reward > 1){reward = 1;}
 			if(DEBUG){
 				System.out.println("REWARD___"+ reward);
 			}
