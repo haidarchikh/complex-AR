@@ -96,12 +96,12 @@ public class SqlStatistics {
 			+ ","
 			+ DISCOUNT_FACTOR
 			+ ") VALUES(?,?,?,?,?)";
-	int mTupleID;
+	
 	public void insertNewTuple(double mEpsilon, double mLearningRate,
 			double mDisscountFactor,double[] mReward){
 		PreparedStatement mStatement = null;
 		try {
-			mStatement = mConnection.prepareStatement(INSERT_INTO_TUPLE);
+			mStatement = mConnection.prepareStatement(INSERT_INTO_TUPLE, Statement.RETURN_GENERATED_KEYS);
 			mStatement.setNull	(1, java.sql.Types.NULL	);
 			mStatement.setInt	(2, mTestID				);
 			mStatement.setDouble(3, mEpsilon			);
@@ -109,12 +109,10 @@ public class SqlStatistics {
 			mStatement.setDouble(5, mDisscountFactor	);
 			mStatement.executeUpdate();
 			
-			/*
+			
 			ResultSet rs = mStatement.getGeneratedKeys();
 			rs.next();
 			int mTupleID = rs.getInt(1);
-			*/
-			mTupleID++;
 			insertReward(mTupleID, mReward);
 			
 		} catch (SQLException e) {
@@ -174,6 +172,7 @@ public class SqlStatistics {
 				mMap.put(EPSILON, 			mEpsilon);
 				mMap.put(LEARNING_RATE, 	mLearningRate);
 				mMap.put(DISCOUNT_FACTOR, 	mDiscountFactor);
+				System.out.println(mMap.toString());
 			}
 			
 		} catch (SQLException e) {

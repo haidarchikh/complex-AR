@@ -42,17 +42,18 @@ public class AgentDataPlotter extends ApplicationFrame {
 
 		final XYSeriesCollection dataset = new XYSeriesCollection();
 		
-		dataset.addSeries(getRewardXYSeries(7, 1, 0.6, 0.7));
-		dataset.addSeries(getRewardXYSeries(7, 0.1, 0.3, 0.3));
-		dataset.addSeries(getRewardXYSeries(7, 0.5, 0.8, 0.3));
-		dataset.addSeries(getRewardXYSeries(7, 0.7, 0.4, 0.8));
-		dataset.addSeries(getRewardXYSeries(7, 0.6, 1.0, 0.2));
-		dataset.addSeries(getRewardXYSeries(7, 1.0, 0.9, 0.15));
+		dataset.addSeries(getRewardXYSeries(9, 1, 0.6, 0.7));
+		dataset.addSeries(getRewardXYSeries(9, 0.1, 0.3, 0.3));
+		dataset.addSeries(getRewardXYSeries(9, 0.5, 0.8, 0.3));
+		dataset.addSeries(getRewardXYSeries(9, 0.7, 0.4, 0.8));
+		dataset.addSeries(getRewardXYSeries(9, 0.6, 1.0, 0.2));
+		dataset.addSeries(getRewardXYSeries(9, 1.0, 0.9, 0.1));
 		
 		return dataset;
 		
 		
 	}
+
 	// this method take a tuple and return a XYSeries with the reward
 	private XYSeries getRewardXYSeries(int test_id, double epsilon, double learning, double discount){
 		// Get the tuple from the database

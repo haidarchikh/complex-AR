@@ -47,7 +47,7 @@ public class Main {
 	public static final int MIN_T = 10000;
 	public static final int MAX_T = 10000;
 
-	public static final int NIGATIVE_REWARD = -10;
+	public static final int NIGATIVE_REWARD = 0;
 
 	public static final double REWARD_WEIGHT = 0.9;
 
@@ -118,8 +118,8 @@ public class Main {
 	
 	public void QLearningTODatabase() {
 		
-		int mMaxEpisodes = 100;
-		BigDecimal mStep = new BigDecimal("0.05");
+		int mMaxEpisodes = 2;
+		BigDecimal mStep = new BigDecimal("0.1");
 
 		
 		//mStatistics = new Statistics();
@@ -140,9 +140,10 @@ public class Main {
 						mDiscountFactor.compareTo(BigDecimal.ONE)<= 0;
 						mDiscountFactor = mDiscountFactor.add(mStep)) {
 			
-					System.out.println("Discount factor : "+ mDiscountFactor 
-							+", Learning rate : "+mLearningRate
-							+", Epsilon : "+ mEpsilon);		
+					System.out.println(
+							 "Epsilon : "+ 		mEpsilon
+							+", Learning rate : "+	mLearningRate
+							+", Discount factor : "+mDiscountFactor);		
 					
 					// setting up the agent
 					LearningAgent agent = new MyQLearning(domain, mDiscountFactor.doubleValue(), 
@@ -353,8 +354,8 @@ public class Main {
 		String outputPathSARAS = "output/saras/";
 		String outputPathVI = "output/vi/";
 		
-		//ex.QLearningTODatabase();
-		ex.QLearning(outputPathQl);
+		ex.QLearningTODatabase();
+		//ex.QLearning(outputPathQl);
 		// ex.QPlaning(outputPathQl);
 		// ex.SARASLearningExample(outputPathSARAS);
 		// ex.experimentAndPlotter();
