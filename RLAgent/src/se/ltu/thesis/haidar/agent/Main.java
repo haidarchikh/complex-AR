@@ -42,12 +42,12 @@ import burlap.oomdp.visualizer.Visualizer;
 public class Main {
 
 	public static final int MIN_D = 20;
-	public static final int MAX_D = 1000;
+	public static final int MAX_D = 80;
 
 	public static final int MIN_T = 10000;
 	public static final int MAX_T = 10000;
 
-	public static final int NIGATIVE_REWARD = 0;
+	public static final int NIGATIVE_REWARD = -10;
 
 	public static final double REWARD_WEIGHT = 0.9;
 
@@ -85,17 +85,38 @@ public class Main {
 		env = new MyEnve(domain, rf, tf, initialState);
 
 	}
-
-	public void valueIteration(String outputPath) {
-
-		Planner planner = new ValueIteration(domain, rf, tf, 0.99,
-				hashingFactory, 0.1, 10);
-		Policy p = planner.planFromState(initialState);
-		p.evaluateBehavior(initialState, rf, tf).writeToFile(outputPath + "vi");
-
-	}
-	private Statistics mStatistics;
 	public void QLearning(String outputPath) {
+		
+		LearningAgent agent = new MyQLearning(domain, DISSCOUNT_FACTOR,
+		hashingFactory, INITIAL_Q_VALUE, LEARNING_RATE);
+	 
+		((MyQLearning) agent).setLearningPolicy(new EpsilonGreedy((QFunction) agent, EPSILON));
+		
+		LearningRate mLearnig = new MyLearningRate(); 
+		//((MyQLearning) agent).setLearningRateFunction(mLearnig);
+			  
+		//run learning for 50 episodes 
+		for(int i = 0; i < 10; i++){
+		EpisodeAnalysis ea = agent.runLearningEpisode(env , STEPS_IN_EPISODE);
+		
+		List<Double> reward = ea.rewardSequence; 
+		double sum = 0; 
+		for (double r: reward){sum += r;} 
+		
+		System.out.println("Episode : "+i+", cumulative reward :"+ sum);
+		
+		ea.writeToFile(outputPath + "ql_" + i);
+		env.resetEnvironment();
+		}
+		// To get a greedy policy for each episode
+		GreedyQPolicy mPolicy = new GreedyQPolicy((QFunction) agent);
+		env.resetEnvironment(); 
+		EpisodeAnalysis eaP = mPolicy.evaluateBehavior(env,900); 
+		env.resetEnvironment();
+		eaP.writeToFile(outputPath + "ql_greedyPolicy");
+	}
+	
+	public void QLearningTODatabase() {
 		
 		int mMaxEpisodes = 100;
 		BigDecimal mStep = new BigDecimal("0.05");
@@ -107,72 +128,56 @@ public class Main {
 		mS.connect();
 		mS.mNewTest(mStep.doubleValue());
 		
-		for (BigDecimal mDiscountFactor 	= BigDecimal.ZERO; 
-				mDiscountFactor.compareTo(BigDecimal.ONE)<= 0;
-				mDiscountFactor = mDiscountFactor.add(mStep)) {
+		for (BigDecimal mEpsilon = BigDecimal.ZERO;
+				mEpsilon.compareTo(BigDecimal.ONE) <= 0; 
+				mEpsilon = mEpsilon.add(mStep)) {
 			
 			for (BigDecimal mLearningRate 	= BigDecimal.ZERO;
 					mLearningRate.compareTo(BigDecimal.ONE) <= 0;
 					mLearningRate = mLearningRate.add(mStep)) {
 				
-				for (BigDecimal mEpsilon 	= BigDecimal.ZERO;
-						mEpsilon.compareTo(BigDecimal.ONE) <= 0; 
-						mEpsilon = mEpsilon.add(mStep)) {
+				for (BigDecimal mDiscountFactor 	= BigDecimal.ZERO; 
+						mDiscountFactor.compareTo(BigDecimal.ONE)<= 0;
+						mDiscountFactor = mDiscountFactor.add(mStep)) {
+			
 					System.out.println("Discount factor : "+ mDiscountFactor 
 							+", Learning rate : "+mLearningRate
 							+", Epsilon : "+ mEpsilon);		
-					LearningAgent agent = new MyQLearning(domain, mDiscountFactor.doubleValue(), hashingFactory, INITIAL_Q_VALUE,
-							mLearningRate.doubleValue());
+					
+					// setting up the agent
+					LearningAgent agent = new MyQLearning(domain, mDiscountFactor.doubleValue(), 
+							hashingFactory, INITIAL_Q_VALUE,mLearningRate.doubleValue());
+					// adding a greedy policy to the agent
+					// can't do that from the constructor (I didn't mess with that)
 					((MyQLearning) agent).setLearningPolicy(new EpsilonGreedy(
 							(QFunction) agent, mEpsilon.doubleValue()));
 					
-					
 					double[] mReward = new double[mMaxEpisodes];
+					
+					// running learning episodes
 					for (int i = 0; i < mMaxEpisodes; i++) {
-						EpisodeAnalysis ea = agent.runLearningEpisode(env,
-								STEPS_IN_EPISODE);
+						EpisodeAnalysis ea = agent.runLearningEpisode(env,STEPS_IN_EPISODE);
 						
 						List<Double> reward = ea.rewardSequence;
 						double sum = 0;
-						for (double r : reward) {
-							sum += r;
-						}
+						
+						// get the sum of reward for this episode
+						for (double r : reward) { sum += r;}
+						
 						mReward[i]= sum;
 						
 						env.resetEnvironment();
 					}
-					//mStatistics	.append(mStep.doubleValue(), mEpsilon.doubleValue(), mLearningRate.doubleValue(), mDiscountFactor.doubleValue(), mReward);
-					//mS				.append(mStep.doubleValue() ,mEpsilon.doubleValue(), mLearningRate.doubleValue(), mDiscountFactor.doubleValue(), mReward);
-					mS				.insertNewTuple(mEpsilon.doubleValue(), mLearningRate.doubleValue(), mDiscountFactor.doubleValue(), mReward);
+					mS.insertNewTuple(
+							mEpsilon.doubleValue(),
+							mLearningRate.doubleValue(),
+							mDiscountFactor.doubleValue(),
+							mReward);
 				}
 			}
 		}
-		//mStatistics.close();
-		mS.discounect();
-		/*
-		 * LearningAgent agent = new MyQLearning(domain, DISSCOUNT_FACTOR,
-		 * hashingFactory, INITIAL_Q_VALUE, LEARNING_RATE);
-		 * 
-		 * LearningRate mLearnig = new MyLearningRate(); //((MyQLearning)
-		 * agent).setLearningRateFunction(mLearnig);
-		 * 
-		 * //((MyQLearning) agent).setLearningPolicy(new
-		 * MyEpsilonGreedy((QFunction) agent, EPSILON));
-		 * 
-		 * //run learning for 50 episodes for(int i = 0; i < 100; i++){
-		 * EpisodeAnalysis ea = agent.runLearningEpisode(env ,
-		 * STEPS_IN_EPISODE); //ea.writeToFile(outputPath + "ql_" + i);
-		 * List<Double> reward = ea.rewardSequence; double sum = 0; for(double r
-		 * : reward){ sum += r; } System.out.println("Episode : "+i +
-		 * ", cumulative reward :"+ sum); env.resetEnvironment();
-		 * 
-		 * // To get a greedy policy for each episode
-		 * 
-		 * //GreedyQPolicy mPolicy = new GreedyQPolicy((QFunction) agent);
-		 * //env.resetEnvironment(); //EpisodeAnalysis eaP =
-		 * mPolicy.evaluateBehavior(env,900); //env.resetEnvironment();
-		 * //eaP.writeToFile(outputPath + "ql_p" + i); }
-		 */
+		// disconnect from the database
+		mS.disconnect();
 	}
 
 	public void QPlaning(String outputPath) {
@@ -208,6 +213,14 @@ public class Main {
 		// manualValueFunctionVis((ValueFunction) agent, mPolicy1);
 	}
 
+	public void valueIteration(String outputPath) {
+
+		Planner planner = new ValueIteration(domain, rf, tf, 0.99,
+				hashingFactory, 0.1, 10);
+		Policy p = planner.planFromState(initialState);
+		p.evaluateBehavior(initialState, rf, tf).writeToFile(outputPath + "vi");
+
+	}
 	public void SARASLearning(String outputPath) {
 
 		/*
@@ -339,7 +352,8 @@ public class Main {
 		String outputPathQl = "output/ql/";
 		String outputPathSARAS = "output/saras/";
 		String outputPathVI = "output/vi/";
-
+		
+		//ex.QLearningTODatabase();
 		ex.QLearning(outputPathQl);
 		// ex.QPlaning(outputPathQl);
 		// ex.SARASLearningExample(outputPathSARAS);
@@ -347,7 +361,7 @@ public class Main {
 		// ex.valueIteration(outputPathVI);
 
 		
-		//Visualizer v = ex.mCloudWorld.getVisualizer();
-		//new EpisodeSequenceVisualizer(v, ex.domain, outputPathQl);
+		Visualizer v = ex.mCloudWorld.getVisualizer();
+		new EpisodeSequenceVisualizer(v, ex.domain, outputPathQl);
 	}
 }

@@ -1,9 +1,5 @@
 package se.ltu.thesis.haidar.plotter;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -20,6 +16,7 @@ import se.ltu.thesis.haidar.database.SqlStatistics.Tuple;
 
 
 
+@SuppressWarnings("serial")
 public class AgentDataPlotter extends ApplicationFrame {
 	
 	private SqlStatistics mS;
@@ -39,7 +36,7 @@ public class AgentDataPlotter extends ApplicationFrame {
 		final ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
 		setContentPane(chartPanel);
-		mS.discounect();
+		mS.disconnect();
 	}
 	private XYSeriesCollection reward(){
 
@@ -49,6 +46,8 @@ public class AgentDataPlotter extends ApplicationFrame {
 		dataset.addSeries(getRewardXYSeries(7, 0.1, 0.3, 0.3));
 		dataset.addSeries(getRewardXYSeries(7, 0.5, 0.8, 0.3));
 		dataset.addSeries(getRewardXYSeries(7, 0.7, 0.4, 0.8));
+		dataset.addSeries(getRewardXYSeries(7, 0.6, 1.0, 0.2));
+		dataset.addSeries(getRewardXYSeries(7, 1.0, 0.9, 0.15));
 		
 		return dataset;
 		

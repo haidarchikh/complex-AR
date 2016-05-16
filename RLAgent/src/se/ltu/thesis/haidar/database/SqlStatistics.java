@@ -51,7 +51,7 @@ public class SqlStatistics {
 		}
 	}
 
-	public void discounect() {
+	public void disconnect() {
 		if (mConnection != null) {
 			try {
 				mConnection.close();
@@ -207,7 +207,27 @@ public class SqlStatistics {
 		}
 		return new Reward(mMap);
 	}
-	
+	public static final String QUERY_GET_MAX_REWARD = "SELECT  MAX("+REWARD+") FROM "+ REWARD_TABLE;
+	public Reward getMaxReward(){
+		PreparedStatement mStatement = null;
+		ResultSet mRes = null;
+		Map<Integer, Double> mMap = null;
+		try {
+			mStatement = mConnection.prepareStatement(QUERY_GET_MAX_REWARD);
+			mRes = mStatement.executeQuery();
+			
+			mMap = new TreeMap<>();
+			while(mRes.next()){
+				int mEpisode 			= mRes.getInt(EPISODE_NUMBER);
+				double mReward		 	= mRes.getDouble(REWARD);
+				mMap.put(mEpisode ,	mReward);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return new Reward(mMap);
+	}
 	public static void main(String[] args){
 		SqlStatistics mS = new SqlStatistics();
 		mS.connect();
@@ -216,7 +236,8 @@ public class SqlStatistics {
 		int tuple_id = mTuple.getID();
 		
 		System.out.println(mS.getReward(TEST_ID_ZERO_FIVE, tuple_id));
-		mS.discounect();
+		System.out.println(mS.getMaxReward().toString());
+		mS.disconnect();
 	}
 	public class Tuple{
 		private static final String TUPLE_ID 		= "tuple_id";

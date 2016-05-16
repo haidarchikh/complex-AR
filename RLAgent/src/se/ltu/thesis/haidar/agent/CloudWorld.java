@@ -424,7 +424,7 @@ public class CloudWorld implements DomainGenerator{
 		private double calcThroughputReward(int throughput){
 			// if the throughput is smaller than the minimum
 			if(throughput <= min_T){
-				return nigative_Reward;
+				return 0;
 			}
 			// if the throughput is bigger than the maximum 
 			if(throughput >= max_T){
@@ -434,7 +434,7 @@ public class CloudWorld implements DomainGenerator{
 			if(min_T < throughput && throughput < max_T){
 				return (double)(max_D - throughput)/(max_D - min_D);
 			}
-			return nigative_Reward;
+			return 0;
 		}
 	}
 	public class WallPainter implements StaticPainter{
@@ -442,6 +442,9 @@ public class CloudWorld implements DomainGenerator{
 		@Override
 		public void paint(Graphics2D g2, State s, float cWidth, float cHeight) {
 			
+			// for the laptop screen (without the frame is funny)
+			cWidth 	-=100;
+			cHeight -=100;
 			//walls will be filled in black
 			g2.setColor(Color.BLACK);
 			
@@ -462,7 +465,6 @@ public class CloudWorld implements DomainGenerator{
 					
 					//is there a wall here?
 					if(CloudWorld.this.map[i][j] >= 1){
-						
 						
 						//left corrdinate of cell on our canvas
 						float rx = i*width;
@@ -502,6 +504,10 @@ public class CloudWorld implements DomainGenerator{
 		@Override
 		public void paintObject(Graphics2D g2, State s, ObjectInstance ob,
 				float cWidth, float cHeight) {
+			
+			// for the laptop screen (without the frame is funny)
+			cWidth 	-=100;
+			cHeight -=100;
 			
 			//agent will be filled in gray
 			g2.setColor(Color.GRAY);
