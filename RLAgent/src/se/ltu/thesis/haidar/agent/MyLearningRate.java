@@ -9,26 +9,22 @@ import burlap.oomdp.core.states.State;
 
 
 public class MyLearningRate implements LearningRate {
-	
 	private double mInitialLearningRate;
 	
-	private RandomEngine	mEngine;
-	private Normal			mNormal;
-	//private ParetoDistribution mPareto;
-	private ExploreFunction mExploreFunction;
-	public static final double INITIAL_LEARNING_RATE = 1.0;
-
+	private RandomEngine		mEngine;
+	private Normal				mNormal;
+	private ExploreFunction 	mExploreFunction;
+	public static final double 	INITIAL_LEARNING_RATE = 1.0;
+	
 	public MyLearningRate() {
 		
 
-		this.mInitialLearningRate = INITIAL_LEARNING_RATE;
-		
-		//this.mPareto = new ParetoDistribution(10, 10);
-		this.mExploreFunction = new ExploreFunction();
-		this.mEngine = new DRand();
-		this.mNormal = new Normal(3, 1.5, mEngine);
+		this.mInitialLearningRate 	= INITIAL_LEARNING_RATE;
+		this.mExploreFunction 		= new ExploreFunction();
+		this.mEngine 				= new DRand();
+		this.mNormal 				= new Normal(20, 6, mEngine);
 	}
-
+	
 	@Override
 	public double peekAtLearningRate(State s, AbstractGroundedAction ga) {
 		return this.mInitialLearningRate;

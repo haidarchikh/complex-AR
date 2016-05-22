@@ -1,5 +1,7 @@
 package se.ltu.thesis.haidar.plotter;
 
+import java.math.BigDecimal;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -42,12 +44,23 @@ public class AgentDataPlotter extends ApplicationFrame {
 
 		final XYSeriesCollection dataset = new XYSeriesCollection();
 		
-		dataset.addSeries(getRewardXYSeries(9, 1, 0.6, 0.7));
-		dataset.addSeries(getRewardXYSeries(9, 0.1, 0.3, 0.3));
-		dataset.addSeries(getRewardXYSeries(9, 0.5, 0.8, 0.3));
-		dataset.addSeries(getRewardXYSeries(9, 0.7, 0.4, 0.8));
-		dataset.addSeries(getRewardXYSeries(9, 0.6, 1.0, 0.2));
-		dataset.addSeries(getRewardXYSeries(9, 1.0, 0.9, 0.1));
+		BigDecimal mStep = new BigDecimal("0.2");
+		BigDecimal mEpsilon = new BigDecimal("1.0");
+		
+		int mTestID = 10;
+		
+        for (BigDecimal mLearningRate 	= BigDecimal.ZERO;
+				mLearningRate.compareTo(BigDecimal.ONE) <= 0;
+				mLearningRate = mLearningRate.add(mStep)) {
+			
+			for (BigDecimal mDiscountFactor 	= BigDecimal.ZERO; 
+					mDiscountFactor.compareTo(BigDecimal.ONE)<= 0;
+					mDiscountFactor = mDiscountFactor.add(mStep)) {
+				dataset.addSeries(getRewardXYSeries(mTestID, mEpsilon.doubleValue()
+						, mLearningRate.doubleValue(), mDiscountFactor.doubleValue()));
+			}
+		}
+		//dataset.addSeries(getRewardXYSeries(9, 1, 0.6, 0.7));
 		
 		return dataset;
 		

@@ -155,7 +155,7 @@ public class CloudWorld implements DomainGenerator{
 		mAgentClass.addAttribute(mD_N2_C3);
 		mAgentClass.addAttribute(mT_N2_C3);
 		
-		
+	
 		// Current network and cloud
 		Attribute mC = new Attribute(domain, CURRENT_CLOUD, AttributeType.STRING);
 		Attribute mN = new Attribute(domain, CURRENT_NETWORK, AttributeType.STRING);
@@ -180,6 +180,7 @@ public class CloudWorld implements DomainGenerator{
 
 		agent.setValue(D_N1_C1, 11);
 		agent.setValue(D_N1_C2, 12);
+
 		agent.setValue(D_N1_C3, 12);
 
 		agent.setValue(D_N2_C1, 21);
@@ -189,42 +190,13 @@ public class CloudWorld implements DomainGenerator{
 		
 		agent.setValue(T_N1_C1, 9911);
 		agent.setValue(T_N1_C2, 9912);
+	
 		agent.setValue(T_N1_C3, 9912);
 
 		agent.setValue(T_N2_C1, 9921);
 		agent.setValue(T_N2_C2, 9922);
 		agent.setValue(T_N2_C3, 9923);
 
-		agent.setValue(CURRENT_CLOUD  , C1);
-		agent.setValue(CURRENT_NETWORK, N1);
-
-		s.addObject(agent);
-		
-		return s;
-	}
-	
-	public static State getPolicyTestState(Domain domain){
-		State s = new MutableState();
-		ObjectInstance agent = new MutableObjectInstance(domain.getObjectClass(CLASSAGENT), "agent0");
-		
-		agent.setValue(D_N1_C1, 220);
-		agent.setValue(D_N1_C2, 520);
-		agent.setValue(D_N1_C3, 10000);
-
-		agent.setValue(D_N2_C1, 10000);
-		agent.setValue(D_N2_C2, 10000);
-		agent.setValue(D_N2_C3, 10000);
-		
-		
-		agent.setValue(T_N1_C1, 1);
-		agent.setValue(T_N1_C2, 1);
-		agent.setValue(T_N1_C3, 1);
-
-		agent.setValue(T_N2_C1, 1);
-		agent.setValue(T_N2_C2, 1);
-		agent.setValue(T_N2_C3, 1);
-
-		
 		agent.setValue(CURRENT_CLOUD  , C1);
 		agent.setValue(CURRENT_NETWORK, N1);
 
@@ -377,7 +349,7 @@ public class CloudWorld implements DomainGenerator{
 			this.nigative_Reward = nigative_Reward;
 		}
 		@Override
-		// s and a are the state and action in from the previous time epochs, spirme is the currnet state
+		// s and a are the state and action in from the previous time epochs, spirme is the current state
 		// so we can have the reward for the tuples  (state action state^prime) 
 		public double reward(State s, GroundedAction a, State sprime) {
 			
@@ -389,25 +361,32 @@ public class CloudWorld implements DomainGenerator{
 			String mDelay 		= DELAY 		+ mCurrentNetwork + mCurrentCloud;
 			String mThroughput 	= THROUGHPUT 	+ mCurrentNetwork + mCurrentCloud;
 			
+			
+			int delay_C2 		= agent.getIntValForAttribute(D_N1_C2);
+			int throughput_C2 	= agent.getIntValForAttribute(T_N1_C2);
+			
 			int delay 		= agent.getIntValForAttribute(mDelay);
 			int throughput 	= agent.getIntValForAttribute(mThroughput);
+			
+			//if(delay == 60 && throughput == 70 && delay_C2 == 230 && throughput_C2 == 30){return 1;}else{return 0;}
 			
 			double delayReward 		= calcDelayReward(delay);
 			double throughputReward = calcThroughputReward(throughput);
 			
 			double reward = (weight) * delayReward + (1.0 - weight ) * throughputReward;
-
 			
 			if(DEBUG){
 				System.out.println("REWARD___"+ reward);
 			}
 			return reward;
+			
 		}
 		// calculate the delay reward 
+		
 		private double calcDelayReward(int delay){
 			// if the delay is smaller than the minimum
 			if(delay <= min_D){
-				return 1;
+				return 0;
 			}
 			// if the delay is bigger than the maximum allowed delay
 			if(delay >= max_D){
@@ -428,7 +407,7 @@ public class CloudWorld implements DomainGenerator{
 			}
 			// if the throughput is bigger than the maximum 
 			if(throughput >= max_T){
-				return 1;
+				return nigative_Reward;
 			}
 			// if the delay is between minimum and maximum
 			if(min_T < throughput && throughput < max_T){

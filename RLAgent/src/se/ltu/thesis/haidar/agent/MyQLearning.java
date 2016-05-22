@@ -33,6 +33,7 @@ import burlap.oomdp.statehashing.HashableStateFactory;
 import javax.management.RuntimeErrorException;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -210,8 +211,6 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 		this.QLInit(domain, gamma, hashingFactory, qInit, learningRate, learningPolicy, maxEpisodeSize);
 	}
 	
-	
-	
 	/**
 	 * Initializes the algorithm. By default the agent will only save the last learning episode and a call to the {@link #planFromState(State)} method
 	 * will cause the valueFunction to use only one episode for planning; this should probably be changed to a much larger value if you plan on using this
@@ -278,7 +277,6 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 	public void setQInitFunction(ValueFunctionInitialization qInit){
 		this.qInitFunction = qInit;
 	}
-	
 	
 	/**
 	 * Sets which policy this agent should use for learning.
@@ -358,17 +356,6 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 		}
 	}
 	
-	
-	
-	
-	
-
-
-
-
-	
-	
-
 	@Override
 	public List<QValue> getQs(State s) {
 		return this.getQs(this.stateHash(s));
@@ -401,13 +388,7 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 		QLearningStateNode node = this.getStateNode(s);
 
 		a = (GroundedAction)AbstractObjectParameterizedGroundedAction.Helper.translateParameters(a, s.s, node.s.s);
-
-		//legacy method
-//		if(a.params.length > 0 && !this.domain.isObjectIdentifierDependent() && a.parametersAreObjects()){
-//			Map<String, String> matching = s.s.getObjectMatchingTo(node.s.s, false);
-//			a = this.translateAction(a, matching);
-//		}
-		
+	
 		for(QValue qv : node.qEntry){
 			if(qv.a.equals(a)){
 				return qv;
@@ -479,11 +460,10 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 		if(this.rf == null || this.tf == null){
 			throw new RuntimeException("QLearning (and its subclasses) cannot execute planFromState because the reward function and/or terminal function for planning have not been set. Use the initializeForPlanning method to set them.");
 		}
-		/////////////////////////////////////////////
-		////////////// This is my env////////////////
-		/////////////////////////////////////////////
-		MyEnve env = new MyEnve(this.domain, this.rf, this.tf, initialState);
-
+		///////////////////////////////////////////////////////////////////////
+		///////////////////////////This is my env//////////////////////////////
+		MyEnve env = new MyEnve(this.domain, this.rf, this.tf, initialState);//
+		///////////////////////////////////////////////////////////////////////
 		int eCount = 0;
 		do{
 			env.resetEnvironment();
@@ -496,6 +476,11 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 		return new GreedyQPolicy(this);
 
 	}
+	////////////////I added this//////////////////
+	public double getMaxQChangeInLastEpisode(){	//
+		return maxQChangeInLastEpisode;			//
+	}											//
+	//////////////////////////////////////////////
 
 	@Override
 	public EpisodeAnalysis runLearningEpisode(Environment env) {
@@ -541,24 +526,22 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 			else{
 				ea.appendAndMergeEpisodeAnalysis(((Option)action.action).getLastExecutionResults());
 			}
-
-
-
+			
 			double oldQ = curQ.q;
 
 			//update Q-value
 			curQ.q = curQ.q + this.learningRate.pollLearningRate(this.totalNumberOfSteps, curState.s, action) * (r + (discount * maxQ) - curQ.q);
-			//curQ.q = curQ.q + this.learningRate.pollLearningRate(this.totalNumberOfSteps, curState.s, action) * (r + (discount * maxQ));
+			
 			double deltaQ = Math.abs(oldQ - curQ.q);
+			if(r != 0|| curQ.q != 0|| oldQ != 0){
+				int x = 0;
+			}
+			
 			if(deltaQ > maxQChangeInLastEpisode){
 				maxQChangeInLastEpisode = deltaQ;
-			}
-
-			//move on polling environment for its current state in case it changed during processing
+				}	//move on polling environment for its current state in case it changed during processing
 			curState = this.stateHash(env.getCurrentObservation());
 			this.totalNumberOfSteps++;
-
-
 		}
 
 		if(episodeHistory.size() >= numEpisodesToStore){
@@ -569,8 +552,6 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 		return ea;
 
 	}
-
-
 
 	public EpisodeAnalysis getLastLearningEpisode() {
 		return episodeHistory.getLast();

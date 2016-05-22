@@ -98,15 +98,15 @@ public class SqlStatistics {
 			+ ") VALUES(?,?,?,?,?)";
 	
 	public void insertNewTuple(double mEpsilon, double mLearningRate,
-			double mDisscountFactor,double[] mReward){
+			double mDisscountFactor,Double[] mReward){
 		PreparedStatement mStatement = null;
 		try {
 			mStatement = mConnection.prepareStatement(INSERT_INTO_TUPLE, Statement.RETURN_GENERATED_KEYS);
 			mStatement.setNull	(1, java.sql.Types.NULL	);
 			mStatement.setInt	(2, mTestID				);
-			mStatement.setDouble(3, mEpsilon			);
-			mStatement.setDouble(4, mLearningRate		);
-			mStatement.setDouble(5, mDisscountFactor	);
+			mStatement.setDouble(3, mEpsilon);
+			mStatement.setDouble(4, mLearningRate);
+			mStatement.setDouble(5, mDisscountFactor);
 			mStatement.executeUpdate();
 			
 			
@@ -122,7 +122,7 @@ public class SqlStatistics {
 	public static final String INSERT_INTO_REWARD = "INSERT INTO "+REWARD_TABLE
 			+"("+ REWARD_ID+","+ TUPLE_ID+","+TEST_ID+","+EPISODE_NUMBER+","+REWARD
 			+ ") VALUES(?,?,?,?,?)";
-	public void insertReward(int mTupleID, double[] mReward){
+	public void insertReward(int mTupleID, Double[] mReward){
 		PreparedStatement mStatement = null;
 		try {
 			mStatement = mConnection.prepareStatement(INSERT_INTO_REWARD);
@@ -130,8 +130,8 @@ public class SqlStatistics {
 				mStatement.setNull	( 1	, java.sql.Types.NULL);
 				mStatement.setInt	( 2 , mTupleID);
 				mStatement.setInt	( 3 , mTestID);
-				mStatement.setInt	( 4 , i+1);
-				mStatement.setDouble( 5 , mReward[i]);
+				mStatement.setInt	( 4 , i);
+				mStatement.setDouble( 5 , Math.round(mReward[i] * 1000000.0) / 1000000.0);
 				mStatement.addBatch();
 			}
 			mStatement.executeBatch();
@@ -172,7 +172,6 @@ public class SqlStatistics {
 				mMap.put(EPSILON, 			mEpsilon);
 				mMap.put(LEARNING_RATE, 	mLearningRate);
 				mMap.put(DISCOUNT_FACTOR, 	mDiscountFactor);
-				System.out.println(mMap.toString());
 			}
 			
 		} catch (SQLException e) {
@@ -280,7 +279,7 @@ public class SqlStatistics {
 			return mRewardMap;
 		}
 		public double getReward(int episode){
-			return mRewardArray[episode-1];
+			return mRewardArray[episode];
 		}
 		private void createArray(){
 			mRewardArray = new double[mRewardMap.size()];
@@ -289,9 +288,8 @@ public class SqlStatistics {
 					.iterator();
 			while (mIterator.hasNext()) {
 				Entry<Integer, Double> mEntry = mIterator.next();
-				// the keys in the map represent the episode number and they start from 1
 				// the map is Tree map
-				mRewardArray[mEntry.getKey()-1] = mEntry.getValue();
+				mRewardArray[mEntry.getKey()] = mEntry.getValue();
 			}
 		}
 		public String toString(){

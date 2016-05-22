@@ -26,7 +26,7 @@ import burlap.oomdp.core.states.State;
  */
 public class MyEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 
-	protected QFunction qplanner;
+	protected QFunction 				qplanner;
 	protected double					epsilon;
 	protected Random 					rand;
 	
@@ -88,25 +88,21 @@ public class MyEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 		
 		
 		double roll = rand.nextDouble();
-
-		if(roll <= epsilon){
-			int actionNumber  = qValues.size();
-			for(int i = 0; i < actionNumber ; i++){
-				AbstractGroundedAction ga = qValues.get(i).a;
-				int occurrence = mExploreFunction.getOccurrence(s, ga);
-				if(occurrence == 0){
-					return AbstractObjectParameterizedGroundedAction.Helper.translateParameters(ga, qValues.get(i).s, s);
-				}
-			}
-		}
-		// The original method
-		/*
+		////////////////////////////////////////////////////////////////////
 		if(roll <= epsilon){
 			int selected = rand.nextInt(qValues.size());
-			AbstractGroundedAction ga = qValues.get(selected).a;
-			return AbstractObjectParameterizedGroundedAction.Helper.translateParameters(ga, qValues.get(selected).s, s);
-		}*/
-
+				AbstractGroundedAction ga = qValues.get(selected).a;
+				int occurrence = mExploreFunction.getOccurrence(s, ga);
+				
+				// Look on how many times this action have been taken from this state
+				// because we don't have a transition matrix and our world is stochastic we take the same action
+				// from the same state many times. After 10 times for example the q value associated with this action
+				// will be a good indication on how good or bad this action's result is.
+				if(occurrence < 10){
+					return AbstractObjectParameterizedGroundedAction.Helper.translateParameters(ga, qValues.get(selected).s, s);
+		/////////////////////////////////////////////////////////////////////		
+			}
+		}
 		
 		List <QValue> maxActions = new ArrayList<QValue>();
 		maxActions.add(qValues.get(0));

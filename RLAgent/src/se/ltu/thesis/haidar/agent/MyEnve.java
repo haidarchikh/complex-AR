@@ -23,12 +23,6 @@ import burlap.oomdp.singleagent.environment.TaskSettableEnvironment;
 
 public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment, EnvironmentServerInterface{
 
-	public static final int DELAY_MEAN = 100; // ms
-	public static final int THROUGHPUT_MEAN = 40; // Mbps
-	
-	// N1 : WiFI , N2 : 4G
-	// C1 : Local, C2 : Cloud1 , C3 : Cloud2 
-	
 	
 	private boolean allowActionFromTerminalStates = false;
 	
@@ -48,9 +42,12 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 	protected double lastReward = 0.;
 	
 	protected List<EnvironmentObserver> observers = new LinkedList<EnvironmentObserver>();
+	//////////////////////////////////////////
+	private StateUpdater mUpdater;			//
+	private Map<Integer, JSONObject> mData;	//
+	//////////////////////////////////////////
 	
-	private StateUpdater mUpdater;
-	private Map<Integer, JSONObject> mData;
+	
 	
 	public MyEnve(Domain domain, RewardFunction rf, TerminalFunction tf, State initialState) {
 		this.domain = domain;
@@ -59,17 +56,12 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 		this.stateGenerator = new ConstantStateGenerator(initialState);
 		this.curState = initialState;
 		
-		// for the state
-		mUpdater = new StateUpdater();
-		mUpdater.loadDataFromFile();
-		mData = mUpdater.getData();
+		//////////////////////////////////////////////////////
+		////////////////// for the state//////////////////////
+		mUpdater = new StateUpdater();						//
+		mData = mUpdater.loadDataFromFile(StateUpdater.FILE_PATH_DATA2);	//
+		//////////////////////////////////////////////////////
 	}
-
-	@Override
-	public State getCurrentObservation() {
-		return this.curState.copy();
-	}
-	
 
 	@Override
 	public EnvironmentOutcome executeAction(GroundedAction ga) {
@@ -89,7 +81,8 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 			///////////////////////////////////////////////////////////
 			// here I can plug in my external data to the "nextState"//
 			///////////////////////////////////////////////////////////
-			nextState = getNetxStateValues(nextState);
+			getNetxStateValues(nextState);/////////////////////////////
+			///////////////////////////////////////////////////////////
 			this.lastReward = this.rf.reward(this.curState, simGA, nextState);
 		}
 		else{
@@ -115,21 +108,23 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 		for(EnvironmentObserver observer : this.observers){
 			observer.observeEnvironmentReset(this);
 		}
-		///////////////////////////////
+		//////////////////////////////
 		// here I can rest the input//
 		//////////////////////////////
-		timeEpoch = 0;
+			this.timeEpoch = 0;	//////
+		//////////////////////////////
 	}
-	private int timeEpoch = 0;
-	private JSONObject mState;
-	private State getNetxStateValues(State nextState){
-		State temp = nextState.copy();
-		ObjectInstance agent = temp.getFirstObjectOfClass(CloudWorld.CLASSAGENT);
-		//System.out.println(mDataTable);
-		mState = mData.get(timeEpoch);
+	////////////////////////////////////////////////////////////////////////
+	private int timeEpoch;
+	private void getNetxStateValues(State nextState){
+		
+		ObjectInstance agent = nextState.getFirstObjectOfClass(CloudWorld.CLASSAGENT);
+		
+		JSONObject mState = mData.get(timeEpoch);
 		timeEpoch++;
 		agent.setValue(CloudWorld.D_N1_C1, mState.get(CloudWorld.D_N1_C1));
 		agent.setValue(CloudWorld.D_N1_C2, mState.get(CloudWorld.D_N1_C2));
+
 		agent.setValue(CloudWorld.D_N1_C3, mState.get(CloudWorld.D_N1_C3));
 		
 		agent.setValue(CloudWorld.D_N2_C1, mState.get(CloudWorld.D_N2_C1));
@@ -139,22 +134,26 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 		
 		agent.setValue(CloudWorld.T_N1_C1, mState.get(CloudWorld.T_N1_C1));
 		agent.setValue(CloudWorld.T_N1_C2, mState.get(CloudWorld.T_N1_C2));
+
 		agent.setValue(CloudWorld.T_N1_C3, mState.get(CloudWorld.T_N1_C3));
 		
 		agent.setValue(CloudWorld.T_N2_C1, mState.get(CloudWorld.T_N2_C1));
 		agent.setValue(CloudWorld.T_N2_C2, mState.get(CloudWorld.T_N2_C2));
 		agent.setValue(CloudWorld.T_N2_C3, mState.get(CloudWorld.T_N2_C3));		
 		
-		// To test without terminal state
-		if(mState.getInt(CloudWorld.D_N1_C1)== -1){timeEpoch = 0;}
-		return temp;
 	}
+	////////////////////////////////////////////////////////////////////////
 	@Override
 	public void setCurStateTo(State s) {
 		if(this.stateGenerator == null){
 		   this.stateGenerator = new ConstantStateGenerator(s);
 		}
 		this.curState = s;
+	}
+	
+	@Override
+	public State getCurrentObservation() {
+		return this.curState.copy();
 	}
 	
 	@Override

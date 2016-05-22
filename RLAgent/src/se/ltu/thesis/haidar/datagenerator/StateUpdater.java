@@ -29,8 +29,13 @@ public class StateUpdater {
 	public static final double THROUGHPUT_VARIANCE = 5;
 	public static final double ROUND_THROUGHPUT_TO = 10;
 
-	public static final String SAMPLE_COUNT = "sample count";
-	public static final String FILE_PATH = "outputData/samplesNew.json";
+	public static final String SAMPLE_COUNT 	= "sample count";
+	
+	public static final String FILE_PATH_DATA1	= "datasets/data1/data1.json";
+	
+	public static final String FILE_PATH_DATA2	= "datasets/data2/data2.json";
+	
+	
 
 	private Map<Integer, JSONObject> mData = new TreeMap<>();
 
@@ -58,14 +63,13 @@ public class StateUpdater {
 	public static void main(String[] args){
 		
 		StateUpdater mUpdater = new StateUpdater();
-		mUpdater.writeToFile(FILE_PATH);
-	}
-	
-	public Map<Integer, JSONObject> getData() {
-		return mData;
+		mUpdater.initiateGenerators();
+		mUpdater.dataSet2ToGenerators();
+		
+		mUpdater.dumpToFile(FILE_PATH_DATA2);
 	}
 
-	private void writeToFile(String path) {
+	private void dumpToFile(String path) {
 		File f = (new File(path)).getParentFile();
 		if (f != null) {
 			f.mkdirs();
@@ -90,13 +94,14 @@ public class StateUpdater {
 			e.printStackTrace();
 		}
 	}
-	public void loadDataFromFile(){
+
+	public Map<Integer, JSONObject> loadDataFromFile(String path){
 		JSONObject	 	mJSON 	= null;
 		String 			line	= null;
 		BufferedReader 	br		= null;
 		
 		try {
-			br 		= new BufferedReader(new FileReader(FILE_PATH));
+			br 		= new BufferedReader(new FileReader(path));
 			line 	= br.readLine();
 			
 			while(line != null){
@@ -108,6 +113,7 @@ public class StateUpdater {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return mData;
 	}
 
 	private JSONObject getDataSample(int sampleNum) {
@@ -132,6 +138,9 @@ public class StateUpdater {
 	}
 
 	public StateUpdater() {
+		
+	}
+	public void initiateGenerators(){
 		D_N1_C1 = new DataGenerator();
 		D_N1_C2 = new DataGenerator();
 		D_N1_C3 = new DataGenerator();
@@ -148,8 +157,8 @@ public class StateUpdater {
 		T_N2_C2 = new DataGenerator();
 		T_N2_C3 = new DataGenerator();
 		
-		setupUpdaterAgentTestPareto();
 	}
+	
 
 	private void addConstantDelay(DataGenerator mG) {
 		mG.addGaussianPlan(COUNT_ALL, CONSTANT_DELAY, 0, ROUND_DELAY_TO);
@@ -159,7 +168,7 @@ public class StateUpdater {
 		mG.addGaussianPlan(COUNT_ALL, CONSTANT_THROUGHPUT, 0,
 				ROUND_THROUGHPUT_TO);
 	}
-	private void setupUpdaterAgentTestPareto() {
+	private void dataSet1ToGenerators() {
 		// Count , Mean , Variance , RoundTO
 		// D_N1_C1
 		D_N1_C1.addParetoPlan(COUNT, 40, PARETO_SHAPE, ROUND_DELAY_TO);
@@ -217,6 +226,74 @@ public class StateUpdater {
 		T_N1_C2.addParetoPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
 		T_N1_C2.addParetoPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
 		T_N1_C2.addParetoPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+
+		// addConstantThroughput(T_N1_C1);
+		// addConstantThroughput(T_N1_C2);
+		addConstantThroughput(T_N1_C3);
+
+		addConstantThroughput(T_N2_C1);
+		addConstantThroughput(T_N2_C2);
+		addConstantThroughput(T_N2_C3);
+	}
+	
+	private void dataSet2ToGenerators() {
+		// Count , Mean , Variance , RoundTO
+		// D_N1_C1
+		D_N1_C1.addParetoPlan(COUNT, 40, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C1.addParetoPlan(COUNT, 40, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C1.addParetoPlan(COUNT, 40, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C1.addParetoPlan(COUNT, 40, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C1.addParetoPlan(COUNT, 300, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C1.addParetoPlan(COUNT, 300, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C1.addParetoPlan(COUNT, 300, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C1.addParetoPlan(COUNT, 300, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C1.addParetoPlan(COUNT, 300, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C1.addParetoPlan(COUNT, 300, PARETO_SHAPE, ROUND_DELAY_TO);
+		// D_N1_C2
+		D_N1_C2.addParetoPlan(COUNT, 200, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C2.addParetoPlan(COUNT, 200, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C2.addParetoPlan(COUNT, 200, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C2.addParetoPlan(COUNT, 200, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C2.addParetoPlan(COUNT, 200, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C2.addParetoPlan(COUNT, 50, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C2.addParetoPlan(COUNT, 50, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C2.addParetoPlan(COUNT, 50, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C2.addParetoPlan(COUNT, 50, PARETO_SHAPE, ROUND_DELAY_TO);
+		D_N1_C2.addParetoPlan(COUNT, 50, PARETO_SHAPE, ROUND_DELAY_TO);
+
+		// D_N1_C3
+		addConstantDelay(D_N1_C3);
+
+		addConstantDelay(D_N2_C1);
+		addConstantDelay(D_N2_C2);
+		addConstantDelay(D_N2_C3);
+		// ////////////////////////////////////////////////////////////
+		// //////////////////////// Throughput ////////////////////////
+		// ////////////////////////////////////////////////////////////
+
+		// D_N1_C1
+		T_N1_C1.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C1.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C1.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C1.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C1.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C1.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C1.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C1.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C1.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C1.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		// T_N1_C2
+		T_N1_C2.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C2.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C2.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C2.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C2.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C2.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
+		T_N1_C2.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C2.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C2.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C2.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
+		T_N1_C2.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
 
 		// addConstantThroughput(T_N1_C1);
 		// addConstantThroughput(T_N1_C2);
@@ -288,162 +365,6 @@ public class StateUpdater {
 
 		// addConstantThroughput(T_N1_C1);
 		// addConstantThroughput(T_N1_C2);
-		addConstantThroughput(T_N1_C3);
-
-		addConstantThroughput(T_N2_C1);
-		addConstantThroughput(T_N2_C2);
-		addConstantThroughput(T_N2_C3);
-	}
-
-	private void setupUpdater3() {
-		// Count , Mean , Variance , RoundTO
-		// D_N1_C1
-		D_N1_C1.addGaussianPlan(COUNT, 40, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 40, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 40, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 40, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 40, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		// D_N1_C2
-		D_N1_C2.addGaussianPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 40, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 40, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 40, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 40, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 40, DELAY_VARIANCE, ROUND_DELAY_TO);
-
-		// D_N1_C3
-		addConstantDelay(D_N1_C3);
-
-		addConstantDelay(D_N2_C1);
-		addConstantDelay(D_N2_C2);
-		addConstantDelay(D_N2_C3);
-		// ////////////////////////////////////////////////////////////
-		// //////////////////////// Throughput ////////////////////////
-		// ////////////////////////////////////////////////////////////
-
-		// D_N1_C1
-		T_N1_C1.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C1.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C1.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C1.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C1.addGaussianPlan(COUNT, 50, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C1.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C1.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE, ROUND_THROUGHPUT_TO);
-		T_N1_C1.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C1.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C1.addGaussianPlan(COUNT, 20, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		// T_N1_C2
-		T_N1_C2.addGaussianPlan(COUNT, 15, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C2.addGaussianPlan(COUNT, 15, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C2.addGaussianPlan(COUNT, 15, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C2.addGaussianPlan(COUNT, 15, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C2.addGaussianPlan(COUNT, 15, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C2.addGaussianPlan(COUNT, 15, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C2.addGaussianPlan(COUNT, 60, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C2.addGaussianPlan(COUNT, 60, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C2.addGaussianPlan(COUNT, 60, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C2.addGaussianPlan(COUNT, 60, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-		T_N1_C2.addGaussianPlan(COUNT, 60, THROUGHPUT_VARIANCE,	ROUND_THROUGHPUT_TO);
-
-		// addConstantThroughput(T_N1_C1);
-		// addConstantThroughput(T_N1_C2);
-		addConstantThroughput(T_N1_C3);
-
-		addConstantThroughput(T_N2_C1);
-		addConstantThroughput(T_N2_C2);
-		addConstantThroughput(T_N2_C3);
-	}
-
-	private void setupUpdater2() {
-		// Count , Mean , Variance , RoundTO
-		// D_N1_C1
-		D_N1_C1.addGaussianPlan(COUNT, 70, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 70, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 70, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 70, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 70, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		// D_N1_C2
-		D_N1_C2.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 300, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 70, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 70, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 70, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 70, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 70, DELAY_VARIANCE, ROUND_DELAY_TO);
-
-		// D_N1_C3
-		addConstantDelay(D_N1_C3);
-
-		addConstantDelay(D_N2_C1);
-		addConstantDelay(D_N2_C2);
-		addConstantDelay(D_N2_C3);
-		// ////////////////////////////////////////////////////////////
-		// //////////////////////// Throughput ////////////////////////
-		// ////////////////////////////////////////////////////////////
-
-		addConstantThroughput(T_N1_C1);
-		addConstantThroughput(T_N1_C2);
-		addConstantThroughput(T_N1_C3);
-
-		addConstantThroughput(T_N2_C1);
-		addConstantThroughput(T_N2_C2);
-		addConstantThroughput(T_N2_C3);
-	}
-
-	private void setupUpdater1() {
-		// Count , Mean , Variance , RoundTO
-		// D_N1_C1
-		D_N1_C1.addGaussianPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 400, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 400, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 100, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 150, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 250, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C1.addGaussianPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
-		// D_N1_C2
-		D_N1_C2.addGaussianPlan(COUNT, 150, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 200, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 180, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 160, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
-		D_N1_C2.addGaussianPlan(COUNT, 500, DELAY_VARIANCE, ROUND_DELAY_TO);
-
-		// D_N1_C3
-		addConstantDelay(D_N1_C3);
-
-		addConstantDelay(D_N2_C1);
-		addConstantDelay(D_N2_C2);
-		addConstantDelay(D_N2_C3);
-		// ////////////////////////////////////////////////////////////
-		// //////////////////////// Throughput ////////////////////////
-		// ////////////////////////////////////////////////////////////
-
-		addConstantThroughput(T_N1_C1);
-		addConstantThroughput(T_N1_C2);
 		addConstantThroughput(T_N1_C3);
 
 		addConstantThroughput(T_N2_C1);

@@ -15,23 +15,6 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		BigDecimal mStep = new BigDecimal("0.5");
-		int pointNum = 1;
-
-		for (BigDecimal mLearningRate = BigDecimal.ZERO; mLearningRate
-				.compareTo(BigDecimal.ONE) <= 0; mLearningRate = mLearningRate
-				.add(mStep)) {
-
-			for (BigDecimal mDiscountFactor = BigDecimal.ZERO; mDiscountFactor
-					.compareTo(BigDecimal.ONE) <= 0; mDiscountFactor = mDiscountFactor
-					.add(mStep)) {
-				
-				System.out.println(pointNum+ ", learning : "+ mLearningRate.doubleValue()+ 
-						" discount : "+ mDiscountFactor.doubleValue());
-				pointNum++;
-
-			}
-		}
+		
 	}
-
 }

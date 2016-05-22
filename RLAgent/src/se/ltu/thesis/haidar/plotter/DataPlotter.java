@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
@@ -22,9 +23,12 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
+import org.json.JSONObject;
 
 import cern.jet.random.Normal;
+import se.ltu.thesis.haidar.agent.CloudWorld;
 import se.ltu.thesis.haidar.datagenerator.DataGenerator;
+import se.ltu.thesis.haidar.datagenerator.StateUpdater;
 import se.ltu.thesis.haidar.datagenerator.DataGenerator.GaussianGenerator;
 import se.ltu.thesis.haidar.datagenerator.DataGenerator.ParetoGenerator;
 
@@ -36,37 +40,31 @@ import se.ltu.thesis.haidar.datagenerator.DataGenerator.ParetoGenerator;
 @SuppressWarnings("serial")
 public class DataPlotter extends ApplicationFrame {
 
-	/**
-	 * A demonstration application showing an XY series containing a null value.
-	 *
-	 * @param title
-	 *            the frame title.
-	 */
 	
 	public DataPlotter(final String title) {
 
 		super(title);
 		
-		XYDataset dataset = plotFreqBoth();
-		JFreeChart chart = freqChart(dataset);
+		XYDataset dataset = plotCDF();
+		JFreeChart chart = cdfChart(dataset);
 		
 		final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
         setContentPane(chartPanel);
 		
-
+        /*
         GradientPaint gp1 = new GradientPaint(1.0f, 2.0f, Color.black, 3.0f,
                 4.0f, Color.BLACK);
 		
         XYPlot mPlot = chart.getXYPlot();
         mPlot.setRangeAxisLocation(AxisLocation.BOTTOM_OR_LEFT);
-
+        
         XYTextAnnotation annotation1 = new XYTextAnnotation(" μ = 3, σ\u00B2  = 1.5 ", 2.0, 0.6);
         annotation1.setFont(new Font("SansSerif", Font.PLAIN, 11));
         annotation1.setBackgroundPaint(new Color(255 ,120 ,120));
         annotation1.setPaint(gp1);
         mPlot.addAnnotation(annotation1);
-        
+        */
         /*
         XYTextAnnotation annotation2 = new XYTextAnnotation(" \u03B1 = 4, Scale = 50 ", 70, 0.035);
         annotation2.setFont(new Font("SansSerif", Font.PLAIN, 11));
@@ -107,6 +105,13 @@ public class DataPlotter extends ApplicationFrame {
 	}
 	// To create a frequency domain chart, you can change the distribution used
 	private JFreeChart freqChart(XYDataset dataset){
+		JFreeChart chart = ChartFactory.createXYLineChart("Probability distribution",
+				"x", "P(X=x)", dataset,
+				PlotOrientation.VERTICAL, true, true, false);
+		return chart;
+	}
+	
+	private JFreeChart cdfChart(XYDataset dataset){
 		JFreeChart chart = ChartFactory.createXYLineChart("Cumulative Distribution Function (CDF)",
 				"x", "CDF", dataset,
 				PlotOrientation.VERTICAL, true, true, false);
@@ -151,23 +156,39 @@ public class DataPlotter extends ApplicationFrame {
 		return dataset;
 	}
 	
-	private XYDataset plotFreqBoth() {
+	private XYDataset plotCDF() {
+		DataGenerator mG_G= new DataGenerator();
+		mG_G.addGaussianPlan(4000 , 20, 6 , 0.1);
+		final XYSeries mXY_G = getCDFXY("Gaussian CDF", mG_G);
 		
-		int sampleCount_G = 1000000;
-		double mMean 	= 50;
-		double variance = 11;
-		double roundTo_G = 1;
-		DataGenerator mG_G = new DataGenerator();
+		
+		DataGenerator mG_P 	= new DataGenerator();
+		mG_P.addParetoPlan(4000 , 1, 10, 0.1);
+		final XYSeries mXY_P = getCDFXY("Pareto CDF", mG_P);
+		
+		final XYSeriesCollection dataset = new XYSeriesCollection();
+		dataset.addSeries(mXY_G);
+		dataset.addSeries(mXY_P);
+		return dataset;
+	}
+	
+	private XYDataset plotFreq() {
+		
+		int sampleCount_G 	= 1000000;
+		double mMean 		= 50;
+		double variance 	= 11;
+		double roundTo_G 	= 1;
+		DataGenerator mG_G 	= new DataGenerator();
 		mG_G.addGaussianPlan(sampleCount_G , mMean, variance , roundTo_G);
 		
-		final XYSeries mXY_G = getFreqXY("Gaussian CDF", mG_G);
+		final XYSeries mXY_G = getFreqXY("Gaussian distribution", mG_G);
 		
 		
-		int sampleCount_P = 1000000;
-		double mScale 	= 50;
-		double mShape	= 4;
+		int sampleCount_P 	= 1000000;
+		double mScale 		= 50;
+		double mShape		= 4;
 		double roundTo_P 	= 1;
-		DataGenerator mG_P = new DataGenerator();
+		DataGenerator mG_P 	= new DataGenerator();
 		mG_P.addParetoPlan(sampleCount_P , mScale, mShape, roundTo_P);
 		
 		final XYSeries mXY_P = getFreqXY("Pareto distribution", mG_P);
@@ -177,6 +198,7 @@ public class DataPlotter extends ApplicationFrame {
 		dataset.addSeries(mXY_P);
 		return dataset;
 	}
+	
 	
 	private XYSeries getTimeXY(String mName,DataGenerator mG ){
 		final XYSeries mXY = new XYSeries(mName);
@@ -213,7 +235,34 @@ public class DataPlotter extends ApplicationFrame {
 		}
 		return mXY;
 	}
-
+	private XYSeries getCDFXY(String mName,DataGenerator mG){
+		final XYSeries mXY = new XYSeries(mName);
+		TreeMap<Double, Integer> mStatistics  = mG.getStatistics();
+		Iterator<Entry<Double, Integer>> mIterator = mStatistics.entrySet()
+				.iterator();
+		while (mIterator.hasNext()) {
+			Entry<Double, Integer> mEntry = mIterator.next();
+			double sample = mEntry.getKey();
+			
+			// each generator has a different method to get PDF
+			if(mG.getGenerator() instanceof ParetoGenerator){
+				ParetoGenerator m = (ParetoGenerator) mG.getGenerator();
+				ParetoDistribution mPareto = m.getGenerator();
+				double pro = mPareto.cumulativeProbability(sample);
+				if(sample< 100)
+				mXY.add(sample, pro);	
+			}
+			if(mG.getGenerator() instanceof GaussianGenerator){
+				GaussianGenerator m = (GaussianGenerator) mG.getGenerator();
+				Normal mNormal = m.getGenerator();
+				double pro = mNormal.cdf(sample);
+				if(sample< 100)
+				mXY.add(sample, pro);
+			}
+		}
+		return mXY;
+	}
+	
 	public static void main(final String[] args) {
 
 		final DataPlotter demo = new DataPlotter("XY Series Demo");
@@ -222,4 +271,5 @@ public class DataPlotter extends ApplicationFrame {
 		demo.setVisible(true);
 
 	}
+	
 }
