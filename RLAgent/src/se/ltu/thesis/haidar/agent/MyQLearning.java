@@ -26,14 +26,12 @@ import burlap.oomdp.singleagent.GroundedAction;
 import burlap.oomdp.singleagent.RewardFunction;
 import burlap.oomdp.singleagent.environment.Environment;
 import burlap.oomdp.singleagent.environment.EnvironmentOutcome;
-import burlap.oomdp.singleagent.environment.SimulatedEnvironment;
 import burlap.oomdp.statehashing.HashableState;
 import burlap.oomdp.statehashing.HashableStateFactory;
 
 import javax.management.RuntimeErrorException;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -476,7 +474,7 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 		return new GreedyQPolicy(this);
 
 	}
-	////////////////I added this//////////////////
+	//////////////////////////////////////////////
 	public double getMaxQChangeInLastEpisode(){	//
 		return maxQChangeInLastEpisode;			//
 	}											//
@@ -533,9 +531,6 @@ public class MyQLearning extends MDPSolver implements QFunction, LearningAgent, 
 			curQ.q = curQ.q + this.learningRate.pollLearningRate(this.totalNumberOfSteps, curState.s, action) * (r + (discount * maxQ) - curQ.q);
 			
 			double deltaQ = Math.abs(oldQ - curQ.q);
-			if(r != 0|| curQ.q != 0|| oldQ != 0){
-				int x = 0;
-			}
 			
 			if(deltaQ > maxQChangeInLastEpisode){
 				maxQChangeInLastEpisode = deltaQ;

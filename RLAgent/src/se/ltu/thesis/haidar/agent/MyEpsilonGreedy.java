@@ -30,6 +30,7 @@ public class MyEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 	protected double					epsilon;
 	protected Random 					rand;
 	
+	private boolean constantEpsilon;
 	
 	/**
 	 * Initializes with the value of epsilon, where epsilon is the probability of taking a random action.
@@ -46,10 +47,11 @@ public class MyEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 	 * @param planner the QComputablePlanner to use
 	 * @param epsilon the probability of taking a random action.
 	 */
-	public MyEpsilonGreedy(QFunction planner, double epsilon) {
+	public MyEpsilonGreedy(QFunction planner, double epsilon , boolean constantEpsilon) {
 		qplanner = planner;
 		this.epsilon = epsilon;
 		rand = RandomFactory.getMapped(0);
+		this.constantEpsilon = constantEpsilon;
 	}
 
 	
@@ -89,18 +91,21 @@ public class MyEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 		
 		double roll = rand.nextDouble();
 		////////////////////////////////////////////////////////////////////
-		if(roll <= epsilon){
+		if(roll < epsilon){
 			int selected = rand.nextInt(qValues.size());
-				AbstractGroundedAction ga = qValues.get(selected).a;
-				int occurrence = mExploreFunction.getOccurrence(s, ga);
-				
-				// Look on how many times this action have been taken from this state
-				// because we don't have a transition matrix and our world is stochastic we take the same action
-				// from the same state many times. After 10 times for example the q value associated with this action
-				// will be a good indication on how good or bad this action's result is.
-				if(occurrence < 10){
+			AbstractGroundedAction ga = qValues.get(selected).a;
+			if(constantEpsilon){
 					return AbstractObjectParameterizedGroundedAction.Helper.translateParameters(ga, qValues.get(selected).s, s);
-		/////////////////////////////////////////////////////////////////////		
+				}else{
+					
+					int occurrence = mExploreFunction.getOccurrence(s, ga);
+					// Look on how many times this action have been taken from this state
+					// because we don't have a transition matrix and our world is stochastic we take the same action
+					// from the same state many times. After 10 times for example the q value associated with this action
+					// will be a good indication on how good or bad this action's result is.
+					if(occurrence < 4){
+						return AbstractObjectParameterizedGroundedAction.Helper.translateParameters(ga, qValues.get(selected).s, s);
+				}		
 			}
 		}
 		

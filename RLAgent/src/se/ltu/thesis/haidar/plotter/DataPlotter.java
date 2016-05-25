@@ -5,7 +5,10 @@ package se.ltu.thesis.haidar.plotter;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Map.Entry;
@@ -27,6 +30,8 @@ import org.json.JSONObject;
 
 import cern.jet.random.Normal;
 import se.ltu.thesis.haidar.agent.CloudWorld;
+import se.ltu.thesis.haidar.database.SqlStatistics;
+import se.ltu.thesis.haidar.database.SqlStatistics.Tuple;
 import se.ltu.thesis.haidar.datagenerator.DataGenerator;
 import se.ltu.thesis.haidar.datagenerator.StateUpdater;
 import se.ltu.thesis.haidar.datagenerator.DataGenerator.GaussianGenerator;
@@ -45,8 +50,10 @@ public class DataPlotter extends ApplicationFrame {
 
 		super(title);
 		
-		XYDataset dataset = plotCDF();
-		JFreeChart chart = cdfChart(dataset);
+		
+		
+		XYDataset dataset = plotGreedyCDF();
+		JFreeChart chart = greedyCDFChart(dataset);
 		
 		final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -87,6 +94,14 @@ public class DataPlotter extends ApplicationFrame {
         target.setPaint(new Color(222, 222, 255, 128));
         plot.addRangeMarker(target, Layer.BACKGROUND);
 		*/
+	}
+	
+	// To create a delay chart, you can change the distribution used
+	private JFreeChart greedyCDFChart(XYDataset dataset){
+		JFreeChart chart = ChartFactory.createXYLineChart(" CDF of tuples that converge within 1000 learning episodes ",
+				"Tuples", "Episodes", dataset,
+				PlotOrientation.VERTICAL, true, true, false);
+		return chart;
 	}
 
 	// To create a delay chart, you can change the distribution used
@@ -137,6 +152,56 @@ public class DataPlotter extends ApplicationFrame {
 		dataset.addSeries(N1_C2);
 		return dataset;
 	}
+	
+	private XYDataset plotGreedyCDF() {
+		
+		SqlStatistics mS = new SqlStatistics();
+		mS.connect();
+		List<Tuple> mTupleList = null;
+		try {
+			mTupleList = mS.getGreedy(mS);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		final XYSeries mXY = new XYSeries("Tuples CDF");
+		int count = 0;
+		Map<Integer,Integer>  mTuplesMap = new TreeMap<>();
+		for(int i = 0; i< mTupleList.size() ; i++){
+		Tuple mTuple = mTupleList.get(i);
+		
+		double mEpsilon				= mTuple.getEpsilon();
+		double mLearning 			= mTuple.getLearningRate();
+		double mDiscount 			= mTuple.getDiscountFactor();
+		
+		double mGreedyReward 		= mTuple.getGreedyReward();
+		int mEpisodeTillGreedy 	=(int) mTuple.getEpisodeTillGready();
+		if(mGreedyReward == 402.37983){
+			if(!mTuplesMap.containsKey(mEpisodeTillGreedy)){
+				mTuplesMap.put( mEpisodeTillGreedy, 1);	
+			}else{
+				int temp = mTuplesMap.get(mEpisodeTillGreedy);
+				temp ++;
+				mTuplesMap.put(mEpisodeTillGreedy,temp);
+			}
+		}
+		
+		}
+		int mCount = 0;
+		Iterator<Entry<Integer, Integer>> mIterator  = mTuplesMap.entrySet().iterator();;
+		while(mIterator.hasNext()){
+			Entry<Integer, Integer> mEntry = mIterator.next();
+			mCount += mEntry.getValue();
+			mXY.add((int)mCount,(int)mEntry.getKey());
+		}
+		
+		
+		final XYSeriesCollection dataset = new XYSeriesCollection();
+		dataset.addSeries(mXY);
+		return dataset;
+	}
+	
 	// Add a time domain data
 	private XYDataset plotTimePareto() {
 		
@@ -158,7 +223,7 @@ public class DataPlotter extends ApplicationFrame {
 	
 	private XYDataset plotCDF() {
 		DataGenerator mG_G= new DataGenerator();
-		mG_G.addGaussianPlan(4000 , 20, 6 , 0.1);
+		mG_G.addGaussianPlan(4000 , 3, 1.5 , 0.1);
 		final XYSeries mXY_G = getCDFXY("Gaussian CDF", mG_G);
 		
 		
@@ -177,7 +242,7 @@ public class DataPlotter extends ApplicationFrame {
 		int sampleCount_G 	= 1000000;
 		double mMean 		= 50;
 		double variance 	= 11;
-		double roundTo_G 	= 1;
+		double roundTo_G 	= 0.1;
 		DataGenerator mG_G 	= new DataGenerator();
 		mG_G.addGaussianPlan(sampleCount_G , mMean, variance , roundTo_G);
 		
@@ -187,7 +252,7 @@ public class DataPlotter extends ApplicationFrame {
 		int sampleCount_P 	= 1000000;
 		double mScale 		= 50;
 		double mShape		= 4;
-		double roundTo_P 	= 1;
+		double roundTo_P 	= 0.1;
 		DataGenerator mG_P 	= new DataGenerator();
 		mG_P.addParetoPlan(sampleCount_P , mScale, mShape, roundTo_P);
 		
@@ -222,14 +287,14 @@ public class DataPlotter extends ApplicationFrame {
 				ParetoGenerator m = (ParetoGenerator) mG.getGenerator();
 				ParetoDistribution mPareto = m.getGenerator();
 				double pro = mPareto.density(sample);
-				if(sample< 1000)
+				//if(sample< 110)
 				mXY.add(sample, pro);	
 			}
 			if(mG.getGenerator() instanceof GaussianGenerator){
 				GaussianGenerator m = (GaussianGenerator) mG.getGenerator();
 				Normal mNormal = m.getGenerator();
 				double pro = mNormal.pdf(sample);
-				if(sample< 110)
+				//if(sample< 110)
 				mXY.add(sample, pro);
 			}
 		}

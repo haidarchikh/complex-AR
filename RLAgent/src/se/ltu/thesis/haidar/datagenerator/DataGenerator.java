@@ -48,15 +48,37 @@ public class DataGenerator {
 		return mG;
 	}
 	
+
+	// Delay
+	public static final double CONSTANT_DELAY = 10000;
+	public static final double DELAY_VARIANCE = 10;
+	public static final double ROUND_DELAY_TO = 10;
+	
+	public static final double PARETO_SHAPE = 5;
+	
+	// Throughput
+	public static final double CONSTANT_THROUGHPUT = 1;
+	public static final double THROUGHPUT_VARIANCE = 5;
+	public static final double ROUND_THROUGHPUT_TO = 10;
+	
 	
 	public static void main(String[] args){
-		DataGenerator mG = new DataGenerator();
+		DataGenerator T_N2_C2 = new DataGenerator();
 		//mG.addGaussianPlan(100, 100, 10, 10);
 		//mG.addGaussianPlan(100, 2000, 10, 10);
 		
+		T_N2_C2.addGaussianPlan(100, 20, 5,	10);
+		T_N2_C2.addGaussianPlan(100, 20, 5,	10);
+		T_N2_C2.addGaussianPlan(100, 20, 5, 10);
+		T_N2_C2.addGaussianPlan(100, 20, 5,	10);
+		T_N2_C2.addGaussianPlan(100, 20, 5,	10);
+		T_N2_C2.addGaussianPlan(100, 50, 5,	10);
+		T_N2_C2.addGaussianPlan(100, 50, 5,	10);
+		T_N2_C2.addGaussianPlan(100, 50, 5,	10);
+		T_N2_C2.addGaussianPlan(100, 50, 5,	10);
+		T_N2_C2.addGaussianPlan(100, 50, 5,	10);
 		
-		mG.addParetoPlan(1000, 40, 5,10);
-		mG.printStatistics();
+		T_N2_C2.printStatistics();
 	}
 	
 	
@@ -106,8 +128,10 @@ public class DataGenerator {
 		// rounds up and down. 1.4 to 1 and 1.6 to 2
 		public final double round(double sample, double roundTo) {
 			if(roundTo % 1 == 0){
+				// round to an integer
 				return Math.round((sample + roundTo / 2) / roundTo) * roundTo;
 			} else{
+				// round to a double
 				return roundTo * Math.floor(sample / roundTo);
 			}
 		}
@@ -195,7 +219,7 @@ public class DataGenerator {
 				double percentage = (double) occurrence / (double) mSampelCount;
 				percentage *= 100;
 				System.out.println("sample : " + String.format("%.3f", sample)
-						+ ", Occurrence : " + String.format("%02d", occurrence)
+						+ ", Occurrence : " + String.format("%03d", occurrence)
 						+ ", Percentage : " + String.format("%.3f", percentage)
 						+ "%");
 			}

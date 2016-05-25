@@ -22,7 +22,7 @@ public class MyLearningRate implements LearningRate {
 		this.mInitialLearningRate 	= INITIAL_LEARNING_RATE;
 		this.mExploreFunction 		= new ExploreFunction();
 		this.mEngine 				= new DRand();
-		this.mNormal 				= new Normal(20, 6, mEngine);
+		this.mNormal 				= new Normal(3, 0.5, mEngine);
 	}
 	
 	@Override
@@ -52,5 +52,4 @@ public class MyLearningRate implements LearningRate {
 		// TODO Auto-generated method stub
 
 	}
-
 }

@@ -167,8 +167,8 @@ public class CloudWorld implements DomainGenerator{
 		new Migrate(MIGRATE_TO_N1_C2, domain, N1 ,C2);
 		//new Migrate(MIGRATE_TO_N1_C3, domain, N1 ,C3);
 		
-		//new Migrate(MIGRATE_TO_N2_C1, domain, N2 ,C1);
-		//new Migrate(MIGRATE_TO_N2_C2, domain, N2 ,C2);
+		new Migrate(MIGRATE_TO_N2_C1, domain, N2 ,C1);
+		new Migrate(MIGRATE_TO_N2_C2, domain, N2 ,C2);
 		//new Migrate(MIGRATE_TO_N2_C3, domain, N2 ,C3);
 		
 		return domain;
@@ -322,6 +322,8 @@ public class CloudWorld implements DomainGenerator{
 		
 
 	public static class Reward implements RewardFunction{
+		public static final int MAX_DAMPER = 10000;
+		
 		// D : Delay
 		private int min_D;
 		private int max_D;
@@ -330,7 +332,9 @@ public class CloudWorld implements DomainGenerator{
 		private int min_T;
 		private int max_T;
 		
-		private double weight;
+		private double delayWeight;
+		private double thWeight;
+		private double damperWeihgt;
 		
 		private int nigative_Reward;
 		/**
@@ -339,12 +343,16 @@ public class CloudWorld implements DomainGenerator{
 		 * @param min_T The minimum throughput required by an application
 		 * @param max_T The maximum throughput required by an application
 		 * */
-		public Reward(int min_D, int max_D, int min_T, int max_T,int nigative_Reward, double weight){
+		public Reward(int min_D, int max_D, int min_T, int max_T,int nigative_Reward, 
+				double delayWeight, double thWeight,double damperWeight){
 			this.min_D 	= min_D;
 			this.max_D 	= max_D;
 			this.min_T 	= min_T;
 			this.max_T 	= max_T;
-			this.weight = weight;
+			
+			this.delayWeight = delayWeight;
+			this.thWeight = thWeight;
+			this.damperWeihgt = damperWeight;
 			
 			this.nigative_Reward = nigative_Reward;
 		}
@@ -362,31 +370,32 @@ public class CloudWorld implements DomainGenerator{
 			String mThroughput 	= THROUGHPUT 	+ mCurrentNetwork + mCurrentCloud;
 			
 			
-			int delay_C2 		= agent.getIntValForAttribute(D_N1_C2);
-			int throughput_C2 	= agent.getIntValForAttribute(T_N1_C2);
-			
 			int delay 		= agent.getIntValForAttribute(mDelay);
 			int throughput 	= agent.getIntValForAttribute(mThroughput);
 			
-			//if(delay == 60 && throughput == 70 && delay_C2 == 230 && throughput_C2 == 30){return 1;}else{return 0;}
+			double delayReward 		= calcDelayReward(delay				, this.min_D, this.max_D);
+			double throughputReward = calcThroughputReward(throughput	, this.min_T, this.max_T);
 			
-			double delayReward 		= calcDelayReward(delay);
-			double throughputReward = calcThroughputReward(throughput);
+			double delayDamper		= calcDelayReward(delay				, 0, MAX_DAMPER);
+			double throughputDamper = calcThroughputReward(throughput	, 0, MAX_DAMPER);
+
+			double damperreward = (delayDamper + throughputDamper)/2.0;
 			
-			double reward = (weight) * delayReward + (1.0 - weight ) * throughputReward;
-			
+			double reward = delayWeight * delayReward + thWeight * throughputReward
+					+damperWeihgt * damperreward;
+								
 			if(DEBUG){
 				System.out.println("REWARD___"+ reward);
 			}
+			if(reward > 1){reward =1;}
 			return reward;
 			
 		}
-		// calculate the delay reward 
 		
-		private double calcDelayReward(int delay){
+		private double calcDelayReward(int delay, int min_D, int max_D){
 			// if the delay is smaller than the minimum
 			if(delay <= min_D){
-				return 0;
+				return 1;
 			}
 			// if the delay is bigger than the maximum allowed delay
 			if(delay >= max_D){
@@ -399,21 +408,20 @@ public class CloudWorld implements DomainGenerator{
 			return nigative_Reward;
 		}
 		
-		// calculate the throughput reward
-		private double calcThroughputReward(int throughput){
+		private double calcThroughputReward(int throughput, int min_T, int max_T){
 			// if the throughput is smaller than the minimum
 			if(throughput <= min_T){
-				return 0;
+				return nigative_Reward;
 			}
 			// if the throughput is bigger than the maximum 
 			if(throughput >= max_T){
-				return nigative_Reward;
+				return 1;
 			}
 			// if the delay is between minimum and maximum
 			if(min_T < throughput && throughput < max_T){
-				return (double)(max_D - throughput)/(max_D - min_D);
+				return (double)(throughput - min_T)/(max_T - min_T);
 			}
-			return 0;
+			return nigative_Reward;
 		}
 	}
 	public class WallPainter implements StaticPainter{

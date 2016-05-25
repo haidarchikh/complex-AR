@@ -1,9 +1,15 @@
-package se.ltu.thesis.haidar.agent;
+package deprecated;
 
 import java.awt.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+import se.ltu.thesis.haidar.agent.CloudWorld;
+import se.ltu.thesis.haidar.agent.MyEnve;
+import se.ltu.thesis.haidar.agent.MyEpsilonGreedy;
+import se.ltu.thesis.haidar.agent.MyLearningRate;
+import se.ltu.thesis.haidar.agent.MyQLearning;
+import se.ltu.thesis.haidar.agent.CloudWorld.Reward;
 import se.ltu.thesis.haidar.database.SqlStatistics;
 import burlap.behavior.learningrate.LearningRate;
 import burlap.behavior.policy.EpsilonGreedy;
@@ -181,7 +187,7 @@ public class MainBeforeCleaning {
 		LearningRate mLearnig = new MyLearningRate();
 		// ((MyQLearning) agent).setLearningRateFunction(mLearnig);
 
-		agent.setLearningPolicy(new MyEpsilonGreedy(agent, EPSILON));
+		agent.setLearningPolicy(new MyEpsilonGreedy(agent, EPSILON, false));
 
 		agent.setMaxPlaningEpisodeSize(STEPS_IN_EPISODE);
 		agent.setMaxQChangeForPlanningTerminaiton(DELTA_TERMINATION);

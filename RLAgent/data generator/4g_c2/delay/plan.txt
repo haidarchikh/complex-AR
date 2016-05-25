@@ -1,0 +1,10 @@
+D_N2_C2.addParetoPlan(100, 300, 5, 10);
+D_N2_C2.addParetoPlan(100, 300, 5, 10);
+D_N2_C2.addParetoPlan(100, 300, 5, 10);
+D_N2_C2.addParetoPlan(100, 300, 5, 10);
+D_N2_C2.addParetoPlan(100, 300, 5, 10);
+D_N2_C2.addParetoPlan(100, 300, 5, 10);
+D_N2_C2.addParetoPlan(100, 40 , 5, 10);
+D_N2_C2.addParetoPlan(100, 40 , 5, 10);
+D_N2_C2.addParetoPlan(100, 300, 5, 10);
+D_N2_C2.addParetoPlan(100, 40 , 5, 10);

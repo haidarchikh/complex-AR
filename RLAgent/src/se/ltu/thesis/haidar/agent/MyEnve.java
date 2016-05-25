@@ -59,7 +59,7 @@ public class MyEnve implements StateSettableEnvironment, TaskSettableEnvironment
 		//////////////////////////////////////////////////////
 		////////////////// for the state//////////////////////
 		mUpdater = new StateUpdater();						//
-		mData = mUpdater.loadDataFromFile(StateUpdater.FILE_PATH_DATA2);	//
+		mData = mUpdater.loadDataFromFile(StateUpdater.FILE_PATH_DATA3);	//
 		//////////////////////////////////////////////////////
 	}
 

@@ -25,13 +25,13 @@ public class FileDataPlotter extends ApplicationFrame {
 
 		super(title);
 		
-		mData = getFile(StateUpdater.FILE_PATH_DATA2);
+		mData = getFile(StateUpdater.FILE_PATH_DATA3);
 		
-		//XYDataset dataset	= plotThroughput();
-		//JFreeChart chart 	= throughputChart(dataset);
+		XYDataset dataset	= plotThroughput();
+		JFreeChart chart 	= throughputChart(dataset);
 		
-		XYDataset dataset	= plotDelay();
-		JFreeChart chart 	= delayChart(dataset);
+		//XYDataset dataset	= plotDelay();
+		//JFreeChart chart 	= delayChart(dataset);
 		
 		final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -57,9 +57,16 @@ public class FileDataPlotter extends ApplicationFrame {
 		final XYSeries D_N1_C1 = getTimeXY(CloudWorld.D_N1_C1);
 		final XYSeries D_N1_C2 = getTimeXY(CloudWorld.D_N1_C2);
 		
+		final XYSeries D_N2_C1 = getTimeXY(CloudWorld.D_N2_C1);
+		final XYSeries D_N2_C2 = getTimeXY(CloudWorld.D_N2_C2);
+		
 		final XYSeriesCollection dataset = new XYSeriesCollection();
 		dataset.addSeries(D_N1_C1);
 		dataset.addSeries(D_N1_C2);
+		
+		dataset.addSeries(D_N2_C1);
+		dataset.addSeries(D_N2_C2);
+		
 		return dataset;
 	}
 	private XYDataset plotThroughput() {
@@ -67,9 +74,15 @@ public class FileDataPlotter extends ApplicationFrame {
 		final XYSeries T_N1_C1 = getTimeXY(CloudWorld.T_N1_C1);
 		final XYSeries T_N1_C2 = getTimeXY(CloudWorld.T_N1_C2);
 		
+		final XYSeries T_N2_C1 = getTimeXY(CloudWorld.T_N2_C1);
+		final XYSeries T_N2_C2 = getTimeXY(CloudWorld.T_N2_C2);
+		
 		final XYSeriesCollection dataset = new XYSeriesCollection();
 		dataset.addSeries(T_N1_C1);
 		dataset.addSeries(T_N1_C2);
+		
+		dataset.addSeries(T_N2_C1);
+		dataset.addSeries(T_N2_C2);
 		return dataset;
 	}
 	
