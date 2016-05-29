@@ -98,8 +98,8 @@ public class DataPlotter extends ApplicationFrame {
 	
 	// To create a delay chart, you can change the distribution used
 	private JFreeChart greedyCDFChart(XYDataset dataset){
-		JFreeChart chart = ChartFactory.createXYLineChart(" CDF of tuples that converge within 1000 learning episodes ",
-				"Tuples", "Episodes", dataset,
+		JFreeChart chart = ChartFactory.createXYLineChart(" Tuples that converge within 1000 learning episodes ",
+				 "Episodes", "Tuples",dataset,
 				PlotOrientation.VERTICAL, true, true, false);
 		return chart;
 	}
@@ -165,7 +165,7 @@ public class DataPlotter extends ApplicationFrame {
 			e.printStackTrace();
 		}
 		
-		final XYSeries mXY = new XYSeries("Tuples CDF");
+		final XYSeries mXY = new XYSeries("Cumelative Converged Tuples ");
 		int count = 0;
 		Map<Integer,Integer>  mTuplesMap = new TreeMap<>();
 		for(int i = 0; i< mTupleList.size() ; i++){
@@ -193,10 +193,10 @@ public class DataPlotter extends ApplicationFrame {
 		while(mIterator.hasNext()){
 			Entry<Integer, Integer> mEntry = mIterator.next();
 			mCount += mEntry.getValue();
-			mXY.add((int)mCount,(int)mEntry.getKey());
+			mXY.add((int)mEntry.getKey(),(int)mCount);
 		}
 		
-		
+		System.out.println(mCount);
 		final XYSeriesCollection dataset = new XYSeriesCollection();
 		dataset.addSeries(mXY);
 		return dataset;

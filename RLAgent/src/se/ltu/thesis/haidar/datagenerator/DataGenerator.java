@@ -125,13 +125,16 @@ public class DataGenerator {
 				}
 				return mData;
 		}
-		// rounds up and down. 1.4 to 1 and 1.6 to 2
+		// rounds up. 1.0 ,1.4, 1.6 to 2.0
+		// 			. 10  , 16, 19  to 20
 		public final double round(double sample, double roundTo) {
 			if(roundTo % 1 == 0){
 				// round to an integer
+				// if I put floor it will round up and down
 				return Math.round((sample + roundTo / 2) / roundTo) * roundTo;
 			} else{
 				// round to a double
+				// If I put round it will round up and down
 				return roundTo * Math.floor(sample / roundTo);
 			}
 		}

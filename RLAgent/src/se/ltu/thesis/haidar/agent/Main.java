@@ -35,10 +35,10 @@ public class Main {
 
 	public static final double 	EPSILON 			= 1.0;
 	public static final double 	LEARNING_RATE 		= 1.0;
-	public static final double 	DISSCOUNT_FACTOR 	= 0.0;
+	public static final double 	DISSCOUNT_FACTOR 	= 0.1;
 	
 	public static final double 	INITIAL_Q_VALUE 	= 0.0;
-	public static final double 	DELTA_TERMINATION 	= 0.0000;
+	public static final double 	DELTA_TERMINATION 	= 0.01;
 	public static final int 	STEPS_IN_EPISODE 	= 1000;
 	public static final int 	MAX_NUM_OF_EPISODES	= 1000;
 	
@@ -95,7 +95,7 @@ public class Main {
 			System.out.println("Episode :"+ eCount +", max Q Change :" + agent.getMaxQChangeInLastEpisode()+
 					", greedy reward :" + rewardSum);
 			
-			if (rewardSum > 402.3798){break;}
+			if (rewardSum > 402.37){break;}
 			
 		}while(eCount < MAX_NUM_OF_EPISODES /*&& agent.getMaxQChangeInLastEpisode() > DELTA_TERMINATION*/);
 		
@@ -112,8 +112,8 @@ public class Main {
 		MyQLearning agent = new MyQLearning(mDomain, DISSCOUNT_FACTOR,
 		mHashingFactory, INITIAL_Q_VALUE, LEARNING_RATE);
 	 
-		agent.setLearningPolicy(new MyEpsilonGreedy(agent, EPSILON, true));
-		//agent.setLearningPolicy(new MyOracleEpsilonGreedy(agent));
+		//agent.setLearningPolicy(new MyEpsilonGreedy(agent, EPSILON, true));
+		agent.setLearningPolicy(new MyOracleEpsilonGreedy(agent));
 		//MyLearningRate mLearnig = new MyLearningRate(); 
 		//agent.setLearningRateFunction(mLearnig);
 		

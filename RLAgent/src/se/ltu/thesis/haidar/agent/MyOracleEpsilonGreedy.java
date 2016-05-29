@@ -126,7 +126,7 @@ public class MyOracleEpsilonGreedy extends Policy implements SolverDerivedPolicy
 		
 		Double max  = Collections.max(mRewardList);
 		int action = mRewardList.indexOf(max);
-		System.out.println(action);
+		//System.out.println(action);
 		switch (action){
 		case 0 : return action0;
 		case 1 : return action1;
