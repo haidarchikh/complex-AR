@@ -18,7 +18,6 @@ actionSequence: [!action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_clo
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
-  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_2',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
@@ -43,12 +42,13 @@ actionSequence: [!action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_clo
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
-  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
-  !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
+  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
+  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
+  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
@@ -110,7 +110,7 @@ actionSequence: [!action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_clo
   !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2',
   !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2',
   !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2',
-  !action 'migrate_to_4G_cloud_1', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2',
+  !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2',
   !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2',
   !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2',
   !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2',
@@ -144,7 +144,6 @@ actionSequence: [!action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_clo
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
-  !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
@@ -166,7 +165,8 @@ actionSequence: [!action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_clo
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
-  !action 'migrate_to_4G_cloud_1', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_1',
+  !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
+  !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
@@ -269,36 +269,36 @@ actionSequence: [!action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_clo
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_1',
-  !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_2',
+  !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
-  !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_1',
+  !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_1',
-  !action 'migrate_to_4G_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2',
+  !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_2',
-  !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2',
+  !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2',
-  !action 'migrate_to_4G_cloud_1', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_2',
+  !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_1',
-  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_1',
+  !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1',
-  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_1',
-  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
+  !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_2',
+  !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
-  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2',
-  !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_1',
+  !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
+  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
-  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1',
+  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
-  !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_1',
-  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_2',
+  !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
+  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
@@ -330,7 +330,7 @@ actionSequence: [!action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_clo
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
-  !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1',
+  !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2']
 rewardSequence: [0.505005, 0.505005, 0.505, 0.505005, 0.505, 0.30499000000000004,
@@ -340,7 +340,7 @@ rewardSequence: [0.505005, 0.505005, 0.505, 0.505005, 0.505, 0.30499000000000004
   0.505, 0.505005, 0.505005, 0.30499000000000004, 0.505, 0.505, 0.505005, 0.40499500000000005,
   0.30499000000000004, 0.30498500000000006, 0.505005, 0.505005, 0.505, 0.505005, 0.505,
   0.405, 0.505, 0.505005, 0.505005, 0.405, 0.505005, 0.505, 0.505, 0.505, 0.505, 0.405,
-  0.505, 0.505, 0.505, 0.505, 0.00482, 0.505, 0.505005, 0.505005, 0.30499500000000007,
+  0.505, 0.505, 0.505, 0.505, 0.004975, 0.505, 0.505005, 0.505005, 0.30499500000000007,
   0.505, 0.505005, 0.505, 0.505, 0.00498, 0.505, 0.505005, 0.30499000000000004, 0.505,
   0.504995, 0.405, 0.505005, 0.40499500000000005, 0.505005, 0.30499500000000007, 0.505,
   0.10498500000000001, 0.505, 0.505005, 0.30499500000000007, 0.505, 0.505005, 0.505,
@@ -349,22 +349,22 @@ rewardSequence: [0.505005, 0.505005, 0.505, 0.505005, 0.505, 0.30499000000000004
   0.505005, 0.204985, 0.505, 0.505, 0.505, 0.505, 0.505, 0.505005, 0.505005, 0.505005,
   0.40499500000000005, 0.405, 0.505, 0.505005, 0.505, 0.505, 0.505005, 0.505, 0.505,
   0.405, 0.505005, 0.505005, 0.505, 0.505, 0.505005, 0.505005, 0.505005, 0.505, 0.505005,
-  0.505005, 0.405, 0.505005, 0.00484, 0.30499000000000004, 0.504995, 0.505, 0.204985,
+  0.505005, 0.405, 0.505005, 0.00496, 0.30499000000000004, 0.504995, 0.505, 0.204985,
   0.505, 0.505, 0.505, 0.40499, 0.40499500000000005, 0.405, 0.505, 0.30499000000000004,
-  0.505, 0.00485, 0.505005, 0.505005, 0.0049700000000000005, 0.505, 0.30499500000000007,
-  0.505005, 0.505, 0.505005, 0.30499000000000004, 0.30499000000000004, 0.40499500000000005,
-  0.10498500000000001, 0.505005, 0.505005, 0.505, 0.505, 0.505, 0.405, 0.30499000000000004,
-  0.505, 0.505, 0.40499500000000005, 0.405, 0.505, 0.40499500000000005, 0.40499500000000005,
-  0.30499000000000004, 0.505, 0.505005, 0.40499500000000005, 0.30499500000000007,
-  0.40499, 0.505, 0.505, 0.40499500000000005, 0.505005, 0.505005, 0.505005, 0.505005,
-  0.505, 0.505, 0.505005, 0.505, 0.505005, 0.505005, 0.405, 0.505, 0.405, 0.505, 0.505005,
-  0.20499, 0.505005, 0.505005, 0.505005, 0.505, 0.505005, 0.505, 0.505005, 0.40499500000000005,
-  0.505005, 0.30499500000000007, 0.505005, 0.505, 0.505005, 0.505, 0.505005, 0.505,
-  0.405, 0.505, 0.505, 0.505, 0.405, 0.505, 0.505005, 0.505005, 0.405, 0.505, 0.505,
-  0.50501, 0.505, 0.30499000000000004, 0.505005, 0.30499500000000007, 0.405, 0.505,
-  0.204985, 0.505, 0.40499500000000005, 0.505005, 0.505005, 0.505, 0.505005, 0.505,
-  0.505005, 0.505005, 0.40499, 0.505005, 0.505, 0.505005, 0.505, 0.505, 0.505, 0.505005,
-  0.505, 0.30499000000000004, 0.505005, 0.30499500000000007, 0.505005, 0.40499500000000005,
+  0.505, 0.0049700000000000005, 0.505005, 0.505005, 0.0049700000000000005, 0.505,
+  0.30499500000000007, 0.505005, 0.505, 0.505005, 0.30499000000000004, 0.30499000000000004,
+  0.40499500000000005, 0.10498500000000001, 0.505005, 0.505005, 0.505, 0.505, 0.505,
+  0.405, 0.30499000000000004, 0.505, 0.505, 0.40499500000000005, 0.405, 0.505, 0.40499500000000005,
+  0.40499500000000005, 0.30499000000000004, 0.505, 0.505005, 0.40499500000000005,
+  0.30499500000000007, 0.40499, 0.505, 0.505, 0.40499500000000005, 0.505005, 0.505005,
+  0.505005, 0.505005, 0.505, 0.505, 0.505005, 0.505, 0.505005, 0.505005, 0.405, 0.505,
+  0.405, 0.505, 0.505005, 0.20499, 0.505005, 0.505005, 0.505005, 0.505, 0.505005,
+  0.505, 0.505005, 0.40499500000000005, 0.505005, 0.30499500000000007, 0.505005, 0.505,
+  0.505005, 0.505, 0.505005, 0.505, 0.405, 0.505, 0.505, 0.505, 0.405, 0.505, 0.505005,
+  0.505005, 0.405, 0.505, 0.505, 0.50501, 0.505, 0.30499000000000004, 0.505005, 0.30499500000000007,
+  0.405, 0.505, 0.204985, 0.505, 0.40499500000000005, 0.505005, 0.505005, 0.505, 0.505005,
+  0.505, 0.505005, 0.505005, 0.40499, 0.505005, 0.505, 0.505005, 0.505, 0.505, 0.505,
+  0.505005, 0.505, 0.30499000000000004, 0.505005, 0.30499500000000007, 0.505005, 0.40499500000000005,
   0.40499500000000005, 0.505, 0.30499000000000004, 0.30499000000000004, 0.505005,
   0.405, 0.40499500000000005, 0.505, 0.505, 0.30499000000000004, 0.505005, 0.505,
   0.505, 0.505, 0.505, 0.505, 0.405, 0.40499500000000005, 0.505, 0.505, 0.405, 0.505,
@@ -374,7 +374,7 @@ rewardSequence: [0.505005, 0.505005, 0.505, 0.505005, 0.505, 0.30499000000000004
   0.505, 0.505005, 0.505, 0.505005, 0.40499500000000005, 0.505, 0.505, 0.505005, 0.505005,
   0.505005, 0.505005, 0.505, 0.505005, 0.505005, 0.505005, 0.40499500000000005, 0.20499,
   0.405, 0.505, 0.505005, 0.40499500000000005, 0.405, 0.505, 0.505, 0.30499000000000004,
-  0.505005, 0.505005, 0.505005, 0.405, 0.505, 0.004845, 0.505005, 0.505005, 0.504995,
+  0.505005, 0.505005, 0.505005, 0.405, 0.505, 0.004965, 0.505005, 0.505005, 0.504995,
   0.505005, 0.504995, 0.505005, 0.505005, 0.505005, 0.505005, 0.30499500000000007,
   0.30499000000000004, 0.505, 0.505, 0.505, 0.505, 0.505, 0.505, 0.405, 0.505005,
   0.40499500000000005, 0.505005, 0.204985, 0.505, 0.505, 0.505005, 0.20499, 0.505005,
@@ -388,14 +388,14 @@ rewardSequence: [0.505005, 0.505005, 0.505, 0.505005, 0.505, 0.30499000000000004
   0.30499500000000007, 0.505, 0.505, 0.505, 0.405, 0.30499500000000007, 0.505, 0.10498,
   0.505005, 0.40499500000000005, 0.505005, 0.405, 0.505005, 0.30499000000000004, 0.505,
   0.40499500000000005, 0.405, 0.505, 0.505, 0.505005, 0.505, 0.505, 0.505, 0.30499000000000004,
-  0.00481, 0.505, 0.505, 0.10498500000000001, 0.30499000000000004, 0.504995, 0.505,
+  0.00496, 0.505, 0.505, 0.10498500000000001, 0.30499000000000004, 0.504995, 0.505,
   0.505005, 0.505, 0.505, 0.505, 0.505005, 0.505, 0.40499500000000005, 0.505005, 0.505,
   0.10498500000000001, 0.505, 0.505, 0.505, 0.505, 0.505005, 0.505005, 0.505, 0.505005,
   0.505, 0.505, 0.505, 0.505005, 0.505005, 0.004955, 0.10498, 0.505, 0.405, 0.505,
   0.40499500000000005, 0.505005, 0.505005, 0.505, 0.505005, 0.505, 0.505, 0.40499500000000005,
   0.505005, 0.505005, 0.505, 0.40499500000000005, 0.505, 0.405, 0.505005, 0.505, 0.505005,
   0.505, 0.40499, 0.505005, 0.505, 0.30499500000000007, 0.504995, 0.505, 0.505005,
-  0.505, 0.505005, 0.505005, 0.505005, 0.505005, 0.20499, 0.505005, 0.00479, 0.30499000000000004,
+  0.505, 0.505005, 0.505005, 0.505005, 0.505005, 0.20499, 0.505005, 0.00496, 0.30499000000000004,
   0.505, 0.40499500000000005, 0.004945, 0.505, 0.20499, 0.00495, 0.505, 0.40499500000000005,
   0.405, 0.505, 0.40499500000000005, 0.20499, 0.40499500000000005, 0.505005, 0.505005,
   0.405, 0.505, 0.505, 0.405005, 0.405, 0.505005, 0.505, 0.505005, 0.40499500000000005,
@@ -434,17 +434,17 @@ rewardSequence: [0.505005, 0.505005, 0.505, 0.505005, 0.505, 0.30499000000000004
   0.505005, 0.505005, 0.30499500000000007, 0.505005, 0.004865, 0.004825, 0.004845,
   0.004875, 0.00485, 0.00487, 0.00486, 0.00486, 0.00485, 0.00486, 0.004875, 0.00486,
   0.004855, 0.00485, 0.00487, 0.00486, 0.004855, 0.00486, 0.00486, 0.004875, 0.004845,
-  0.004865, 0.004855, 0.00487, 0.004865, 0.004865, 0.00487, 0.004855, 0.004865, 0.00484,
-  0.004865, 0.004855, 0.00486, 0.00485, 0.004845, 0.004875, 0.00486, 0.004855, 0.004855,
-  0.0047799999999999995, 0.004855, 0.00487, 0.004875, 0.004845, 0.00487, 0.00484,
-  0.004855, 0.004875, 0.00485, 0.00485, 0.004865, 0.004875, 0.00486, 0.004845, 0.00485,
-  0.004855, 0.00483, 0.004835, 0.004855, 0.004775, 0.00487, 0.004855, 0.00485, 0.004855,
-  0.004865, 0.004845, 0.004855, 0.004865, 0.004855, 0.004855, 0.00485, 0.00486, 0.00486,
-  0.00486, 0.004865, 0.004825, 0.004855, 0.004845, 0.00485, 0.00486, 0.00483, 0.00487,
-  0.004865, 0.004855, 0.004875, 0.004875, 0.00487, 0.00486, 0.004865, 0.00486, 0.004865,
-  0.00486, 0.00485, 0.00485, 0.004845, 0.00486, 0.00486, 0.00487, 0.0047799999999999995,
-  0.004855, 0.505005, 0.505, 0.30499500000000007, 0.505, 0.505, 0.505005, 0.504995,
-  0.505, 0.505, 0.505, 0.505005, 0.40499500000000005, 0.505, 0.405, 0.505, 0.40499500000000005,
+  0.004865, 0.004855, 0.00487, 0.004865, 0.004865, 0.00487, 0.00487, 0.004865, 0.004845,
+  0.004865, 0.004855, 0.00486, 0.00487, 0.00485, 0.004875, 0.00486, 0.004855, 0.004855,
+  0.0047799999999999995, 0.004855, 0.00487, 0.004875, 0.004875, 0.00487, 0.00484,
+  0.004855, 0.004875, 0.00485, 0.004855, 0.004865, 0.004875, 0.00486, 0.004845, 0.00485,
+  0.004855, 0.00483, 0.004855, 0.004855, 0.004775, 0.00487, 0.004855, 0.00485, 0.004855,
+  0.004865, 0.00485, 0.004855, 0.004865, 0.004855, 0.004855, 0.00485, 0.00486, 0.00486,
+  0.00486, 0.004865, 0.00484, 0.004855, 0.004845, 0.00485, 0.00486, 0.00483, 0.00487,
+  0.004865, 0.004855, 0.004875, 0.004875, 0.00487, 0.00486, 0.004865, 0.004865, 0.004865,
+  0.00486, 0.00485, 0.00485, 0.004845, 0.00486, 0.00486, 0.00487, 0.004865, 0.004855,
+  0.505005, 0.505, 0.30499500000000007, 0.505, 0.505, 0.505005, 0.504995, 0.505, 0.505,
+  0.505, 0.505005, 0.40499500000000005, 0.505, 0.405, 0.505, 0.40499500000000005,
   0.40499500000000005, 0.505005, 0.40499500000000005, 0.505, 0.40499500000000005,
   0.405, 0.405, 0.405, 0.505005, 0.30499500000000007, 0.505, 0.505, 0.505005, 0.505005,
   0.505, 0.20499, 0.505005, 0.505005, 0.40499500000000005, 0.40499500000000005, 0.505,
@@ -454,8 +454,8 @@ rewardSequence: [0.505005, 0.505005, 0.505, 0.505005, 0.505, 0.30499000000000004
   0.505, 0.20499, 0.505, 0.505, 0.505, 0.505, 0.10498, 0.505005, 0.505005, 0.40499500000000005,
   0.30499500000000007, 0.505005, 0.40499500000000005, 0.505, 0.505, 0.505, 0.505005,
   0.505, 0.505005, 0.505, 0.505005, 0.505, 0.505005, 0.10498, 0.505005, 0.505, 0.505005,
-  0.505, 0.505, 0.505, 0.505005, 0.505, 0.20499, 0.505, 0.00485, 0.40499500000000005,
-  0.00475, 0.40499500000000005, 0.10498500000000001, 0.504995, 0.505]
+  0.505, 0.505, 0.505, 0.505005, 0.505, 0.20499, 0.505, 0.00498, 0.40499500000000005,
+  0.0049700000000000005, 0.40499500000000005, 0.10498500000000001, 0.504995, 0.505]
 stateSequence:
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
@@ -1595,7 +1595,7 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '30'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_2}
+    - {attribute: current_cloud, value: _cloud_1}
     - {attribute: current_network, value: WiFI}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
@@ -3001,8 +3001,8 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '30'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_2}
-    - {attribute: current_network, value: 4G}
+    - {attribute: current_cloud, value: _cloud_1}
+    - {attribute: current_network, value: WiFI}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -3267,7 +3267,7 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '30'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_2}
+    - {attribute: current_cloud, value: _cloud_1}
     - {attribute: current_network, value: WiFI}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
@@ -6801,8 +6801,8 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '30'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
-    - {attribute: current_network, value: 4G}
+    - {attribute: current_cloud, value: _cloud_2}
+    - {attribute: current_network, value: WiFI}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -8739,7 +8739,7 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '30'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_2}
+    - {attribute: current_cloud, value: _cloud_1}
     - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
@@ -10012,8 +10012,8 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '20'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_2}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_cloud, value: _cloud_1}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -15903,7 +15903,7 @@ stateSequence:
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
     - {attribute: current_cloud, value: _cloud_2}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -16206,7 +16206,7 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '50'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
+    - {attribute: current_cloud, value: _cloud_2}
     - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
@@ -16244,7 +16244,7 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '50'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
+    - {attribute: current_cloud, value: _cloud_2}
     - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
@@ -16320,7 +16320,7 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '50'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
+    - {attribute: current_cloud, value: _cloud_2}
     - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
@@ -16339,8 +16339,8 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '60'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_cloud, value: _cloud_2}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -16510,8 +16510,8 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '60'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_cloud, value: _cloud_2}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -16625,7 +16625,7 @@ stateSequence:
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
     - {attribute: current_cloud, value: _cloud_2}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -16776,7 +16776,7 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '50'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
+    - {attribute: current_cloud, value: _cloud_2}
     - {attribute: current_network, value: WiFI}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
@@ -16891,7 +16891,7 @@ stateSequence:
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
     - {attribute: current_cloud, value: _cloud_1}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -16928,8 +16928,8 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '60'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
-    - {attribute: current_network, value: 4G}
+    - {attribute: current_cloud, value: _cloud_2}
+    - {attribute: current_network, value: WiFI}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -16948,7 +16948,7 @@ stateSequence:
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
     - {attribute: current_cloud, value: _cloud_1}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -17119,7 +17119,7 @@ stateSequence:
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
     - {attribute: current_cloud, value: _cloud_1}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -17137,8 +17137,8 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '60'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_cloud, value: _cloud_2}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -17175,7 +17175,7 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '60'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_2}
+    - {attribute: current_cloud, value: _cloud_1}
     - {attribute: current_network, value: WiFI}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
@@ -17384,8 +17384,8 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '50'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_cloud, value: _cloud_2}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -17479,8 +17479,8 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '50'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_2}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_cloud, value: _cloud_1}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -17556,7 +17556,7 @@ stateSequence:
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
     - {attribute: current_cloud, value: _cloud_2}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -19342,7 +19342,7 @@ stateSequence:
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
     - {attribute: current_cloud, value: _cloud_2}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -19379,8 +19379,8 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '50'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
-    - {attribute: current_network, value: WiFI}
+    - {attribute: current_cloud, value: _cloud_2}
+    - {attribute: current_network, value: 4G}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0

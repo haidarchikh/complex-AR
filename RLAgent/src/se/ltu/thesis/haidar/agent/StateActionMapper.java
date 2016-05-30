@@ -9,12 +9,12 @@ import burlap.oomdp.statehashing.HashableState;
 import burlap.oomdp.statehashing.HashableStateFactory;
 import burlap.oomdp.statehashing.SimpleHashableStateFactory;
 
-public class ExploreFunction {
+public class StateActionMapper {
 	
 	private HashableStateFactory 						hashingFactory;
 	private Map<HashableState, Map<String, Integer>> 	mStateMap;
 	
-	public ExploreFunction(){
+	public StateActionMapper(){
 		hashingFactory	= new SimpleHashableStateFactory();
 		mStateMap 		= new HashMap<>();
 	}

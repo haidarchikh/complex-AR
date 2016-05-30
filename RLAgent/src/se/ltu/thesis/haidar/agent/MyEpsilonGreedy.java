@@ -29,6 +29,7 @@ public class MyEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 	protected QFunction 				qplanner;
 	protected double					epsilon;
 	protected Random 					rand;
+	private StateActionMapper 			mStateActionMapper;
 	
 	private boolean constantEpsilon;
 	
@@ -52,6 +53,7 @@ public class MyEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 		this.epsilon = epsilon;
 		rand = RandomFactory.getMapped(0);
 		this.constantEpsilon = constantEpsilon;
+		mStateActionMapper = new StateActionMapper();
 	}
 
 	
@@ -81,7 +83,7 @@ public class MyEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 		this.qplanner = (QFunction) solver;
 	}
 	
-	private ExploreFunction mExploreFunction = new ExploreFunction();
+	
 	@Override
 	public AbstractGroundedAction getAction(State s) {
 		
@@ -92,19 +94,23 @@ public class MyEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 		double roll = rand.nextDouble();
 		////////////////////////////////////////////////////////////////////
 		if(roll < epsilon){
-			int selected = rand.nextInt(qValues.size());
-			AbstractGroundedAction ga = qValues.get(selected).a;
 			if(constantEpsilon){
-					return AbstractObjectParameterizedGroundedAction.Helper.translateParameters(ga, qValues.get(selected).s, s);
+				int selected = rand.nextInt(qValues.size());
+				AbstractGroundedAction ga = qValues.get(selected).a;
+				return AbstractObjectParameterizedGroundedAction.Helper.translateParameters(ga, qValues.get(selected).s, s);
 				}else{
-					
-					int occurrence = mExploreFunction.getOccurrence(s, ga);
 					// Look on how many times this action have been taken from this state
 					// because we don't have a transition matrix and our world is stochastic we take the same action
 					// from the same state many times. After 10 times for example the q value associated with this action
 					// will be a good indication on how good or bad this action's result is.
-					if(occurrence < 4){
-						return AbstractObjectParameterizedGroundedAction.Helper.translateParameters(ga, qValues.get(selected).s, s);
+					for(int i = 0 ; i < qValues.size();i++){
+						// I want the exploration to be random, not action 0 then action 1 .....
+						int selected = rand.nextInt(qValues.size());
+						AbstractGroundedAction ga = qValues.get(selected).a;
+						int occurrence = mStateActionMapper.getOccurrence(s, ga);
+						if(occurrence < 3){
+							return AbstractObjectParameterizedGroundedAction.Helper.translateParameters(ga, qValues.get(selected).s, s);
+					}
 				}		
 			}
 		}
@@ -126,6 +132,8 @@ public class MyEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 		int selected = rand.nextInt(maxActions.size());
 		//return translated action parameters if the action is parameterized with objects in a object identifier indepdent domain
 		AbstractGroundedAction ga =  maxActions.get(selected).a;
+		// This to count the times we take the max action, so we don't try to explore it.
+		//mStateActionMapper.getOccurrence(s, ga);
 		return AbstractObjectParameterizedGroundedAction.Helper.translateParameters(ga, maxActions.get(selected).s, s);
 	}
 	

@@ -35,10 +35,10 @@ public class Main {
 
 	public static final double 	EPSILON 			= 1.0;
 	public static final double 	LEARNING_RATE 		= 1.0;
-	public static final double 	DISSCOUNT_FACTOR 	= 0.1;
+	public static final double 	DISSCOUNT_FACTOR 	= 0.0;
 	
 	public static final double 	INITIAL_Q_VALUE 	= 0.0;
-	public static final double 	DELTA_TERMINATION 	= 0.01;
+	public static final double 	DELTA_TERMINATION 	= 0.00;
 	public static final int 	STEPS_IN_EPISODE 	= 1000;
 	public static final int 	MAX_NUM_OF_EPISODES	= 1000;
 	
@@ -95,9 +95,9 @@ public class Main {
 			System.out.println("Episode :"+ eCount +", max Q Change :" + agent.getMaxQChangeInLastEpisode()+
 					", greedy reward :" + rewardSum);
 			
-			if (rewardSum > 402.37){break;}
+			//if (rewardSum > 402.37983){break;}
 			
-		}while(eCount < MAX_NUM_OF_EPISODES /*&& agent.getMaxQChangeInLastEpisode() > DELTA_TERMINATION*/);
+		}while(eCount < MAX_NUM_OF_EPISODES && agent.getMaxQChangeInLastEpisode() > DELTA_TERMINATION);
 		
 		
 		// To get a greedy policy form this leaning run

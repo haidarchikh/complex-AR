@@ -13,14 +13,14 @@ public class MyLearningRate implements LearningRate {
 	
 	private RandomEngine		mEngine;
 	private Normal				mNormal;
-	private ExploreFunction 	mExploreFunction;
+	private StateActionMapper 	mStateActionMapper;
 	public static final double 	INITIAL_LEARNING_RATE = 1.0;
 	
 	public MyLearningRate() {
 		
 
 		this.mInitialLearningRate 	= INITIAL_LEARNING_RATE;
-		this.mExploreFunction 		= new ExploreFunction();
+		this.mStateActionMapper 		= new StateActionMapper();
 		this.mEngine 				= new DRand();
 		this.mNormal 				= new Normal(3, 0.5, mEngine);
 	}
@@ -34,7 +34,7 @@ public class MyLearningRate implements LearningRate {
 	public double pollLearningRate(int agentTime, State s,
 			AbstractGroundedAction ga) {
 		double mLearningRate = 0;
-		mLearningRate = mInitialLearningRate - mNormal.cdf(mExploreFunction.getOccurrence(s, ga));
+		mLearningRate = mInitialLearningRate - mNormal.cdf(mStateActionMapper.getOccurrence(s, ga));
 		return mLearningRate;
 	}
 	@Override
