@@ -9,12 +9,12 @@ import burlap.oomdp.statehashing.HashableState;
 import burlap.oomdp.statehashing.HashableStateFactory;
 import burlap.oomdp.statehashing.SimpleHashableStateFactory;
 
-public class StateActionMapper {
+public class StateActionOccurrenceMapper {
 	
 	private HashableStateFactory 						hashingFactory;
 	private Map<HashableState, Map<String, Integer>> 	mStateMap;
 	
-	public StateActionMapper(){
+	public StateActionOccurrenceMapper(){
 		hashingFactory	= new SimpleHashableStateFactory();
 		mStateMap 		= new HashMap<>();
 	}
@@ -28,25 +28,22 @@ public class StateActionMapper {
 	 * */
 	public int getOccurrence(State s, AbstractGroundedAction ga){
 		HashableState mState = hashingFactory.hashState(s);
-		// look how many times we've been in this state and took that action
-		if (mStateMap.containsKey(mState)) {
-			Map<String, Integer> mActionMap = mStateMap.get(mState);
-
-			// If the state/action already exist
-			if (mActionMap.containsKey(ga.actionName())) {
-				int occurenceTime = IncrementActionOccurenceTime(mState,
-						mActionMap, ga);
-				return occurenceTime;
-				// else track the new state/action
-			} else {
-				AddNewAction(mState, mActionMap, ga);
-				return 0;
-			}
-		} else {
-			// If the state/action doesn't exist
+		
+		if (!mStateMap.containsKey(mState)) {
+			// If state-action doesn't exist
 			AddNewState(mState, ga);
 			return 0;
 		}
+		
+		// look how many times we've been in this state and took that action
+		Map<String, Integer> mActionMap = mStateMap.get(mState);
+		// If state-action already exist
+		if (mActionMap.containsKey(ga.actionName())) {
+			int occurrenceTime = IncrementActionOccurenceTime(mState, mActionMap, ga);
+			return occurrenceTime;
+			
+			// else track the new state-action
+		} else {AddNewAction(mState, mActionMap, ga); return 0;	}
 	}
 	
 	private void AddNewState(HashableState mState, AbstractGroundedAction ga) {
@@ -65,11 +62,10 @@ public class StateActionMapper {
 
 	private int IncrementActionOccurenceTime(HashableState mState,
 			Map<String, Integer> mActionMap, AbstractGroundedAction ga) {
-		int occurenceTime = mActionMap.get(ga.actionName());
-		occurenceTime++;
-		mActionMap.put(ga.actionName(), occurenceTime);
+		int occurrenceTime = mActionMap.get(ga.actionName());
+		occurrenceTime++;
+		mActionMap.put(ga.actionName(), occurrenceTime);
 		mStateMap.put(mState, mActionMap);
-		return occurenceTime;
+		return occurrenceTime;
 	}
-
 }

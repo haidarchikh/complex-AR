@@ -21,12 +21,10 @@ public class Main {
 	//402.379829999997
 	public static final double DATASET_3_ORACLE_REWARD = 402.37983;
 
-	public static final int MIN_D = 20;
-	public static final int MAX_D = 100;
-
-	public static final int MIN_T = 70;
-	public static final int MAX_T = 100;
-
+	public static final int 	MIN_D 				= 20;
+	public static final int 	MAX_D 				= 100;
+	public static final int 	MIN_T 				= 70;
+	public static final int 	MAX_T 				= 100;
 	
 	public static final int 	NIGATIVE_REWARD 	= 0;
 	public static final double 	DELAY_WEIGHT 		= 0.8;
@@ -35,7 +33,7 @@ public class Main {
 
 	public static final double 	EPSILON 			= 1.0;
 	public static final double 	LEARNING_RATE 		= 1.0;
-	public static final double 	DISSCOUNT_FACTOR 	= 0.0;
+	public static final double 	DISSCOUNT_FACTOR 	= 0.1;
 	
 	public static final double 	INITIAL_Q_VALUE 	= 0.0;
 	public static final double 	DELTA_TERMINATION 	= 0.00;
@@ -53,58 +51,53 @@ public class Main {
 	private Environment 			mEnv;
 
 	public Main() {
-		mCloudWorld = new CloudWorld();
-		mDomain 	= mCloudWorld.generateDomain();
-		mRF 		= new CloudWorld.Reward(MIN_D, MAX_D, MIN_T, MAX_T, NIGATIVE_REWARD,
-				DELAY_WEIGHT, TH_WEIGHT, DAMPER_WEIGHT);
-		//mRF 		= new UniformCostRF();
-		mTF 		= new NullTermination();
-		// mTF 		= new CloudWorld.Terminal();
-		
+		mCloudWorld 	= new CloudWorld();
+		mDomain 		= mCloudWorld.generateDomain();
+		mTF 			= new NullTermination();
 		mInitialState 	= CloudWorld.getInitialState(mDomain);
 		mHashingFactory = new SimpleHashableStateFactory();
-		
-		// I'm using my environment
-		mEnv = new MyEnve(mDomain, mRF, mTF, mInitialState);
-
+		mRF 			= new CloudWorld.Reward(MIN_D, MAX_D, MIN_T, MAX_T, NIGATIVE_REWARD,
+				DELAY_WEIGHT, TH_WEIGHT, DAMPER_WEIGHT);
+		mEnv 			= new MyEnve(mDomain, mRF, mTF, mInitialState);
 	}
+	
 	public void QLearningMine(String outputPath) {
 		
-		MyQLearning agent = new MyQLearning(mDomain, DISSCOUNT_FACTOR,
+		int ave = 0;
+		int repetition = 1;
+		
+		for(int i = 0; i<repetition; i++){
+		
+			MyQLearning agent = new MyQLearning(mDomain, DISSCOUNT_FACTOR,
 		mHashingFactory, INITIAL_Q_VALUE, LEARNING_RATE);
 	 
-		agent.setLearningPolicy(new MyEpsilonGreedy(agent, EPSILON, false));
+			agent.setLearningPolicy(new MyEpsilonGreedy(agent, EPSILON, false));
 		
-		MyLearningRate mLearnig = new MyLearningRate(); 
-		agent.setLearningRateFunction(mLearnig);
+			MyLearningRate mLearnig = new MyLearningRate(); 
+			agent.setLearningRateFunction(mLearnig);
 		
-		int eCount = 0;
-		do{
-			eCount++;
-			mEnv.resetEnvironment();
-			EpisodeAnalysis ea = agent.runLearningEpisode(mEnv, STEPS_IN_EPISODE);
+			int eCount = 0;
+			do{
+				eCount++;
+				mEnv.resetEnvironment();
+				EpisodeAnalysis ea = agent.runLearningEpisode(mEnv, STEPS_IN_EPISODE);
 			
-			//ea.writeToFile(outputPath + "ql_" + eCount);
+				mEnv.resetEnvironment();
+				GreedyQPolicy mPolicy = new GreedyQPolicy(agent); 
+				EpisodeAnalysis eaP = mPolicy.evaluateBehavior(mEnv, STEPS_IN_EPISODE);
 			
-			mEnv.resetEnvironment();
-			GreedyQPolicy mPolicy = new GreedyQPolicy(agent); 
-			EpisodeAnalysis eaP = mPolicy.evaluateBehavior(mEnv, STEPS_IN_EPISODE);
+				double rewardSum = getSum(eaP.rewardSequence);
 			
-			double rewardSum = getSum(eaP.rewardSequence);
-			
-			System.out.println("Episode :"+ eCount +", max Q Change :" + agent.getMaxQChangeInLastEpisode()+
+				System.out.println("Episode :"+ eCount +", max Q Change :" + agent.getMaxQChangeInLastEpisode()+
 					", greedy reward :" + rewardSum);
 			
 			//if (rewardSum > 402.37983){break;}
 			
 		}while(eCount < MAX_NUM_OF_EPISODES && agent.getMaxQChangeInLastEpisode() > DELTA_TERMINATION);
-		
-		
-		// To get a greedy policy form this leaning run
-		mEnv.resetEnvironment();
-		GreedyQPolicy mPolicy = new GreedyQPolicy(agent); 
-		EpisodeAnalysis eaP = mPolicy.evaluateBehavior(mEnv, STEPS_IN_EPISODE);
-		eaP.writeToFile(outputPath + "ql_greedyPolicy");
+			
+		ave += eCount;
+		}
+		System.out.println("Average Episodes to converge :"+ (double)ave/repetition);
 	}
 	
 	public void QLearning(String outputPath) {
@@ -114,14 +107,11 @@ public class Main {
 	 
 		//agent.setLearningPolicy(new MyEpsilonGreedy(agent, EPSILON, true));
 		agent.setLearningPolicy(new MyOracleEpsilonGreedy(agent));
-		//MyLearningRate mLearnig = new MyLearningRate(); 
-		//agent.setLearningRateFunction(mLearnig);
 		
 		int eCount = 0;
 		do{
 			mEnv.resetEnvironment();
 			EpisodeAnalysis ea = agent.runLearningEpisode(mEnv, STEPS_IN_EPISODE);
-			//ea.writeToFile(outputPath + "ql_" + eCount);
 			eCount++;
 			
 			System.out.println("Episode :"+ eCount +", max Q Change :" + agent.getMaxQChangeInLastEpisode()+
@@ -129,13 +119,13 @@ public class Main {
 			
 		}while(eCount < MAX_NUM_OF_EPISODES && agent.getMaxQChangeInLastEpisode() > DELTA_TERMINATION);
 		
-		// To get a greedy policy form this leaning run
 		mEnv.resetEnvironment();
 		GreedyQPolicy mPolicy = new GreedyQPolicy(agent); 
 		EpisodeAnalysis eaP = mPolicy.evaluateBehavior(mEnv, STEPS_IN_EPISODE);
 		System.out.println(getSum(eaP.rewardSequence));
 		mEnv.resetEnvironment();
 		eaP.writeToFile(outputPath + "ql_greedyPolicy");
+		
 	}
 	
 	public void QLearningTODatabase(boolean pushToDatabase) {
@@ -146,14 +136,14 @@ public class Main {
 		SqlStatistics mS = null;
 		
 		if(pushToDatabase){
-			// connect to the database and set the new test
+			// connect to the database and push the new test
 			mS = new SqlStatistics();
 			mS.connect();
 			mS.mNewTest(mStep);
 		}
 
-		List<Double> mRewardList = null;
-		List<Double> mGreedyRewardList = null;
+		List<Double> mEpisodeReward = null;
+		List<Double> mGreedyReward 	= null;
 		for (double mEpsilon = 0;mEpsilon <= 1;mEpsilon += mStep) {
 			for (double mLearning = 0;mLearning <= 1;mLearning += mStep) {
 				for (double mDiscount = 0;mDiscount <= 1;mDiscount += mStep) {		
@@ -163,42 +153,43 @@ public class Main {
 					mDiscount 	= Math.round(mDiscount*100.0)/100.0;
 					
 					// setting up the agent
-					MyQLearning agent = 
-							new MyQLearning(mDomain, mDiscount,mHashingFactory, INITIAL_Q_VALUE,mLearning);
+					MyQLearning agent = new MyQLearning(mDomain, mDiscount,mHashingFactory, INITIAL_Q_VALUE,mLearning);
 					
 					// adding a greedy policy to the agent	
 					agent.setLearningPolicy(new MyEpsilonGreedy(agent, mEpsilon,true));
 					
 					
-					mRewardList 			= new ArrayList<>();
-					mGreedyRewardList 		= new ArrayList<>();
+					mEpisodeReward 			= new ArrayList<>();
+					mGreedyReward	 		= new ArrayList<>();
 					
 					int eCount = 0;
 					do{
 						// learn
 						mEnv.resetEnvironment();
 						EpisodeAnalysis ea = agent.runLearningEpisode(mEnv, STEPS_IN_EPISODE);
-						mRewardList.add(getSum(ea.rewardSequence));
+						
+						mEpisodeReward.add(getSum(ea.rewardSequence));
 						
 						// use the learning 
 						mEnv.resetEnvironment();
 						GreedyQPolicy mPolicy 	 = new GreedyQPolicy(agent); 
 						EpisodeAnalysis eaP 	 = mPolicy.evaluateBehavior(mEnv, STEPS_IN_EPISODE);
-						mGreedyRewardList.add(getSum(eaP.rewardSequence));
+						
+						mGreedyReward.add(getSum(eaP.rewardSequence));
 						
 						eCount++;
 					}while(eCount < MAX_NUM_OF_EPISODES);
 					
-					Double[] mRewardArray 		= mRewardList		.toArray(new Double[0]);
-					Double[] mGreedyRewardArray = mGreedyRewardList	.toArray(new Double[0]);
+					Double[] mEpisodeRewardArray	= mEpisodeReward	.toArray(new Double[0]);
+					Double[] mGreedyRewardArray 	= mGreedyReward		.toArray(new Double[0]);
 					
 					System.out.println("Epsilon : "	+ mEpsilon
 							+", Learning rate : "	+ mLearning
 							+", Discount factor : "	+ mDiscount
-							+", Stops after : "		+ mRewardArray.length);
+							+", Stops after : "		+ mEpisodeRewardArray.length);
 					
 					// push to database
-					if(pushToDatabase){mS.insertNewTuple(mEpsilon,mLearning,mDiscount,mRewardArray,mGreedyRewardArray);}
+					if(pushToDatabase){mS.insertNewTuple(mEpsilon,mLearning,mDiscount,mEpisodeRewardArray,mGreedyRewardArray);}
 				}
 			}
 		}
@@ -228,5 +219,4 @@ public class Main {
 		for (double r : mArray) { sum += r;}
 		return sum;
 	}
-
 }

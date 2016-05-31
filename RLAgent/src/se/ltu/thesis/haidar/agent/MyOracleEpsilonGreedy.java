@@ -33,16 +33,11 @@ import burlap.oomdp.singleagent.RewardFunction;
 public class MyOracleEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 
 	
-	private QFunction 				qplanner;
-	private RewardFunction	mRF;
-	
-	private StateUpdater mUpdater;
-	private Map<Integer, JSONObject> mData;
-	
-	private Domain 				mDomain;
-	private CloudWorld 			mCloudWorld;
-	
-	private int timeEpoch;;
+	private QFunction 					mQplanner;
+	private RewardFunction				mRF;
+	private StateUpdater 				mUpdater;
+	private Map<Integer, JSONObject> 	mData;
+	private int 						mTimeEpoch;
 	
 	public MyOracleEpsilonGreedy(QFunction planner) {
 		mRF = new CloudWorld.Reward(Main.MIN_D, Main.MAX_D, Main.MIN_T, Main.MAX_T, Main.NIGATIVE_REWARD,
@@ -51,10 +46,7 @@ public class MyOracleEpsilonGreedy extends Policy implements SolverDerivedPolicy
 		
 		mUpdater 	= new StateUpdater();
 		mData 		= mUpdater.loadDataFromFile(StateUpdater.FILE_PATH_DATA3);
-		mCloudWorld = new CloudWorld();
-		mDomain = mCloudWorld.generateDomain();
-		
-		qplanner = planner;
+		mQplanner 	= planner;
 	}
 
 	@Override
@@ -64,23 +56,23 @@ public class MyOracleEpsilonGreedy extends Policy implements SolverDerivedPolicy
 	@Override
 	public AbstractGroundedAction getAction(State s) {
 		
-		List<QValue> qValues = this.qplanner.getQs(s);
+		List<QValue> qValues = this.mQplanner.getQs(s);
 		AbstractGroundedAction action0 = qValues.get(0).a;
 		AbstractGroundedAction action1 = qValues.get(1).a;
 		AbstractGroundedAction action2 = qValues.get(2).a;
 		AbstractGroundedAction action3 = qValues.get(3).a;
 		
-
 		// copy the current state
 		State sPrime = s.copy();
 		
 		ObjectInstance agent = sPrime.getFirstObjectOfClass(CloudWorld.CLASSAGENT);
 		
 		// get the data of the next state
-		JSONObject mState = mData.get(timeEpoch);
-		timeEpoch++;
-		if(timeEpoch == 1000){timeEpoch =0;}
-		System.out.println(timeEpoch);
+		JSONObject mState = mData.get(mTimeEpoch);
+		mTimeEpoch++;
+		
+		if(mTimeEpoch == 1000){mTimeEpoch =0;}
+		
 		agent.setValue(CloudWorld.D_N1_C1, mState.get(CloudWorld.D_N1_C1));
 		agent.setValue(CloudWorld.D_N1_C2, mState.get(CloudWorld.D_N1_C2));
 
@@ -126,15 +118,13 @@ public class MyOracleEpsilonGreedy extends Policy implements SolverDerivedPolicy
 		
 		Double max  = Collections.max(mRewardList);
 		int action = mRewardList.indexOf(max);
-		//System.out.println(action);
+		
 		switch (action){
 		case 0 : return action0;
 		case 1 : return action1;
 		case 2 : return action2;
 		case 3 : return action3;
 		}
-		
-		
 		return action3;
 	}
 	

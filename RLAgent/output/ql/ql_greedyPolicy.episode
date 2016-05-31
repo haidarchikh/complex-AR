@@ -269,7 +269,7 @@ actionSequence: [!action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_clo
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_1',
-  !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
+  !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_2',
@@ -288,16 +288,16 @@ actionSequence: [!action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_clo
   !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_2',
-  !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
+  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
-  !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_1',
+  !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_1',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
-  !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
-  !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_1', !action 'migrate_to_4G_cloud_1',
+  !action 'migrate_to_4G_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_2',
+  !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_1',
   !action 'migrate_to_WiFI_cloud_1', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_WiFI_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
   !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2', !action 'migrate_to_4G_cloud_2',
@@ -15902,8 +15902,8 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '50'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_2}
-    - {attribute: current_network, value: 4G}
+    - {attribute: current_cloud, value: _cloud_1}
+    - {attribute: current_network, value: WiFI}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -16948,7 +16948,7 @@ stateSequence:
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
     - {attribute: current_cloud, value: _cloud_1}
-    - {attribute: current_network, value: 4G}
+    - {attribute: current_network, value: WiFI}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -17175,7 +17175,7 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '60'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
+    - {attribute: current_cloud, value: _cloud_2}
     - {attribute: current_network, value: WiFI}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
@@ -17423,7 +17423,7 @@ stateSequence:
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
     - {attribute: current_cloud, value: _cloud_2}
-    - {attribute: current_network, value: 4G}
+    - {attribute: current_network, value: WiFI}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0
@@ -17479,8 +17479,8 @@ stateSequence:
     - {attribute: throughput_4G_cloud_2, value: '50'}
     - {attribute: delay_4G_cloud_3, value: '10010'}
     - {attribute: throughput_4G_cloud_3, value: '10'}
-    - {attribute: current_cloud, value: _cloud_1}
-    - {attribute: current_network, value: 4G}
+    - {attribute: current_cloud, value: _cloud_2}
+    - {attribute: current_network, value: WiFI}
 - !!burlap.oomdp.stateserialization.simple.SimpleSerializableState
   objects:
   - name: agent0

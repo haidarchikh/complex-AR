@@ -13,14 +13,14 @@ public class MyLearningRate implements LearningRate {
 	
 	private RandomEngine		mEngine;
 	private Normal				mNormal;
-	private StateActionMapper 	mStateActionMapper;
+	private StateActionOccurrenceMapper 	mStateActionMapper;
 	public static final double 	INITIAL_LEARNING_RATE = 1.0;
 	
 	public MyLearningRate() {
 		
 
 		this.mInitialLearningRate 	= INITIAL_LEARNING_RATE;
-		this.mStateActionMapper 		= new StateActionMapper();
+		this.mStateActionMapper 	= new StateActionOccurrenceMapper();
 		this.mEngine 				= new DRand();
 		this.mNormal 				= new Normal(3, 0.5, mEngine);
 	}

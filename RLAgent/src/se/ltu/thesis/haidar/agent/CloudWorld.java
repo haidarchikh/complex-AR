@@ -3,8 +3,13 @@ package se.ltu.thesis.haidar.agent;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import se.ltu.thesis.haidar.datagenerator.StateUpdaterForVI;
 import burlap.oomdp.auxiliary.DomainGenerator;
@@ -25,7 +30,6 @@ import burlap.oomdp.singleagent.SADomain;
 import burlap.oomdp.singleagent.common.SimpleAction;
 import burlap.oomdp.visualizer.ObjectPainter;
 import burlap.oomdp.visualizer.StateRenderLayer;
-import burlap.oomdp.visualizer.StaticPainter;
 import burlap.oomdp.visualizer.Visualizer;
 
 // Interface DomainGenerator is a BURLAP convention when we want to implement our own domain
@@ -424,105 +428,40 @@ public class CloudWorld implements DomainGenerator{
 			return nigative_Reward;
 		}
 	}
-	public class WallPainter implements StaticPainter{
-
-		@Override
-		public void paint(Graphics2D g2, State s, float cWidth, float cHeight) {
-			
-			// for the laptop screen (without the frame is funny)
-			cWidth 	-=100;
-			cHeight -=100;
-			//walls will be filled in black
-			g2.setColor(Color.BLACK);
-			
-			//set up floats for the width and height of our domain
-			float fWidth 	= CloudWorld.this.map.length;
-			float fHeight 	= CloudWorld.this.map[0].length;
-			
-			//determine the width of a single cell on our canvas 
-			//such that the whole map can be painted
-			float width = cWidth / fWidth;
-			float height = cHeight / fHeight;
-			
-			
-			//pass through each cell of our map and if it's a wall, paint a black 
-			//rectangle on our cavas of dimension widthxheight
-			for(int i = 0; i < CloudWorld.this.map.length; i++){
-				for(int j = 0; j < CloudWorld.this.map[0].length; j++){
-					
-					//is there a wall here?
-					if(CloudWorld.this.map[i][j] >= 1){
-						
-						//left corrdinate of cell on our canvas
-						float rx = i*width;
-						
-						//top coordinate of cell on our canvas
-						//coordinate system adjustment because the java canvas
-						//origin is in the top left instead of the bottom right
-						float ry = cHeight - height - j*height;
-						
-						int loc = CloudWorld.this.map[i][j];
-						switch (loc){
-						case 6 :  g2.drawString(N1+ SPACE +C1, ry, rx);
-				        break;
-						case 5 :  g2.drawString(N1+ SPACE +C2, ry, rx);
-				        break;
-						case 4 :  g2.drawString(N1+ SPACE +C3, ry, rx);
-				        break;
-				        
-						case 3 :  g2.drawString(N2+ SPACE +C1, ry, rx);
-				        break;
-						case 2 :  g2.drawString(N2+ SPACE +C2, ry, rx);
-				        break;
-						case 1 :  g2.drawString(N2+ SPACE +C3, ry, rx);
-				        break;
-						}
-						// I fliped the x and y to make it work!!
-						//paint the rectangle
-						//g2.drawString(N1+C1, ry, rx);
-						//g2.fill(new Rectangle2D.Float(ry, rx, width, height));
-					}
-				}
-			}	
-		}
-	}
+	
 	public class AgentPainter implements ObjectPainter{
-
+		
 		@Override
 		public void paintObject(Graphics2D g2, State s, ObjectInstance ob,
 				float cWidth, float cHeight) {
 			
-			// for the laptop screen (without the frame is funny)
-			cWidth 	-=100;
-			cHeight -=100;
-			
-			//agent will be filled in gray
 			g2.setColor(Color.GRAY);
 			
 			//set up floats for the width and height of our domain
-			float fWidth  = CloudWorld.this.map.length;
-			float fHeight = CloudWorld.this.map[0].length;
+			float domainXScale  = CloudWorld.this.map.length;
+			float domainYScale 	= CloudWorld.this.map[0].length;
 			
 			//determine the width of a single cell on our canvas 
 			//such that the whole map can be painted
-			float width  = cWidth / fWidth;
-			float height = cHeight / fHeight;
+			float mCellwidth 	= (1.0f/domainXScale) * cWidth;
+			float mCellheight 	= (1.0f/domainYScale) * cHeight;
 			
 			String mCurrentNetwork	= ob.getStringValForAttribute(CURRENT_NETWORK);
 			String mCurrentCloud	= ob.getStringValForAttribute(CURRENT_CLOUD);
 			
-			//left coordinate of cell on our canvas
-			int ax = agentLocation(mCurrentNetwork, mCurrentCloud);
-			float rx = ax*width;
 			
-			//top coordinate of cell on our canvas
-			//coordinate system adjustment because the java canvas 
-			//origin is in the top left instead of the bottom right
-			float ry = cHeight - height - 2*height;
+			int mAgentAtXCell	 = agentLocation(mCurrentNetwork, mCurrentCloud);
+			float mAgentX = mAgentAtXCell * mCellwidth;
+			
+			 
+			float mAgentY = cHeight  - 3.0f * mCellheight;
 		
-			//paint the rectangle
-			g2.fill(new Ellipse2D.Float(rx, ry, width , height));
-			
+			// Center the agent in a cell
+			//mAgentX += mCellwidth  / 2.0f;
+			//mAgentY += mCellheight / 2.0f;
+			//paint the agent
+			g2.fill(new Ellipse2D.Float(mAgentX , mAgentY , 40.0f , 40.0f));
+
 			String D_N1_C1 = String.valueOf(ob.getIntValForAttribute(CloudWorld.D_N1_C1));
 			String D_N1_C2 = String.valueOf(ob.getIntValForAttribute(CloudWorld.D_N1_C2));
 			String D_N1_C3 = String.valueOf(ob.getIntValForAttribute(CloudWorld.D_N1_C3));
@@ -539,58 +478,60 @@ public class CloudWorld implements DomainGenerator{
 			String T_N2_C2 = String.valueOf(ob.getIntValForAttribute(CloudWorld.T_N2_C2));
 			String T_N2_C3 = String.valueOf(ob.getIntValForAttribute(CloudWorld.T_N2_C3));
 			
-			for(int i = 0; i < CloudWorld.this.map.length; i++){
-				for(int j = 0; j < CloudWorld.this.map[0].length; j++){
-					
+			for(int Y = 0; Y < CloudWorld.this.map.length; Y++){
+				for(int X = 0; X < CloudWorld.this.map[0].length; X++){
 					//is there a wall here?
-					if(CloudWorld.this.map[i][j] >= 1){
-						
-						
+					if(CloudWorld.this.map[Y][X] >= 1){
 						//left corrdinate of cell on our canvas
-						float x = (i-3)*width;
-						float xt = (i-4)*width;
-						//top coordinate of cell on our canvas
-						//coordinate system adjustment because the java canvas
-						//origin is in the top left instead of the bottom right
-						float y = cHeight - height - (j) * height;
+						float m_Y = (Y) * mCellheight;
+						float m_X = (X) * mCellwidth;
 						
-						g2.drawString("Delay : ", y , x);
-						g2.drawString("Throu : ", y , xt);
 						
-						y+= 45;
+						float m_X_Text = m_X +50.0f;
 						
-						int loc = CloudWorld.this.map[i][j];
+						float mT_Y = (Y-4) * mCellheight;
+						float mD_Y = (Y-3) * mCellheight;
+						
+						
+						
+						g2.drawString("Delay : ", m_X , mD_Y);
+						g2.drawString("Throu : ", m_X , mT_Y);
+					
+						
+						int loc = CloudWorld.this.map[Y][X];
 						switch (loc){
-						case 6 :  
-							g2.drawString(D_N1_C1, y, x);
-							g2.drawString(T_N1_C1, y, xt);
-				        break;
-						case 5 :  
-							g2.drawString(D_N1_C2, y, x);
-							g2.drawString(T_N1_C2, y, xt);
-				        break;
-						case 4 :  
-							g2.drawString(D_N1_C3, y, x);
-							g2.drawString(T_N1_C3, y, xt);
-				        break;
-				        
-						case 3 :  
-							g2.drawString(D_N2_C1, y, x);
-							g2.drawString(T_N2_C1, y, xt);
+						case 1 :  
+							g2.drawString(N1+ SPACE +C1, m_X, m_Y);
+							g2.drawString(D_N1_C1, m_X_Text, mD_Y);
+							g2.drawString(T_N1_C1, m_X_Text, mT_Y);
 				        break;
 						case 2 :  
-							g2.drawString(D_N2_C2, y, x);
-							g2.drawString(T_N2_C2, y, xt);
+							g2.drawString(N1+ SPACE +C2, m_X, m_Y);
+							g2.drawString(D_N1_C2, m_X_Text, mD_Y);
+							g2.drawString(T_N1_C2, m_X_Text, mT_Y);
 				        break;
-						case 1 :  
-							g2.drawString(D_N2_C3, y, x);
-							g2.drawString(T_N2_C3, y, xt);
+						case 3 :  
+							g2.drawString(N1+ SPACE +C3, m_X, m_Y);
+							g2.drawString(D_N1_C3, m_X_Text, mD_Y);
+							g2.drawString(T_N1_C3, m_X_Text, mT_Y);
+				        break;
+				        
+						case 4 :
+							g2.drawString(N2+ SPACE +C1, m_X, m_Y);
+							g2.drawString(D_N2_C1, m_X_Text, mD_Y);
+							g2.drawString(T_N2_C1, m_X_Text, mT_Y);
+				        break;
+						case 5 :  
+							g2.drawString(N2+ SPACE +C2, m_X, m_Y);
+							g2.drawString(D_N2_C2, m_X_Text, mD_Y);
+							g2.drawString(T_N2_C2, m_X_Text, mT_Y);
+				        break;
+						case 6 :  
+							g2.drawString(N2+ SPACE +C3, m_X, m_Y);
+							g2.drawString(D_N2_C3, m_X_Text, mD_Y);
+							g2.drawString(T_N2_C3, m_X_Text, mT_Y);
 				        break;
 						}
-						// I fliped the x and y to make it work!!
-						//paint the rectangle
-						//g2.drawString(N1+C1, ry, rx);
-						//g2.fill(new Rectangle2D.Float(ry, rx, width, height));
 					}
 				}
 			}
@@ -598,7 +539,6 @@ public class CloudWorld implements DomainGenerator{
 	}
 	public StateRenderLayer getStateRenderLayer(){
 		StateRenderLayer rl = new StateRenderLayer();
-		rl.addStaticPainter(new WallPainter());
 		rl.addObjectClassPainter(CLASSAGENT, new AgentPainter());
 		return rl;
 	}
@@ -606,7 +546,7 @@ public class CloudWorld implements DomainGenerator{
 	public Visualizer getVisualizer(){
 		return new Visualizer(this.getStateRenderLayer());
 	}
-	public static int agentLocation(String currentNetwork , String currentCloud){
+	private static final int agentLocation(String currentNetwork , String currentCloud){
 		String location = currentNetwork + currentCloud;
 		int loc = 0;
 		switch (location){

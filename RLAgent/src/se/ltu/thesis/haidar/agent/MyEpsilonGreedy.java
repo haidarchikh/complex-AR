@@ -29,7 +29,7 @@ public class MyEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 	protected QFunction 				qplanner;
 	protected double					epsilon;
 	protected Random 					rand;
-	private StateActionMapper 			mStateActionMapper;
+	private StateActionOccurrenceMapper 			mStateActionMapper;
 	
 	private boolean constantEpsilon;
 	
@@ -53,7 +53,7 @@ public class MyEpsilonGreedy extends Policy implements SolverDerivedPolicy {
 		this.epsilon = epsilon;
 		rand = RandomFactory.getMapped(0);
 		this.constantEpsilon = constantEpsilon;
-		mStateActionMapper = new StateActionMapper();
+		mStateActionMapper = new StateActionOccurrenceMapper();
 	}
 
 	
