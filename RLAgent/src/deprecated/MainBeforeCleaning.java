@@ -79,8 +79,8 @@ public class MainBeforeCleaning {
 	public MainBeforeCleaning() {
 		mCloudWorld = new CloudWorld();
 		domain = mCloudWorld.generateDomain();
-		rf = new CloudWorld.Reward(MIN_D, MAX_D, MIN_T, MAX_T, NIGATIVE_REWARD,
-				REWARD_WEIGHT);
+	//	rf = new CloudWorld.Reward(MIN_D, MAX_D, MIN_T, MAX_T, NIGATIVE_REWARD,
+		//		REWARD_WEIGHT);
 		tf = new NullTermination();
 		// tf = new CloudWorld.Terminal();
 		initialState = CloudWorld.getInitialState(domain);
@@ -170,8 +170,8 @@ public class MainBeforeCleaning {
 						env.resetEnvironment();
 					}
 					// push to database
-					mS.insertNewTuple(mEpsilon.doubleValue(),mLearningRate.doubleValue(),
-									mDiscountFactor.doubleValue(),mReward);
+		//			mS.insertNewTuple(mEpsilon.doubleValue(),mLearningRate.doubleValue(),
+			//						mDiscountFactor.doubleValue(),mReward);
 				}
 			}
 		}

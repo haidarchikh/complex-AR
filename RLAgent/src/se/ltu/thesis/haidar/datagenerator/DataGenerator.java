@@ -15,26 +15,27 @@ import cern.jet.random.engine.RandomEngine;
 public class DataGenerator {
 
 	
-	private double[] mData;
-	private SampleGenerator mG;
-	private Statistics mStatistics;
+	private double[] 			mData;
+	private SampleGenerator 	mG;
+	private Statistics 			mStatistics;
 
 
-	public void addGaussianPlan(int mCount, double mMean, double mVariance,
-			double roundTo) {
-		mG = new GaussianGenerator(mCount, mMean, mVariance, roundTo);
-		double[] data = mG.getData();
-		mData = (double[])ArrayUtils.addAll(mData, data);
+	public void addGaussianPlan(int mCount, double mMean, double mVariance,	double roundTo) {
+		
+		mG				= new GaussianGenerator(mCount, mMean, mVariance, roundTo);
+		double[] data 	= mG.getData();
+		mData 			= (double[])ArrayUtils.addAll(mData, data);
 	}
+	
 	public double[] getData(){
 		return mData;
 	}
 	
-	public void addParetoPlan(int mCount, double mScale, double mShape,
-			double roundTo) {
-		mG = new ParetoGenerator(mCount, mScale, mShape, roundTo);
-		double[] data = mG.getData();
-		mData = (double[])ArrayUtils.addAll(mData, data);
+	public void addParetoPlan(int mCount, double mScale, double mShape,	double roundTo) {
+		
+		mG 				= new ParetoGenerator(mCount, mScale, mShape, roundTo);
+		double[] data 	= mG.getData();
+		mData 			= (double[])ArrayUtils.addAll(mData, data);
 	}
 	/*
 	public void addParetoPlan(int mCount, double mScale, double mShape,double inverce,
@@ -43,7 +44,7 @@ public class DataGenerator {
 		double[] data = mG.getData();
 		mData = (double[])ArrayUtils.addAll(mData, data);
 	}
-	*/
+	*/	
 	public SampleGenerator getGenerator(){
 		return mG;
 	}
@@ -63,9 +64,8 @@ public class DataGenerator {
 	
 	
 	public static void main(String[] args){
+		
 		DataGenerator T_N2_C2 = new DataGenerator();
-		//mG.addGaussianPlan(100, 100, 10, 10);
-		//mG.addGaussianPlan(100, 2000, 10, 10);
 		
 		T_N2_C2.addGaussianPlan(100, 20, 5,	10);
 		T_N2_C2.addGaussianPlan(100, 20, 5,	10);
@@ -81,17 +81,11 @@ public class DataGenerator {
 		T_N2_C2.printStatistics();
 	}
 	
-	
-	
-	
-	
-	
-	
-	public DataGenerator() {}
 	public void printStatistics(){
 		mStatistics = new Statistics(mData);
 		mStatistics.printStatistics();
 	}
+	
 	// It returns {sampleValue, Occurrence}
 	public TreeMap<Double, Integer> getStatistics(){
 		mStatistics = new Statistics(mData);
@@ -100,31 +94,30 @@ public class DataGenerator {
 	
 	public abstract class SampleGenerator {
 
-		protected double[] mData;
-		protected int mSampleCount;
-		protected double roundTo;
-
-		public SampleGenerator(int mSampleCount, double roundTo) {
-			this.mSampleCount = mSampleCount;
-			this.mData = new double[mSampleCount];
-			this.roundTo = roundTo;
-		}
+		protected double[] 	mData;
+		protected int 		mSampleCount;
+		protected double 	roundTo;
 
 		protected abstract double getSample();
 		
+		public SampleGenerator(int mSampleCount, double roundTo) {
+			this.mSampleCount 	= mSampleCount;
+			this.mData 			= new double[mSampleCount];
+			this.roundTo 		= roundTo;
+		}
+		
 		public final double[] getData() {
 			int count = 0;
-				while (mSampleCount > count) {
-					double sample = getSample();
-					// Don't round if the rounding value is -1
-					if(roundTo != -1){
-						sample = round(sample, roundTo);
-						}
-					mData[count] = sample;
-					count++;
-				}
-				return mData;
+			while (mSampleCount > count) {
+				double sample = getSample();
+				// Don't round if the rounding value is -1
+				if(roundTo != -1){ sample = round(sample, roundTo);}
+				mData[count] = sample;
+				count++;
+			}
+			return mData;
 		}
+		
 		// rounds up. 1.0 ,1.4, 1.6 to 2.0
 		// 			. 10  , 16, 19  to 20
 		public final double round(double sample, double roundTo) {
@@ -139,6 +132,7 @@ public class DataGenerator {
 			}
 		}
 	}
+	
 	public class ParetoGenerator extends SampleGenerator{
 
 		private ParetoDistribution mPareto;
@@ -169,17 +163,17 @@ public class DataGenerator {
 		
 		private RandomEngine	mEngine;
 		private Normal			mNormal;
-		
+		private Random 			mRandom;
 		public GaussianGenerator(int mSampleCount, double mMean , double mVariance, double roundTo) {
 			super(mSampleCount, roundTo);
 			this.mMean 		= mMean;
 			this.mVariance 	= mVariance;
 			
-			mEngine = new DRand();
-			mNormal = new Normal(this.mMean, this.mVariance, mEngine);
+			mRandom 		= new Random();
+			mEngine 		= new DRand();
+			mNormal 		= new Normal(this.mMean, this.mVariance, mEngine);
 		}
 		
-		private Random mRandom = new Random();
 		@Override
 		protected double getSample() {
 			double gaussian = 0;
@@ -190,7 +184,6 @@ public class DataGenerator {
 			
 			// If the sample is < 0 . return 0
 			if(gaussian <0){gaussian = 0 ;}
-			
 			return gaussian;
 		}
 		public Normal getGenerator(){
@@ -204,26 +197,27 @@ public class DataGenerator {
 		private int mSampelCount;
 		
 		public Statistics(double[]mData){
-			for(double i : mData){
-				appendToStatistics(i);
-			}
+			for(double i : mData){appendToStatistics(i);}
 		}
+		
 		public TreeMap<Double, Integer> getStatistics(){
 			return mStatistics;
-		} 
+		}
+		
 		public void printStatistics() {
 			
-			Iterator<Entry<Double, Integer>> mIterator = mStatistics.entrySet()
-					.iterator();
+			Iterator<Entry<Double, Integer>> mIterator = mStatistics.entrySet().iterator();
+			
 			while (mIterator.hasNext()) {
-				Entry<Double, Integer> mEntry = mIterator.next();
-				double sample = mEntry.getKey();
-				int occurrence = mEntry.getValue();
+				Entry<Double, Integer> mEntry 	= mIterator.next();
+				double sample 					= mEntry.getKey();
+				int occurrence 					= mEntry.getValue();
+				
 				double percentage = (double) occurrence / (double) mSampelCount;
 				percentage *= 100;
-				System.out.println("sample : " + String.format("%.3f", sample)
-						+ ", Occurrence : " + String.format("%03d", occurrence)
-						+ ", Percentage : " + String.format("%.3f", percentage)
+				System.out.println("sample : " 	+ String.format("%.3f", sample)
+						+ ", Occurrence : " 	+ String.format("%03d", occurrence)
+						+ ", Percentage : " 	+ String.format("%.3f", percentage)
 						+ "%");
 			}
 		}
