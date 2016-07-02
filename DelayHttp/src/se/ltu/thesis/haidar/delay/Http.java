@@ -18,24 +18,57 @@ import com.sun.net.httpserver.HttpServer;
 
 
 public class Http {
-	public static int delayCount = 0;
-	public static int throughputCount = 0;
-	public static final int PORT = 50500;
-	public static final String CPU = "cpu";
-
+	public static int delayCounter 		= 0;
+	public static int throughputCounter = 0;
+	public static int countCounter 		= 0;
+	
+	public static final int 	PORT 	= 50500;
+	public static final String 	CPU 	= "cpu";
+	public static final String 	COUNT	= "count";
+	
+	public static Counter mCounter;
+	
     public static void main(String[] args) throws Exception {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
-        server.createContext("/delay", new MyDelayHandler());
-        server.createContext("/throughput", new MyThroughputHandler());
+        server.createContext("/delay"		, new MyDelayHandler());
+        server.createContext("/throughput"	, new MyThroughputHandler());
+        server.createContext("/counter"		, new MyCounterHandler());
         server.setExecutor(null); // creates a default executor
+        
+        mCounter = new Counter();
+        mCounter.setRunning(true);
+        mCounter.start();
+        
         server.start();
         System.out.println("Server is connected to port :"+ PORT);
     }
-
+    
+    public static class MyCounterHandler implements HttpHandler {
+        @Override
+        public void handle(HttpExchange t) throws IOException {
+        	countCounter++;
+        	String res = "";
+            Headers h = t.getResponseHeaders();
+            h.add("Content-Type", "text/plain");
+            try {
+				 res = String.valueOf(mCounter.getCount());
+				 h.add(COUNT, res);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+        	// add response header
+            t.sendResponseHeaders(200, res.length());
+            OutputStream os = t.getResponseBody();
+            os.write(res.getBytes());
+            os.close();
+            System.out.println("Got "+ countCounter +" count requests");
+        }
+    }
+    
     public static class MyDelayHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
-        	delayCount++;
+        	delayCounter++;
         	String res = "";
             Headers h = t.getResponseHeaders();
             h.add("Content-Type", "text/plain");
@@ -50,13 +83,13 @@ public class Http {
             OutputStream os = t.getResponseBody();
             os.write(res.getBytes());
             os.close();
-            System.out.println("Got "+ delayCount +" delay requests");
+            System.out.println("Got "+ delayCounter +" delay requests");
         }
     }
     public static class MyThroughputHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
-        	throughputCount++;
+        	throughputCounter++;
         	
         	// get the file
             File file = new File ("/100meg.test");
@@ -82,7 +115,7 @@ public class Http {
             os.write(bytearray,0,bytearray.length);
             os.close();
             bis.close();
-            System.out.println("Got "+ throughputCount +" throughput requests");
+            System.out.println("Got "+ throughputCounter +" throughput requests");
         }
     }
     
