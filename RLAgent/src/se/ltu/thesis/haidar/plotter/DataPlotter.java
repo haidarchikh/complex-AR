@@ -56,7 +56,7 @@ public class DataPlotter extends ApplicationFrame {
 		JFreeChart chart = greedyCDFChart(dataset);
 		
 		final ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 400));
         setContentPane(chartPanel);
 		
         /*
@@ -98,8 +98,8 @@ public class DataPlotter extends ApplicationFrame {
 	
 	// To create a delay chart, you can change the distribution used
 	private JFreeChart greedyCDFChart(XYDataset dataset){
-		JFreeChart chart = ChartFactory.createXYLineChart(" Tuples that converge within 1000 learning episodes ",
-				 "Episodes", "Tuples",dataset,
+		JFreeChart chart = ChartFactory.createXYLineChart("",
+				 "Episode", "Tuple",dataset,
 				PlotOrientation.VERTICAL, true, true, false);
 		return chart;
 	}
@@ -194,6 +194,7 @@ public class DataPlotter extends ApplicationFrame {
 			Entry<Integer, Integer> mEntry = mIterator.next();
 			mCount += mEntry.getValue();
 			mXY.add((int)mEntry.getKey(),(int)mCount);
+			System.out.println((int)mCount);
 		}
 		
 		System.out.println(mCount);

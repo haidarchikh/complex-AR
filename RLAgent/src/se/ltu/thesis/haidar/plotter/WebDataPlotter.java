@@ -4,16 +4,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import se.ltu.thesis.haidar.database.SqlStatistics;
@@ -175,7 +172,7 @@ private StringBuilder getDataCSVGreedy(List<Tuple> mTupleList){
 		double mGreedyReward 		= mTuple.getGreedyReward();
 		double mEpisodeTillGreedy 	= mTuple.getEpisodeTillGready();
 		
-		if(mGreedyReward == 402.37983){
+		if(mGreedyReward >= 402.37983){
 			
 			count++;
 			mBuilder
