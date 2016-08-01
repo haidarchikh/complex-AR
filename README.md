@@ -10,7 +10,7 @@ The system consists of three layers. Sensor layer, Gateway layer and Management 
 ``` Shell
 git clone https://github.com/haidarchikh/complex-AR
 ```
-2- Step into M7016E_Project folder
+2- Step into complex-AR folder
 
 3- Build the project
 ``` shell
