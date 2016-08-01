@@ -20,4 +20,4 @@ You will get
 * Eclipse project that you can import (import existing project into workspace)
 
 ##Further Information
-For further information please refer to the paper in this repository.
+For further information please refer to [this paper](resources/paper.pdf).
