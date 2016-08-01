@@ -1,6 +1,0 @@
-dependencies {
-	compile project(':AccelerometerFeatures')
-	compile project(':RabbitLib')
-	compile project(':WekaService')
-	compile project(':ComplexActivityRecognition')
-}

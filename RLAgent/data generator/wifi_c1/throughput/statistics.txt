@@ -1,8 +1,0 @@
-sample : 10.000, Occurrence : 021, Percentage : 2.100%
-sample : 20.000, Occurrence : 460, Percentage : 46.000%
-sample : 30.000, Occurrence : 317, Percentage : 31.700%
-sample : 40.000, Occurrence : 007, Percentage : 0.700%
-sample : 50.000, Occurrence : 115, Percentage : 11.500%
-sample : 60.000, Occurrence : 079, Percentage : 7.900%
-sample : 70.000, Occurrence : 001, Percentage : 0.100%
-
